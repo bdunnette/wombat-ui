@@ -1,0 +1,23 @@
+
+<template name="westPanel">
+  <aside id="westPanel" class="padded ui sidebar">
+    <ul class="list-group">
+      <li id="textInputBlock" class="dragDropBlock list-group-item">
+          <label class="smallgray" for="firstNameInput">Text Input</label>
+          <input id="firstNameInput" class="form-control" type="text" placeholder="First Name" value="{{FirstName}}" {{first_name_enabled}}>
+      </li>
+      <li id="textareaInputBlock" class="dragDropBlock list-group-item">
+        <label class="smallgray" for="notesInput">Textarea</label>
+        <textarea id="notesInput"  class="form-control" rows="3" placeholder="Notes" value="Lorem ipsum..." {{web_enabled}}></textarea>
+      </li>
+      <li id="numericInputBlock" class="dragDropBlock list-group-item">
+        <label class="smallgray" for="numberInput">Numeric Input</label>
+        <input id="numberInput" class="form-control" type="number" placeholder="123456" value="{{Number}}" {{generic_enabled}}>
+      </li>
+      <li id="colorInputBlock" class="dragDropBlock list-group-item">
+        <label class="smallgray" for="colorInput">Color Picker</label>
+        <input id="colorInput" class="form-control" type="color" placeholder="#33ff88" value="#{{Color}}" {{generic_enabled}}>
+      </li>
+    </ul>
+  </aside>
+</template>
