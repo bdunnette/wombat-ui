@@ -3,7 +3,7 @@ wombat-ui
 
 Clinical Form Builder app for Pharmaceutical Trials Data Collection. 
 
-Demo available at:  [http://wombat.meteor.com](http://wombat.meteor.com)  
+Demo available at:  [http://wombat-ui.meteor.com](http://wombat-ui.meteor.com)  
 
 
 ============================
