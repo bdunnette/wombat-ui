@@ -1,0 +1,14 @@
+<template name="builderPage">
+  <div id="builderPage" class="page">
+    <div id="sortableListPanel">
+      <div id="list">
+        {{#each items}}
+          {{> formBlock }}
+        {{/each}}
+      </div>
+    </div>
+    <div id="sortableDropZone" class="centered dragdropzone">
+        <h2>drop here!</h2>
+    </div>
+  </div>
+</template>

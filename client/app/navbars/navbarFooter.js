@@ -23,6 +23,29 @@ Template.navbarFooter.events({
     if(Meteor.user()){
       $('#eastPanel').sidebar('toggle');
     }
+  },
+
+  'click #saveFormLink':function(){
+    saveForm();
   }
 
 });
+
+
+saveForm = function(){
+  var blockItems = Items.find().fetch();
+  console.log("Saving Form: ", JSON.stringify(blockItems));
+
+  var newForm = {
+    createdAt: new Date(),
+    stared: false,
+    active: true,
+    formName: $('#formNameInput').val(),
+    owner: Meteor.userId(),
+    ownerUsername: Meteor.user().username,
+    schema: blockItems,
+    numBlocks: blockItems.length
+  };
+
+  Forms.insert(newForm);
+}

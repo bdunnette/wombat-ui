@@ -111,7 +111,7 @@ renderHomePage = function(scope){
 
 Router.map(function() {
 
-  this.route('landingRoute', {
+  this.route('builderPage', {
     path: '/',
     yieldTemplates: getYieldTemplates(),
     onBeforeAction: function() {

@@ -24,7 +24,15 @@ Template.errorPanel.getErrorMessage = function(){
 Router.configure({
   layoutTemplate: 'appLayout',
   notFoundTemplate: 'notFoundPage',
-  loadingTemplate: 'loadingPage'
+  loadingTemplate: 'loadingPage',
+  yieldTemplates: {
+    'navbarHeader': {
+      to: 'header'
+    },
+    'navbarFooter': {
+      to: 'footer'
+    }
+  }
 });
 Router.onBeforeAction(function() {
   if (!Meteor.loggingIn() && !Meteor.user()) {

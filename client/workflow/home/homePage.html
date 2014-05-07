@@ -1,37 +1,51 @@
 <template name="homePage">
-  <div id="homePage" class="page">
-    <div id="sortableListPanel">
-      <div id="list">
-        {{#each items}}
-          {{> formBlock }}
-        {{/each}}
+  <div id="homePage">
+    <div class="container">
+
+
+      <div class="col col-md-4">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            Form Builder
+          </div>
+          <div class="panel-body">
+            lorem-ipsum...
+          </div>
+          <div class="panel-footer">
+            ...
+          </div>
+        </div>
       </div>
-    </div>
-    <div id="sortableDropZone" class="centered dragdropzone">
-        <h2>drop here!</h2>
+
+      <div class="col col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            Saved Forms
+          </div>
+          <div class="panel-body">
+            lorem-ipsum...
+          </div>
+          <div class="panel-footer">
+            ...
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-md-4">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            Collected Data
+          </div>
+          <div class="panel-body">
+            lorem-ipsum...
+          </div>
+          <div class="panel-footer">
+            ...
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
-</template>
-
-
-<template name="formBlock">
-  {{#if isInput}}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
-      <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-      <button type="button" class="close"><i class="fa fa-times"></i></button>
-      <div class="padded">
-        <input id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" value="{{getInputValue}}">
-      </div>
-    </div>
-  {{/if}}
-
-  {{#if isTextarea}}
-    <div id="item-{{_id}}" class="item">
-      <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-      <button type="button" class="close"><i class="fa fa-times"></i></button>
-      <div class="padded">
-        <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}">{{getInputValue}}</textarea>
-      </div>
-    </div>
-  {{/if}}
 </template>
