@@ -63,7 +63,6 @@ Template.formsListPage.helpers({
 
 
 
-
 Template.formsListPage.events({
   'keyup #searchInput':function(){
     Session.set('accountSearchFilter', $('#searchInput').val());
@@ -84,7 +83,7 @@ Template.formsListPage.events({
   },
   'click .customerRow':function(){
     Session.set('selectedUser', this._id);
-    Router.go('/customer/' + this._id);
+    Router.go('/form/' + this._id);
     //alert(this._id);
   }
 });

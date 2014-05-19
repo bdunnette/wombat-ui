@@ -30,15 +30,7 @@
         </thead>
         <tbody>
           {{#each customersList}}
-            <tr class="customerRow">
-              <td>{{ stared }}</td>
-              <td>{{ createdAt }}</td>
-              <td>{{ name }}</td>
-              <td>{{ ownerUsername }}</td>
-              <td>{{ numBlocks }}</td>
-              <td>{{ tags }}</td>
-              <td>{{ active }}</td>
-            </tr>
+            {{> formRowItem }}
           {{/each}}
         </tbody>
       </table>
@@ -55,4 +47,16 @@
 
 <template name="paginationButton">
   <button id="pagination-btn-{{index}}" class="{{pageActive}} pagination-btn btn btn-default">{{getPage}}</button>
+</template>
+
+<template name="formRowItem">
+  <tr class="customerRow">
+    <td>{{ stared }}</td>
+    <td>{{ createdAt }}</td>
+    <td>{{ name }}</td>
+    <td>{{ ownerUsername }}</td>
+    <td>{{ numBlocks }}</td>
+    <td>{{ tags }}</td>
+    <td>{{ active }}</td>
+  </tr>
 </template>
