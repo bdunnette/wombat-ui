@@ -9,5 +9,10 @@ Meteor.methods({
     }});
     console.log('result: ' + result);
     return result;
+  },
+  dropForm: function(){
+    Items.find().forEach(function(record){
+      Items.remove({_id: record._id});
+    });
   }
 });

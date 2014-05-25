@@ -3,7 +3,7 @@
   {{#if isInput}}
     <div id="item-{{_id}}" class="item {{isSelected}}">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-      <button type="button" class="close"><i class="fa fa-times"></i></button>
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <input id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" value="{{getInputValue}}">
       </div>
@@ -13,7 +13,7 @@
   {{#if isTextarea}}
     <div id="item-{{_id}}" class="item">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-      <button type="button" class="close"><i class="fa fa-times"></i></button>
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}">{{getInputValue}}</textarea>
       </div>

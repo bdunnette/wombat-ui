@@ -82,7 +82,7 @@ Template.formsListPage.events({
     Session.set('skipCount', this.index * Session.get('tableLimit'));
   },
   'click .customerRow':function(){
-    Session.set('selectedUser', this._id);
+    Session.set('currentForm', this._id);
     Router.go('/form/' + this._id);
     //alert(this._id);
   }
@@ -129,5 +129,30 @@ Template.paginationButton.helpers({
   },
   getPage: function(){
     return this.index + 1;
+  }
+});
+
+
+Template.formRowItem.events({
+  'click .fa-star':function(){
+    Forms.update({_id: this._id}, {$set:{
+      'stared':false
+    }});
+  },
+  'click .fa-star-o':function(){
+    Forms.update({_id: this._id}, {$set:{
+      'stared':true
+    }});
+
+  }
+});
+
+Template.formRowItem.helpers({
+  getStar:function(){
+    if(this.stared){
+      return 'fa-star';
+    }else{
+      return 'fa-star-o';
+    }
   }
 });

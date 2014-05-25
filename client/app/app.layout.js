@@ -63,6 +63,7 @@ Router.onBeforeAction(function() {
   }
 }, {
   except: [
+    'homePage',
     'landingRoute',
     'entrySignUpRoute',
     'entrySignInRoute',

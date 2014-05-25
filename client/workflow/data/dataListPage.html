@@ -1,0 +1,56 @@
+<template name="dataListPage">
+  <div id="dataListPage">
+    <div class="container">
+
+        <div class="row">
+          <div class="col col-md-6">
+            <input id="searchInput" type="text" class="form-control" placeholder="search..." />
+          </div>
+          <div class="centered col col-md-6">
+<!--             <div class="pull-right btn-group">
+              <button id="twentyButton" class="{{isTwentyActive}} btn btn-default">20</button>
+              <button id="fiftyButton" class="{{isFiftyActive}} btn btn-default">50</button>
+              <button id="hundredButton" class="{{isHundredActive}} btn btn-default">100</button>
+            </div> -->
+          </div>
+        </div>
+      <hr/>
+
+      <table id="example" class="table table-hover table-striped tablesorter">
+        <thead>
+          <tr>
+            <th>Data ID</th>
+            <th>Created At</th>
+            <th>Schema ID</th>
+            <th>Study/Form Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each dataList }}
+            {{> dataRowItem }}
+          {{/each}}
+        </tbody>
+      </table>
+      <hr>
+
+      <div class="btn-group">
+        {{#each dataPaginationButtonList }}
+          {{> dataPaginationButton }}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="dataPaginationButton">
+  <button id="data-pagination-btn-{{index}}" class="{{pageActive}} pagination-btn btn btn-default">{{getPage}}</button>
+</template>
+
+<template name="dataRowItem">
+  <tr class="dataRow">
+    <td>{{ _id }}</td>
+    <td>{{ createdAt }}</td>
+    <td>{{ schema_id }}</td>
+    <td>{{ formName }}</td>
+  </tr>
+</template>

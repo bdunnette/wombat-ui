@@ -1,6 +1,7 @@
 <template name="builderPage">
   <div id="builderPage" class="page">
-    <div id="sortableListPanel">
+    <div id="sortableListPanel" class="container">
+      <input id="formTitleInput" type="text" class="form-control" placeholder="Sample Form Name...." value="{{formName}}">
       <div id="list">
         {{#each items}}
           {{> formBlock }}

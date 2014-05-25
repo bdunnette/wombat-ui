@@ -1,3 +1,16 @@
+Data =  new Meteor.Collection("data");
+Data.allow({
+  insert: function(){
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
+});
+
 Forms =  new Meteor.Collection("forms");
 Forms.allow({
   insert: function(){

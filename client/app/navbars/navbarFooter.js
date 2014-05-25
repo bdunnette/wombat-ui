@@ -27,26 +27,44 @@ Template.navbarFooter.events({
   },
 
   'click #saveFormLink':function(){
-    saveForm();
+    console.log('click #saveFormLink', this);
+    saveForm(this);
+  },
+  'click #clearFormLink':function(){
+    Meteor.call('dropForm');
   }
 
 });
 
 
-saveForm = function(){
+saveForm = function(scope){
   var blockItems = Items.find().fetch();
-  console.log("Saving Form: ", JSON.stringify(blockItems));
+  console.log("Saving  Schema: ", JSON.stringify(blockItems));
+  console.log('_id', scope._id);
+
 
   var newForm = {
     createdAt: new Date(),
     stared: false,
     active: true,
-    formName: $('#formNameInput').val(),
+    formName: $('#formTitleInput').val(),
     owner: Meteor.userId(),
     ownerUsername: Meteor.user().username,
     schema: blockItems,
     numBlocks: blockItems.length
   };
-
-  Forms.insert(newForm);
+  if(Session.get('currentForm')){
+    Forms.update({_id: Session.get('currentForm')},{$set:{
+      stared: newForm.stared,
+      active: newForm.active,
+      formName: newForm.formName,
+      owner: newForm.owner,
+      ownerUsername: newForm.ownerUsername,
+      schema: newForm.schema,
+      numBlocks: newForm.numBlocks
+    }});
+  }else{
+    Forms.insert(newForm);
+  }
+  Router.go('/forms');
 }

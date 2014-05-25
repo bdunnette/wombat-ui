@@ -4,6 +4,9 @@ Router.map(function(){
   this.route('builderPage', {
     path: '/builder/:id',
     template: 'builderPage',
+    onBeforeAction: function(){
+      Session.set('currentForm', this.params.id);
+    },
     waitOn: function(){
       return Meteor.subscribe('forms');
     },
@@ -14,6 +17,9 @@ Router.map(function(){
   this.route('builderPage', {
     path: '/builder',
     template: 'builderPage',
+    onBeforeAction: function(){
+      Session.set('currentForm', false);
+    },
     waitOn: function(){
       return Meteor.subscribe('forms');
     },
@@ -22,7 +28,6 @@ Router.map(function(){
     },
   });
 });
-
 
 
 
@@ -37,7 +42,17 @@ Template.builderPage.events({
 
 Template.builderPage.helpers({
   items: function(){
-      return Items.find({}, { sort: { rank: 1 } });
+    return Items.find({}, { sort: { rank: 1 } });
+  },
+  formName: function(){
+    var currentForm = Forms.findOne(Session.get('currentForm'));
+    console.log('currentForm', currentForm);
+
+    if(currentForm){
+      return currentForm.formName;
+    }else{
+      return "";
+    }
   },
   rendered: function () {
     $(this.find('#list')).sortable({ // uses the 'sortable' interaction from jquery ui

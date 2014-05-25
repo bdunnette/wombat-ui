@@ -20,7 +20,7 @@
         <thead>
           <tr>
             <th>Stared</th>
-            <th>CreatedAt</th>
+<!--             <th>CreatedAt</th> -->
             <th>Form Name</th>
             <th>Owner</th>
             <th># Blocks</th>
@@ -51,9 +51,9 @@
 
 <template name="formRowItem">
   <tr class="customerRow">
-    <td>{{ stared }}</td>
-    <td>{{ createdAt }}</td>
-    <td>{{ name }}</td>
+    <td><i class="fa {{ getStar }}"></i></td>
+<!--     <td>{{ createdAt }}</td> -->
+    <td>{{ formName }}</td>
     <td>{{ ownerUsername }}</td>
     <td>{{ numBlocks }}</td>
     <td>{{ tags }}</td>

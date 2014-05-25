@@ -1,12 +1,13 @@
 <template name="formPreviewPage">
   <div id="formPreviewPage" class="fullheight padded">
     <div class="container">
-      <div class="col col-md-offset-3 col-md-6">
+      <div class="col col-md-12">
 
       <div class="card panel panel-default">
         <div class="panel-heading">
-          <h2>{{FirstName}} {{LastName}}</h2>
-          <h4>{{Company}}</h4>
+<!--           <h2>{{FirstName}} {{LastName}}</h2> -->
+          <i class="fa {{getStar}} fa-2x pull-right"></i>
+          <h4>{{formName}}</h4>
         </div>
         <div class="panel-body">
           {{#each formSchema}}
@@ -17,7 +18,10 @@
           <div>{{ _id }}</div>
         </div>
       </div>
-
+      {{#if isPublished}}
+      <button id="formCollectButton" class="btn btn-success">Collect Data</button>
+      {{/if}}
+      <button id="formPublishButton" class="btn btn-info">{{getPublishText}}</button>
       <button id="formEditButton" class="btn btn-warning">Edit Form</button>
       <button id="formDeleteButton" class="btn btn-danger">Delete Form</button>
 
