@@ -21,7 +21,8 @@ Template.navbarFooter.events({
   'click #eastPanelToggleLink':function(){
     // only toggle the sidebar if the user is logged in
     if(Meteor.user()){
-      $('#eastPanel').sidebar('toggle');
+      //$('#eastPanel').sidebar('toggle');
+      toggleEastPanel();
     }
   },
 

@@ -10,6 +10,29 @@ UI.body.resized = function(){
 };
 
 
+//----------------------------------------------
+// helper functions
+
+toggleWestPanel = function(){
+  if($('body').hasClass('leftSidebar')){
+    $('body').removeClass('leftSidebar');
+    $('#westPanel').removeClass('active');
+  }else{
+    $('body').addClass('leftSidebar');
+    $('#westPanel').addClass('active');
+  }
+}
+toggleEastPanel = function(){
+  if($('body').hasClass('rightSidebar')){
+    $('body').removeClass('rightSidebar');
+    $('#eastPanel').removeClass('active');
+  }else{
+    $('body').addClass('rightSidebar');
+    $('#eastPanel').addClass('active');
+  }
+}
+
+
 //--------------------------------------------------------------
 // Template.errorPanel
 
