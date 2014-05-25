@@ -1,3 +1,64 @@
+Template.navbarFooter.helpers({
+  isFormBuilder: function(){
+    if(Router.current()){
+      if(Router.current().path.indexOf('builder') > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  },
+  isSavedForms: function(){
+    if(Router.current()){
+      if(Router.current().path.indexOf('form/') > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  },
+  isCollectedData: function(){
+    if(Router.current()){
+      if(Router.current().path.indexOf('data/') > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  },
+  isPublished: function(){
+    var currentForm = Forms.findOne(Session.get('currentForm'));
+    if(currentForm){
+      if(currentForm.stared){
+        return true;
+      }else{
+        return false
+      }
+    }else{
+      return false;
+    }
+  },
+  isApproved: function(){
+    var dataRecord = Data.findOne(Session.get('currentDataRecord'));
+    if(dataRecord){
+      if(dataRecord.approved){
+        return true;
+      }else{
+        return false
+      }
+    }else{
+      return false;
+    }
+
+  }
+});
+
 
 Template.navbarFooter.events({
   'click #logOutLink':function(){
@@ -22,16 +83,78 @@ Template.navbarFooter.events({
     // only toggle the sidebar if the user is logged in
     if(Meteor.user()){
       //$('#eastPanel').sidebar('toggle');
+      toggleWestPanel();
       toggleEastPanel();
     }
   },
 
+  //-----------------------------------------
+  // BUILDER EVENTS
+
+  // TODO refactor #saveFormLink to #saveBuilderLink
   'click #saveFormLink':function(){
     console.log('click #saveFormLink', this);
     saveForm(this);
   },
+  // TODO refactor #clearFormLink to #clearBuilderLink
   'click #clearFormLink':function(){
     Meteor.call('dropForm');
+  },
+
+
+  //-----------------------------------------
+  // DATA COLLECTION EVENTS
+
+  'click #deleteDataLink':function(){
+    if(confirm('Are you sure you want to delete this record?')){
+      Meteor.call('dropDataRecord', Session.get('currentDataRecord'));
+      Router.go('/data');
+    }
+  },
+  'click #editDataLink':function(){
+    Router.go('/form/' + this.schema_id);
+  },
+  'click #approveDataLink':function(){
+    Meteor.call('approveDataRecord', Session.get('currentDataRecord'));
+  },
+
+
+  //-----------------------------------------
+  // SAVED FORMS EVENTS
+
+  'click #collectDataLink': function(){
+    var record = Forms.findOne({_id: Session.get('currentForm')});
+    var newDataRecord = {
+      createdAt: new Date(),
+      schema_id: this._id,
+      formName: this.formName,
+      data: {}
+    }
+    record.schema.forEach(function(block){
+      newDataRecord.data[block._id] = $("#input-" + block._id).val();
+    });
+    Data.insert(newDataRecord);
+    Router.go('/data');
+  },
+  'click #publishFormLink':function(){
+    if(this.stared){
+      Forms.update({_id: this._id},{$set:{
+        stared: false
+      }});
+    }else{
+      Forms.update({_id: this._id},{$set:{
+        stared: true
+      }});
+    }
+  },
+  'click #editFormLink':function(){
+    Router.go('/builder/' + this._id);
+  },
+  'click #deleteFormLink':function(){
+    if(confirm('Are you sure you want to delete ' + this._id + "?")){
+      Forms.remove({_id: this._id});
+      Router.go('/');
+    }
   }
 
 });

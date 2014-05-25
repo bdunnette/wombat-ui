@@ -1,0 +1,25 @@
+
+<template name="dataBlockPreview">
+  {{#if isInput}}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+      <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
+      <div class="padded">
+        <div class="data-value">
+          {{getInputValue}}
+        </div>
+<!--         <input id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" value="{{getInputValue}}"> -->
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if isTextarea}}
+    <div id="item-{{_id}}" class="item">
+      <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
+      <div class="padded">
+        <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}">{{getInputValue}}</textarea>
+      </div>
+    </div>
+  {{/if}}
+</template>

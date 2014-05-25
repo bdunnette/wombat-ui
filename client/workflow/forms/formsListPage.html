@@ -4,14 +4,14 @@
 
         <div class="row">
           <div class="col col-md-6">
-            <input id="searchInput" type="text" class="form-control" placeholder="search..." />
+            <input id="formSearchInput" type="text" class="form-control" placeholder="search saved forms..." />
           </div>
           <div class="centered col col-md-6">
-            <div class="pull-right btn-group">
+<!--             <div class="pull-right btn-group">
               <button id="twentyButton" class="{{isTwentyActive}} btn btn-default">20</button>
               <button id="fiftyButton" class="{{isFiftyActive}} btn btn-default">50</button>
               <button id="hundredButton" class="{{isHundredActive}} btn btn-default">100</button>
-            </div>
+            </div> -->
           </div>
         </div>
       <hr/>
@@ -20,7 +20,7 @@
         <thead>
           <tr>
             <th>Stared</th>
-<!--             <th>CreatedAt</th> -->
+            <th>Form ID</th>
             <th>Form Name</th>
             <th>Owner</th>
             <th># Blocks</th>
@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          {{#each customersList}}
+          {{#each formsList}}
             {{> formRowItem }}
           {{/each}}
         </tbody>
@@ -53,6 +53,7 @@
   <tr class="customerRow">
     <td><i class="fa {{ getStar }}"></i></td>
 <!--     <td>{{ createdAt }}</td> -->
+    <td>{{ _id }}</td>
     <td>{{ formName }}</td>
     <td>{{ ownerUsername }}</td>
     <td>{{ numBlocks }}</td>

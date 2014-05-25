@@ -13,6 +13,9 @@ Router.map(function(){
     data: function () {
       return Forms.findOne({_id: this.params.id});
     },
+    onAfterAction:function(){
+      showSidebars();
+    }
   });
   this.route('builderPage', {
     path: '/builder',
@@ -26,6 +29,9 @@ Router.map(function(){
     data: function () {
       return {};
     },
+    onAfterAction:function(){
+      showSidebars();
+    }
   });
 });
 

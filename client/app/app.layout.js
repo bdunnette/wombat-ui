@@ -11,7 +11,7 @@ UI.body.resized = function(){
 
 
 //----------------------------------------------
-// helper functions
+// sidebar toggle functions
 
 toggleWestPanel = function(){
   if($('body').hasClass('leftSidebar')){
@@ -29,6 +29,33 @@ toggleEastPanel = function(){
   }else{
     $('body').addClass('rightSidebar');
     $('#eastPanel').addClass('active');
+  }
+}
+toggleSidebars = function(){
+  if(Meteor.user()){
+    toggleWestPanel();
+    toggleEastPanel();
+  }
+}
+showSidebars = function(){
+  if(!$('body').hasClass('leftSidebar')){
+    $('body').addClass('leftSidebar');
+    $('#westPanel').addClass('active');
+  }
+
+  if(!$('body').hasClass('rightSidebar')){
+    $('body').addClass('rightSidebar');
+    $('#eastPanel').addClass('active');
+  }
+}
+hideSidebars = function(){
+  if($('body').hasClass('leftSidebar')){
+    $('body').removeClass('leftSidebar');
+    $('#westPanel').removeClass('active');
+  }
+  if($('body').hasClass('rightSidebar')){
+    $('body').removeClass('rightSidebar');
+    $('#eastPanel').removeClass('active');
   }
 }
 
@@ -78,6 +105,10 @@ Router.onBeforeAction(function() {
     'entryResetPasswordRoute'
   ]
 });
+Router.onBeforeAction(function() {
+  hideSidebars();
+}, {except: ['builderPage']});
+
 Router.onBeforeAction(function() {
   if(!bowser.webkit){
     this.render('browserNotSupportedPage');

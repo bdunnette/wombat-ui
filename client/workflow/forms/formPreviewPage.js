@@ -34,19 +34,18 @@ Template.formPreviewPage.events({
     }
   },
   'click #formCollectButton':function(){
-    alert(JSON.stringify(this.schema));
-    var record = Forms.findOne({_id: Session.get('currentForm')});
+    var newDataRecord = Forms.findOne({_id: Session.get('currentForm')});
 
-    var dataRecord = {
+    var newDataRecord = {
       createdAt: new Date(),
       schema_id: this._id,
       formName: this.formName,
-      data: []
+      data: {}
     }
     record.schema.forEach(function(block){
-      dataRecord.data.push($("#input-" + block._id).val());
+      newDataRecord.data[block._id] = $("#input-" + block._id).val();
     });
-    Data.insert(dataRecord)
+    Data.insert(newDataRecord);
   }
 });
 

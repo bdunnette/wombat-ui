@@ -5,3 +5,11 @@ UI.registerHelper('isLoggedIn', function() {
     return false;
   }
 });
+
+UI.registerHelper('getApprovalIcon', function(){
+  if(this.approved){
+    return 'fa-check';
+  }else{
+    return 'fa-inbox';
+  }
+});

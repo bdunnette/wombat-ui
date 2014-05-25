@@ -1,5 +1,5 @@
 Template.homePage.events({
-  'click #fomrBuilderTile':function(){
+  'click #formBuilderTile':function(){
     Router.go('/builder');
   },
   'click #savedFormsTile':function(){

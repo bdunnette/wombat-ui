@@ -15,16 +15,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a id="navbarBrandLink" class="navbar-brand">Wombat UI</a>
+        <a id="navbarBrandLink" class="unselectable navbar-brand" href="/">Wombat UI</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          {{#if isLoggedIn}}
 <!--           <li><a id="formBuilderLink" href="/builder">Form Builder</a></li> -->
           <li><a id="newFormLink" href="/builder">Form Builder</a></li>
           <li><a id="savedFormLink" href="/forms">Saved Forms</a></li>
           <li><a id="collectedDataLink" href="/data">Collected Data</a></li>
+          {{/if}}
 <!--           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account Flow <b class="caret"></b></a>
             <ul class="dropdown-menu">

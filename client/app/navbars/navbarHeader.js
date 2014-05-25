@@ -7,7 +7,8 @@ Template.navbarHeader.events({
     // only toggle the sidebar if the user is logged in
     if(Meteor.user()){
       //$('#westPanel').sidebar('toggle');
-      toggleWestPanel();
+      //toggleWestPanel();
+      Router.go('/');
     }else{
       Router.go('/');
     }

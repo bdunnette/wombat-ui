@@ -1,9 +1,9 @@
 Session.setDefault('receivedData', false);
-Session.setDefault('accountSearchFilter', '');
-Session.setDefault('tableLimit', 20);
-Session.setDefault('paginationCount', 1);
-Session.setDefault('selectedPagination', 0);
-Session.setDefault('skipCount', 0);
+Session.setDefault('formSearchFilter', '');
+Session.setDefault('formTableLimit', 20);
+Session.setDefault('formPaginationCount', 1);
+Session.setDefault('formSelectedPagination', 0);
+Session.setDefault('formSkipCount', 0);
 
 // Meteor.autorun(function(){
 //   Meteor.subscribe('customerAccounts');
@@ -37,16 +37,19 @@ Router.map(function(){
 // HELPERS
 
 Template.formsListPage.helpers({
-  customersList: function(){
+  formsList: function(){
     Session.set('receivedData', new Date());
-    Session.set('paginationCount', Math.floor(Forms.find().count() / Session.get('tableLimit')));
-    return Forms.find({},{limit: Session.get('tableLimit'), skip: Session.get('skipCount')});
+    Session.set('formPaginationCount', Math.floor(Forms.find().count() / Session.get('formTableLimit')));
+    //return Forms.find({},{limit: Session.get('formTableLimit'), skip: Session.get('formSkipCount')});
 
-    // return CustomerAccounts.find({$or:[
-    //   {FirstName: { $regex: Session.get('accountSearchFilter'), $options: 'i' }},
-    //   {LastName: { $regex: Session.get('accountSearchFilter'), $options: 'i' }}
-    //   ]
-    // },{limit: Session.get('tableLimit'), skip: Session.get('skipCount')});
+    if(Session.get('formSearchFilter').length === 17){
+      return Forms.find({_id: Session.get('formSearchFilter')});
+    }else{
+      return Forms.find({formName: {
+        $regex: Session.get('formSearchFilter'),
+        $options: 'i'
+      }},{limit: Session.get('formTableLimit'), skip: Session.get('formSkipCount')});
+    }
   },
   rendered: function(){
     $(this.find('#example')).tablesorter();
@@ -64,22 +67,22 @@ Template.formsListPage.helpers({
 
 
 Template.formsListPage.events({
-  'keyup #searchInput':function(){
-    Session.set('accountSearchFilter', $('#searchInput').val());
+  'keyup #formSearchInput':function(){
+    Session.set('formSearchFilter', $('#formSearchInput').val());
   },
   'click #twentyButton':function(){
-    Session.set('tableLimit', 20);
+    Session.set('formTableLimit', 20);
   },
   'click #fiftyButton': function(){
-    Session.set('tableLimit', 50);
+    Session.set('formTableLimit', 50);
   },
   'click #hundredButton': function(){
-    Session.set('tableLimit', 100);
+    Session.set('formTableLimit', 100);
   },
   'click .pagination-btn':function(){
     //alert(JSON.stringify(this.index));
-    Session.set('selectedPagination', this.index);
-    Session.set('skipCount', this.index * Session.get('tableLimit'));
+    Session.set('formSelectedPagination', this.index);
+    Session.set('formSkipCount', this.index * Session.get('formTableLimit'));
   },
   'click .customerRow':function(){
     Session.set('currentForm', this._id);
@@ -91,11 +94,11 @@ Template.formsListPage.events({
 
 Template.formsListPage.helpers({
   getPaginationCount: function(){
-    return Session.get('paginationCount');
+    return Session.get('formPaginationCount');
   },
   paginationButtonList: function(){
     var paginationArray = [];
-    for (var i = 0; i < Session.get('paginationCount'); i++) {
+    for (var i = 0; i < Session.get('formPaginationCount'); i++) {
       paginationArray[i] = {
         index: i
       };
@@ -103,17 +106,17 @@ Template.formsListPage.helpers({
     return paginationArray;
   },
   isTwentyActive: function(){
-    if(Session.get('tableLimit') === 20){
+    if(Session.get('formTableLimit') === 20){
       return "active";
     }
   },
   isFiftyActive: function(){
-    if(Session.get('tableLimit') === 50){
+    if(Session.get('formTableLimit') === 50){
       return "active";
     }
   },
   isHundredActive: function(){
-    if(Session.get('tableLimit') === 100){
+    if(Session.get('formTableLimit') === 100){
       return "active";
     }
   }
@@ -123,7 +126,7 @@ Template.formsListPage.helpers({
 
 Template.paginationButton.helpers({
   pageActive: function(){
-    if(this.index === Session.get('selectedPagination')){
+    if(this.index === Session.get('formSelectedPagination')){
       return "active";
     }
   },

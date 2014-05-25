@@ -1,0 +1,25 @@
+<template name="dataPreviewPage">
+  <div id="dataPreviewPage" class="fullheight padded">
+    <div class="container">
+      <div class="col col-md-12">
+
+      <div class="card panel panel-default">
+        <div class="panel-heading">
+          <i class="fa {{getApprovalIcon}} fa-2x pull-right"></i>
+          <h4>{{getFormName}}</h4>
+        </div>
+        <div class="panel-body">
+          {{#each dataSchema}}
+            {{> dataBlockPreview }}
+          {{/each}}
+        </div>
+        <div class="panel-footer">
+          <div>{{ _id }}</div>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+  </div>
+</template>
