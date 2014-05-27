@@ -25,7 +25,7 @@ Router.map(function(){
       }
     },
     onBeforeAction: function() {
-      setPageTitle("Forms");
+      setPageTitle("Data Entry");
     },
     waitOn: function(){
       return Meteor.subscribe('data');
