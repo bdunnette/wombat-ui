@@ -118,7 +118,10 @@ Template.navbarFooter.events({
     Meteor.call('approveDataRecord', Session.get('currentDataRecord'));
     Router.go('/data'); // return to the list of completed forms after approving the form
   },
-
+  'click #lockDataLink':function(){
+    Meteor.call('lockDataRecord', Session.get('currentDataRecord'));
+    Router.go('/data'); // return to the list of completed forms after approving the form
+  },
 
   //-----------------------------------------
   // SAVED FORMS EVENTS

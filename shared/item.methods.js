@@ -20,6 +20,23 @@ Meteor.methods({
     console.log('removing record', recordId);
     Data.remove({_id: recordId});
   },
+  lockDataRecord: function(recordId){
+    console.log('toggling locked status on record', recordId);
+    var record = Data.findOne({_id: recordId});
+    if(record){
+      if(record.locked){
+        return Data.update({_id: recordId},{$set:{
+          locked: false
+        }});
+      }else{
+        return Data.update({_id: recordId},{$set:{
+          locked: true
+        }});
+      }
+    }else{
+      return 'Update failed.';
+    }
+  },
   approveDataRecord: function(recordId){
     console.log('toggling approved status on record', recordId);
     var record = Data.findOne({_id: recordId});

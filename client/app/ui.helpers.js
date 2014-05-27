@@ -13,3 +13,11 @@ UI.registerHelper('getApprovalIcon', function(){
     return 'fa-inbox';
   }
 });
+
+UI.registerHelper('getLockedIcon', function(){
+  if(this.locked){
+    return 'fa-lock';
+  }else{
+    return 'fa-unlock';
+  }
+});
