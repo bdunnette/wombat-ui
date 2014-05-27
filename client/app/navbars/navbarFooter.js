@@ -116,6 +116,7 @@ Template.navbarFooter.events({
   },
   'click #approveDataLink':function(){
     Meteor.call('approveDataRecord', Session.get('currentDataRecord'));
+    Router.go('/data'); // return to the list of completed forms after approving the form
   },
 
 
