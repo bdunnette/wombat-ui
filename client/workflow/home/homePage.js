@@ -6,6 +6,6 @@ Template.homePage.events({
     Router.go('/forms');
   },
   'click #collectedDataTile':function(){
-    Router.go('/builder');
+    Router.go('/data');
   }
 });
