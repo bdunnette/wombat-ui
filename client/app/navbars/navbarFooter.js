@@ -141,10 +141,12 @@ Template.navbarFooter.events({
 
   'click #collectDataLink': function(){
     var record = Forms.findOne({_id: Session.get('currentForm')});
+    var previousRecord = Session.get('currentDataRecord');
     var newDataRecord = {
       createdAt: new Date(),
       schema_id: this._id,
       formName: this.formName,
+      previousVersion : previousRecord.id,
       data: {}
     }
     record.schema.forEach(function(block){
