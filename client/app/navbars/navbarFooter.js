@@ -56,6 +56,19 @@ Template.navbarFooter.helpers({
       return false;
     }
 
+  },
+  isLocked: function(){
+    var dataRecord = Data.findOne(Session.get('currentDataRecord'));
+    if(dataRecord){
+      if(dataRecord.locked){
+        return true;
+      }else{
+        return false
+      }
+    }else{
+      return false;
+    }
+
   }
 });
 
