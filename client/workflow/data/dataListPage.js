@@ -5,11 +5,7 @@ Session.setDefault('dataPaginationCount', 1);
 Session.setDefault('dataSelectedPagination', 0);
 Session.setDefault('dataSkipCount', 0);
 
-// Meteor.autorun(function(){
-//   Meteor.subscribe('customerAccounts');
-// });
 
-//------------------------------------------------
 // ROUTING
 
 Router.map(function(){
@@ -40,7 +36,7 @@ Template.dataListPage.helpers({
   dataList: function(){
     Session.set('receivedData', new Date());
     Session.set('dataPaginationCount', Math.floor(Forms.find().count() / Session.get('dataTableLimit')));
-
+    Session.set( 'currentDataRecord', '' );  // null out currentRecord
     //return Data.find();
 
     if(Session.get('dataSearchFilter').length === 17){
@@ -54,12 +50,6 @@ Template.dataListPage.helpers({
         $options: 'i'
       }},{limit: Session.get('dataTableLimit'), skip: Session.get('dataSkipCount')});
     }
-
-
-
-
-
-
 
 
   },
