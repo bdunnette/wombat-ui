@@ -13,6 +13,11 @@ Router.map(function(){
   });
 });
 Template.dataPreviewPage.events({
+  'click .panel-footer':function(){
+    var record = Data.findOne({_id: Session.get('currentDataRecord')});
+    console.log( 'clicked on panel footer ', record);
+    Router.go('/data/' + record.previousVersion);
+  }
 });
 
 Template.dataPreviewPage.helpers({
