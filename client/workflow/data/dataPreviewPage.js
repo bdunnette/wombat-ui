@@ -60,5 +60,18 @@ Template.dataPreviewPage.helpers({
     }else{
       return 'No record.';
     }
+  },
+  getCreatedBy: function(){
+    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    console.log('dataRecord', dataRecord);
+    if(dataRecord){
+      if(dataRecord.ownerUsername){
+        return dataRecord.ownerUsername;
+      }else{
+        return "---";
+      }
+    }else{
+      return 'No record.';
+    }
   }
 });

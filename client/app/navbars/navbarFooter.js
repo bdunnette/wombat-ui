@@ -142,17 +142,20 @@ Template.navbarFooter.events({
   'click #collectDataLink': function(){
     var record = Forms.findOne({_id: Session.get('currentForm')});
     var previousRecord = Session.get('currentDataRecord');
+    console.log ( 'previous record: ', previousRecord );
     var newDataRecord = {
       createdAt: new Date(),
       schema_id: this._id,
       formName: this.formName,
-      previousVersion : previousRecord.id,
+      ownerUsername: Meteor.user().username,
+      previousVersion : previousRecord,
       data: {}
     }
     record.schema.forEach(function(block){
       newDataRecord.data[block._id] = $("#input-" + block._id).val();
     });
     Data.insert(newDataRecord);
+    Session.set('currentDataRecord', null),
     Router.go('/data');
   },
   'click #publishFormLink':function(){
