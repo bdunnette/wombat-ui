@@ -32,20 +32,6 @@ Template.formPreviewPage.events({
         stared: true
       }});
     }
-  },
-  'click #formCollectButton':function(){
-    var newDataRecord = Forms.findOne({_id: Session.get('currentForm')});
-
-    var newDataRecord = {
-      createdAt: new Date(),
-      schema_id: this._id,
-      formName: this.formName,
-      data: {}
-    }
-    record.schema.forEach(function(block){
-      newDataRecord.data[block._id] = $("#input-" + block._id).val();
-    });
-    Data.insert(newDataRecord);
   }
 });
 
