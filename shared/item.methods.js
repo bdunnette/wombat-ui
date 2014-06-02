@@ -16,12 +16,29 @@ Meteor.methods({
       Items.remove({_id: record._id});
     });
   },
-  dropDataRecord: function(recordId){
-    console.log('removing record', recordId);
+ /* dropDataRecord: function(recordId){
     //TODO test for record exists
     Data.update({_id: recordId}, {$set : {isDeleted: true}});
     console.log ('flagged record', recordId);
+  },*/
+  deleteDataRecord: function(recordId){
+    console.log('toggling deleted status on record', recordId);
+    var record = Data.findOne({_id: recordId});
+    if(record){
+      if(record.isDeleted){
+        return Data.update({_id: recordId},{$set:{
+          deleted: false
+        }});
+      }else{
+        return Data.update({_id: recordId},{$set:{
+          deleted: true
+        }});
+      }
+    }else{
+      return 'Update failed.';
+    }
   },
+
   lockDataRecord: function(recordId){
     console.log('toggling locked status on record', recordId);
     var record = Data.findOne({_id: recordId});
