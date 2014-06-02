@@ -18,8 +18,11 @@ Template.dataPreviewPage.events({
     console.log( 'clicked on panel footer ', record.previousVersion);
     Session.set('selectedDataRecord', record.previousVersion);
     Router.go('/data/' + record.previousVersion);
+  },
+  'click .fa-trash-o':function(){
+   Meteor.call('deleteDataRecord', Session.get('currentDataRecord'));
   }
-});
+  });
 
 Template.dataPreviewPage.helpers({
   dataSchema: function(){
@@ -67,6 +70,34 @@ Template.dataPreviewPage.helpers({
       return 'No record.';
     }
   },
+   getPreviousVersion: function(){
+    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    console.log('dataRecord', dataRecord);
+    if(dataRecord){
+      if(dataRecord.previousVersion){
+        return dataRecord.previousVersion;
+      }else{
+        return "Initial Version";
+      }
+    }else{
+      return 'No record.';
+    }
+  },
+  //TODO need to redo this part, not right but works
+   isInitialVersion: function(){
+    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    console.log('dataRecord', dataRecord);
+    if(dataRecord){
+      if(dataRecord.previousVersion){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return 'No record.';
+    }
+  },
+
   getCreatedBy: function(){
     var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
     console.log('dataRecord', dataRecord);
