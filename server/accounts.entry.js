@@ -6,7 +6,6 @@ AccountsEntry = {
   }
 };
 
-
 Meteor.startup(function() {
   return AccountsEntry.config({
     signupCode: 'penecillin'
