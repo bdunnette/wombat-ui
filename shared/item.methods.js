@@ -18,7 +18,9 @@ Meteor.methods({
   },
   dropDataRecord: function(recordId){
     console.log('removing record', recordId);
-    Data.remove({_id: recordId});
+    //TODO test for record exists
+    Data.update({_id: recordId}, {$set {isDeleted: true}});
+    console.log ('flagged record', recordId);
   },
   lockDataRecord: function(recordId){
     console.log('toggling locked status on record', recordId);
