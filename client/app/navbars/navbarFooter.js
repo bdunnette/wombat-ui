@@ -55,8 +55,21 @@ Template.navbarFooter.helpers({
     }else{
       return false;
     }
-
   },
+
+  isDeleted: function(){
+    var dataRecord = Data.findOne(Session.get('currentDataRecord'));
+    if(dataRecord){
+      if(dataRecord.deleted){
+        return true;
+      }else{
+        return false
+      }
+    }else{
+      return false;
+    }
+  },
+
   isLocked: function(){
     var dataRecord = Data.findOne(Session.get('currentDataRecord'));
     if(dataRecord){
@@ -120,7 +133,7 @@ Template.navbarFooter.events({
 
   'click #deleteDataLink':function(){
     if(confirm('Are you sure you want to delete this record?')){
-      Meteor.call('dropDataRecord', Session.get('currentDataRecord'));
+      Meteor.call('deleteDataRecord', Session.get('currentDataRecord'));
       Router.go('/data');
     }
   },
