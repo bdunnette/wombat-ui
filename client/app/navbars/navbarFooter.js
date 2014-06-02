@@ -56,6 +56,19 @@ Template.navbarFooter.helpers({
       return false;
     }
 
+  },
+  isLocked: function(){
+    var dataRecord = Data.findOne(Session.get('currentDataRecord'));
+    if(dataRecord){
+      if(dataRecord.locked){
+        return true;
+      }else{
+        return false
+      }
+    }else{
+      return false;
+    }
+
   }
 });
 
@@ -120,18 +133,21 @@ Template.navbarFooter.events({
   },
   'click #lockDataLink':function(){
     Meteor.call('lockDataRecord', Session.get('currentDataRecord'));
-    Router.go('/data'); // return to the list of completed forms after approving the form
+    Router.go('/data'); // return to the list of completed forms after locking the form
   },
 
   //-----------------------------------------
-  // SAVED FORMS EVENTS
+  // FORMS EVENTS
 
   'click #collectDataLink': function(){
     var record = Forms.findOne({_id: Session.get('currentForm')});
+    var previousRecord = Session.get('currentDataRecord');
     var newDataRecord = {
       createdAt: new Date(),
       schema_id: this._id,
       formName: this.formName,
+      ownerUsername: Meteor.user().username,
+      previousVersion : previousRecord,
       data: {}
     }
     record.schema.forEach(function(block){
