@@ -28,8 +28,9 @@ Template.dataPreviewPage.helpers({
   dataSchema: function(){
     console.log('data.schema', this.schema);
     console.log('selectedDataRecord', Session.get('selectedDataRecord'));
+    console.log('currentDataRecord', Session.get('currentDataRecord'));
 
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
 
     if(dataRecord){
@@ -58,8 +59,9 @@ Template.dataPreviewPage.helpers({
     }
   },
   getFormName: function(){
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
+    //console.log('selectedDataRecord', Session.get('selectedDataRecord'));
     if(dataRecord){
       if(dataRecord.formName){
         return dataRecord.formName;
@@ -71,7 +73,7 @@ Template.dataPreviewPage.helpers({
     }
   },
    getPreviousVersion: function(){
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
     if(dataRecord){
       if(dataRecord.previousVersion){
@@ -85,7 +87,7 @@ Template.dataPreviewPage.helpers({
   },
   //TODO need to redo this part, not right but works
    isInitialVersion: function(){
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
     if(dataRecord){
       if(dataRecord.previousVersion){
@@ -99,7 +101,7 @@ Template.dataPreviewPage.helpers({
   },
 
   getCreatedBy: function(){
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
     if(dataRecord){
       if(dataRecord.ownerUsername){
