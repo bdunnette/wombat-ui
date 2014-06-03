@@ -20,7 +20,7 @@
             {{#if isInitialVersion}}
               <div>{{ _id }} | Created By: {{getCreatedBy}} | Initial Version </div>
             {{else}}
-              <div>{{ _id }} | Created By: {{getCreatedBy}} | <a href = "#">Previous Version: </a>  {{getPreviousVersion}} </div>
+              <div>{{ _id }} | Created By: {{getCreatedBy}} | <a id = "previousVersionID" href = "#">Previous Version: </a>{{getPreviousVersion}}</div>
             {{/if}}
         </div>
       </div>
