@@ -16,7 +16,8 @@ Template.dataPreviewPage.events({
   'click .panel-footer':function(){
     var record = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log( 'clicked on panel footer ', record.previousVersion);
-    Session.set('selectedDataRecord', record.previousVersion);
+    //TODO this is a hack until I put the link into the anchor tag only
+    Session.set('currentDataRecord', record.previousVersion);
     Router.go('/data/' + record.previousVersion);
   },
   'click .fa-trash-o':function(){
