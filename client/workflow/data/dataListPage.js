@@ -36,7 +36,7 @@ Template.dataListPage.helpers({
   dataList: function(){
     Session.set('receivedData', new Date());
     Session.set('dataPaginationCount', Math.floor(Forms.find().count() / Session.get('dataTableLimit')));
-    Session.set( 'currentDataRecord', '' );  // null out currentRecord
+    Session.set( 'currentDataRecord', false );  // null out currentRecord
     //return Data.find();
 
     if(Session.get('dataSearchFilter').length === 17){
@@ -87,7 +87,7 @@ Template.dataListPage.events({
     Session.set('dataSkipCount', this.index * Session.get('dataTableLimit'));
   },
   'click .dataRow':function(){
-    Session.set('selectedDataRecord', this._id);
+    Session.set('currentDataRecord', this._id);
     //Router.go('/form/' + this.schema_id);
     Router.go('/data/' + this._id);
 
