@@ -21,6 +21,9 @@ Template.dataPreviewPage.events({
   },
   'click .fa-trash-o':function(){
    Meteor.call('deleteDataRecord', Session.get('currentDataRecord'));
+  },
+  'click .fa-lock':function(){
+   Meteor.call('lockDataRecord', Session.get('currentDataRecord'));
   }
   });
 
