@@ -21,7 +21,7 @@ Meteor.methods({
     console.log('toggling deleted status on record', recordId);
     var record = Data.findOne({_id: recordId});
     if(record){
-      if(record.deleted){
+      if( record.deleted ){
         return Data.update({_id: recordId},{$set:{
           deleted: false
         }});
@@ -52,6 +52,7 @@ Meteor.methods({
       return 'Update failed.';
     }
   },
+
   approveDataRecord: function(recordId){
     console.log('toggling approved status on record', recordId);
     var record = Data.findOne({_id: recordId});
