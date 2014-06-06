@@ -6,6 +6,7 @@
     "auto-nprogress": {},
     "mousetrap": {},
     "bowser": {},
-    "font-awesome": {}
+    "font-awesome": {},
+    "session-extended-api": {}
   }
 }

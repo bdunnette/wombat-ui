@@ -1,3 +1,7 @@
+// this page is for displaying captured data, so we return data from persistent storage (the database)
+// this page is very similar to formBlockPreivew.js, and could maybe be merged
+// but we want to be careful about the pattern
+
 Template.dataBlockPreview.helpers({
   isInput: function(){
     if(this.elementType === "input"){
@@ -13,19 +17,68 @@ Template.dataBlockPreview.helpers({
       return false;
     }
   },
+  isYesNoBlock:function(){
+    if(this.elementType === "yesno"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  yesNoBlockYesValue: function(){
+    if(this.elementType === "yesno"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "yes"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+
+    }else{
+      return "btn-default";
+    }
+  },
+  yesNoBlockNoValue: function(){
+    if(this.elementType === "yesno"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "no"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+    }else{
+      return "btn-default";
+    }
+  },
+  isSectionTitle: function(){
+    if(this.elementType === "section"){
+      return true;
+    }else{
+      return false;
+    }
+  },
   getLabelText: function(){
     var resultString = "Q: ";
 
     var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
     console.log('dataRecord', dataRecord);
 
-    var form = Forms.findOne(dataRecord.schema_id);
-    console.log('getLabelText: form', form);
+    if(dataRecord){
+        var form = Forms.findOne(dataRecord.schema_id);
+        console.log('getLabelText: form', form);
 
-    if(this.labelText){
-        return resultString + this.labelText;
-    }else{
-        return resultString;
+        if(this.labelText){
+            return resultString + this.labelText;
+        }else{
+            return resultString;
+        }
     }
   },
   getInputType: function(){

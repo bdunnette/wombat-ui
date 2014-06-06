@@ -43,7 +43,18 @@ Template.builderPage.events({
   },
   'click .item':function(){
     Session.set('selectedBlockItem', this._id);
+  },
+  'click .yes-button':function(){
+    Session.set('selectedBlockItem', this._id);
+    alert('Form not activated yet.');
+    // alert('yes: ' + this._id);
+  },
+  'click .no-button':function(){
+    Session.set('selectedBlockItem', this._id);
+    // alert('no: ' + this._id);
+    alert('Form not activated yet.');
   }
+
 });
 
 Template.builderPage.helpers({
@@ -52,9 +63,9 @@ Template.builderPage.helpers({
   },
   formName: function(){
     var currentForm = Forms.findOne(Session.get('currentForm'));
-    console.log('currentForm', currentForm);
 
     if(currentForm){
+      console.log('currentForm', currentForm);
       return currentForm.formName;
     }else{
       return "";
@@ -91,30 +102,52 @@ Template.builderPage.helpers({
         // $('#' + Session.get('movedElementId')).css('left', '0');
         var inputType = "text";
         var elementType = "input";
+        var labelText = "";
+        var text = "";
+
         if(Session.get('movedElementId') === "colorInputBlock"){
           inputType = "color";
+          elementType = "color";
         }else if(Session.get('movedElementId') === "numericInputBlock"){
           inputType = "number";
+          elementType = "number";
         }else if(Session.get('movedElementId') === "textareaInputBlock"){
-          elementType = "textarea"
+          elementType = "textarea";
+        }else if(Session.get('movedElementId') === "textInputBlock"){
+          elementType = "input";
+          text = "Lorem ipsum...";
+        }else if(Session.get('movedElementId') === "spacerBlock"){
+          inputType = "spacer";
+          elementType = "spacer"
+        }else if(Session.get('movedElementId') === "yesNoInputBlock"){
+          elementType = "yesno";
+          inputType = "yesno";
+        }else if(Session.get('movedElementId') === "sectionTitleBlock"){
+          labelText = "New Section";
+          inputType = "section";
+          elementType = "section";
         }
 
-        var rank = 0;
+        var lastRank = 0;
         Items.find().forEach(function(doc){
-          if(doc.rank > rank){
-            rank = doc.rank + 1;
+          if(doc.rank > lastRank){
+            lastRank = doc.rank + 1;
           }
         });
 
-
+        var newObject = {
+          block_type: Session.get('movedElementId'),
+          rank: lastRank,
+          inputType: inputType,
+          inputValue: '',
+          elementType: elementType,
+          labelText: labelText,
+          text: text
+        };
+        console.log('newObject', newObject);
 
         setTimeout(function(){
-          Items.insert({
-            text: Session.get('movedElementId'),
-            rank: rank,
-            inputType: inputType,
-            elementType: elementType
-          });
+          Items.insert(newObject);
           Session.clear('movedElementId');
         }, 50);
       }

@@ -19,11 +19,12 @@
       <table id="example" class="table table-hover table-striped tablesorter">
         <thead>
           <tr>
-            <th>Status</th>
             <th>Data ID</th>
+            <th>Study/Form Name</th>
             <th>Created At</th>
             <th>Schema ID</th>
-            <th>Study/Form Name</th>
+            <th>Approved</th>
+            <th>Locked</th>
           </tr>
         </thead>
         <tbody>
@@ -49,10 +50,11 @@
 
 <template name="dataRowItem">
   <tr class="dataRow">
-    <td><i class="fa {{ getApprovalIcon }}"></i><i class="fa {{ getLockedIcon }}"></i></td>
     <td>{{ _id }}</td>
+    <td>{{ formName }}</td>
     <td>{{ createdAt }}</td>
     <td>{{ schema_id }}</td>
-    <td>{{ formName }}</td>
+    <td class="centered"><i class="fa {{ getApprovalIcon }}"></i></td>
+    <td class="centered"><i class="fa {{ getLockedIcon }}"></i></td>
   </tr>
 </template>

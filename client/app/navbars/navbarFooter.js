@@ -92,6 +92,12 @@ Template.navbarFooter.events({
   'click #tutorialLink':function(){
     $('#tutorialModal').modal('show');
   },
+  'click #panelToggleLink':function(){
+    if(Meteor.user()){
+      toggleWestPanel();
+      toggleEastPanel();
+    }
+  },
   'click #eastPanelToggleLink':function(){
     // only toggle the sidebar if the user is logged in
     if(Meteor.user()){
@@ -142,6 +148,7 @@ Template.navbarFooter.events({
   'click #collectDataLink': function(){
     var record = Forms.findOne({_id: Session.get('currentForm')});
     var previousRecord = Session.get('currentDataRecord');
+
     var newDataRecord = {
       createdAt: new Date(),
       schema_id: this._id,
@@ -151,8 +158,14 @@ Template.navbarFooter.events({
       data: {}
     }
     record.schema.forEach(function(block){
-      newDataRecord.data[block._id] = $("#input-" + block._id).val();
+      //newDataRecord.data[block._id] = $("#input-" + block._id).val();
+      if(Session.get('item-' + block._id + '-yesno')){
+        newDataRecord.data[block._id] = Session.get('item-' + block._id + '-yesno');
+      }else{
+        newDataRecord.data[block._id] = $("#input-" + block._id).val();
+      }
     });
+
     Data.insert(newDataRecord);
     Router.go('/data');
   },

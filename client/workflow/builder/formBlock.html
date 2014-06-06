@@ -1,8 +1,24 @@
 <template name="formBlock">
+
+  {{#if isSpacer }}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
+      <hr>
+    </div>
+  {{/if}}
+
+  {{#if isSectionTitle }}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
+      <hr>
+      <h4>{{getLabelText}}</h4>
+    </div>
+  {{/if}}
+
   {{#if isInput}}
     <div id="item-{{_id}}" class="item {{isSelected}}">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-      <button type="button" class="close"><i class="fa fa-times"></i></button>
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <input id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" value="{{getInputValue}}">
       </div>
@@ -10,12 +26,33 @@
   {{/if}}
 
   {{#if isTextarea}}
-    <div id="item-{{_id}}" class="item">
+    <div id="item-{{_id}}" class="item {{isSelected}}">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-      <button type="button" class="close"><i class="fa fa-times"></i></button>
+<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}">{{getInputValue}}</textarea>
       </div>
     </div>
   {{/if}}
+
+  {{#if isYesNoBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+      <div class="padded row">
+        <div class="col col-md-10">
+          <p>{{getLabelText}}</p>
+        </div>
+        <div class="col col-md-2">
+          <div class="btn-group pull-right">
+            <button type="button" class="btn btn-info yes-button" readonly>Yes</button>
+            <button type="button" class="btn btn-default no-button" readonly>No</button>
+          </div>
+        </div>
+<!--         <div class="col col-md-1">
+          <button type="button" class="close"><i class="fa fa-times"></i></button>
+        </div> -->
+      </div>
+    </div>
+  {{/if}}
+
+
 </template>

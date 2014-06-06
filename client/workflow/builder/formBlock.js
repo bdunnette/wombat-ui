@@ -19,8 +19,29 @@ Template.formBlock.helpers({
       return false;
     }
   },
+  isSpacer: function(){
+    if(this.elementType === "spacer"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  isYesNoBlock:function(){
+    if(this.elementType === "yesno"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  isSectionTitle: function(){
+    if(this.elementType === "section"){
+      return true;
+    }else{
+      return false;
+    }
+  },
   getLabelText: function(){
-    var resultString = "Q: ";
+    var resultString = "";
     if(this.labelText){
         return resultString + this.labelText;
     }else{

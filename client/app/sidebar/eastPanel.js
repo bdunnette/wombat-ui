@@ -1,4 +1,8 @@
 Template.eastPanel.events({
+  'click #deleteBlockButton':function(){
+    Items.remove(Session.get('selectedBlockItem'));
+    //alert('delete');
+  },
   'click #saveFormBlockParamsButton':function(){
     // var data = {
     //   id: Session.get('selectedBlockItem'),

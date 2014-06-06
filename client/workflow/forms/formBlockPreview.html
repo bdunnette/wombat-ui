@@ -1,5 +1,19 @@
 
 <template name="formBlockPreview">
+
+  {{#if isSpacer }}
+    <div id="item-{{_id}}" class="item">
+      <hr>
+    </div>
+  {{/if}}
+
+  {{#if isSectionTitle }}
+    <div id="item-{{_id}}" class="item">
+      <hr>
+      <h3>{getLabelText}}</h3>
+    </div>
+  {{/if}}
+
   {{#if isInput}}
     <div id="item-{{_id}}" class="item {{isSelected}}">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
@@ -19,4 +33,22 @@
       </div>
     </div>
   {{/if}}
+
+  {{#if isYesNoBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+      <div class="padded row">
+        <div class="col col-md-10">
+          <p>{{getLabelText}}</p>
+        </div>
+        <div class="col col-md-2">
+          <div class="btn-group pull-right">
+            <button id="item-{{_id}}-yes" type="button" class="btn {{yesNoBlockYesValue}} yes-button" readonly>Yes</button>
+            <button id="item-{{_id}}-no" type="button" class="btn {{yesNoBlockNoValue}} no-button" readonly>No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
 </template>
