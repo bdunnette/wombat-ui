@@ -54,12 +54,12 @@ Template.dataListPage.helpers({
 
   },
   rendered: function(){
-    $(this.find('#example')).tablesorter();
+    $(this.find('#dataTable')).tablesorter();
 
     Deps.autorun(function(){
       console.log(Session.get('receivedData'))
       setTimeout(function(){
-        $("#example").trigger("update");
+        $("#dataTable").trigger("update");
       }, 200);
     });
   }

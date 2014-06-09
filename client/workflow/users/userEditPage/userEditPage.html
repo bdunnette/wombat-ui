@@ -1,0 +1,209 @@
+<template name="userEditPage">
+  <div id="userEditPage" class="page">
+
+    {{#with user}}
+      <div class="content">
+        <div id="pad-wrapper" class="settings-wrapper">
+          <div class="row">
+
+            <div class="col-md-3 col-md-offset-1 avatar-box">
+              <div class="centered personal-image">
+                <img src="{{ getAvatar }}" class="avatar img-circle" alt="avatar" />
+                <!--<p>Upload a different photo...</p>-->
+              </div>
+
+              {{#if isRole "Admin" }}
+                <div class="fullwidth list-group">
+                  {{#if isRole 'SysAdmin'}}
+                    <li id="setAsSysAdminButton" class="list-group-item {{sysAdminButtonSelected}}">
+                      <i class="icon-lightbulb pull-left"></i>
+                      SysAdmin
+                    </li>
+                  {{/if}}
+                  <li id="setAsAdminButton" class="list-group-item {{adminButtonSelected}}">
+                    <i class="icon-lightbulb pull-left"></i>
+                    Admin
+                  </li>
+                  <li id="setAsUserButton" class="list-group-item {{userButtonSelected}}">
+                    <i class="icon-lightbulb pull-left"></i>
+                    User
+                  </li>
+                </div>
+              {{/if}}
+
+              <label for="helpTipsVisible">Help Tips</label>
+              <div id="helpTipsVisible" class="fullwidth btn-group">
+                <button id="helpTipsVisibleButton" class="btn {{getHelpTipsVisible "visible"}}">Visible</button>
+                <button id="helpTipsHiddenButton" class="btn {{getHelpTipsVisible "hidden"}}">Hidden</button>
+              </div>
+
+              <label for="tableEntriesPreferences">Number of Table Entries</label>
+              <div id="tableEntriesPreferences" class="fullwidth btn-group">
+                <button id="tableEntriesTwentyButton" class="btn {{getTableEntriesVisible "twenty"}}">20</button>
+                <button id="tableEntriesFiftyButton" class="btn {{getTableEntriesVisible "fifty"}}">50</button>
+                <button id="tableEntriesHundredButton" class="btn {{getTableEntriesVisible "hundred"}}">100</button>
+              </div>
+
+              {{> dirtyUserSave }}
+              <br>
+            </div>
+
+            <div class="col-md-7 personal-info">
+              <div class="row">
+                <div class="col col-md-6">
+                  <h5 class="personal-title">{{ newOrEditUser }}</h5>
+
+                </div>
+                <div class="col col-md-6">
+                </div>
+              </div>
+
+              <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Username:</label>
+                  <div class="col-lg-8">
+                    <input id="profileUsernameInput" class="form-control" type="text" value="{{ getUsername }}" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Email:</label>
+                  <div class="col-lg-8">
+                    <input id="profileEmailInput" class="form-control" type="text" value="{{ getEmail }}" />
+                  </div>
+                </div>
+
+<!--                 <hr>
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Password:</label>
+                  <div class="col-lg-8">
+                    <input id="profilePasswordInput" class="form-control" type="password" placeholder="********" value="{{password}}" />
+                  </div>
+                </div>
+                <div class="form-group {{isValidated}}">
+                  <label class="col-lg-2 control-label">Confirm password:</label>
+                  <div class="col-lg-8">
+                    <input id="profilePasswordConfirmInput" class="form-control" type="password" placeholder="********" value="{{password}}" />
+                  </div>
+                </div>
+                {{#if passwordIsValid }}
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>
+                    <div class="col-lg-8">
+                      <button id="updatePasswordButton" class="btn btn-info">Update Password</button>
+                    </div>
+                  </div>
+                {{/if}} -->
+
+                <hr>
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Name:</label>
+                  <div class="col-lg-8">
+                    <input id="profileNameInput" class="form-control" type="text" placeholder="Jane Doe" value="{{ getName }}" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Title:</label>
+                  <div class="col-lg-8">
+                    <input id="profileTitleInput" class="form-control" type="text" placeholder="VP Sales" value="{{ getTitle }}" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Client:</label>
+                  <div class="col-lg-8">
+                    <!--<input id="profileCompanyInput" class="form-control" type="text" placeholder="ACME, Inc." value="{{ getClient }}" />-->
+                    <!--<button id="findCompanyButton" class="btn btn-default">Find</button>-->
+
+                    <!--<input id="profileCompanyInput" class="form-control" type="text" placeholder="ACME, Inc." value="{{ getClient }}" />-->
+                    <div id="findClientButton" class="fullwidth btn btn-default">{{ getClient }}</div>
+
+                  </div>
+                  <div class="col-lg-1">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Role:</label>
+                  <div class="col-lg-8">
+                    <div id="selectRoleButton" class="fullwidth btn btn-default">{{ getRole }}</div>
+                  </div>
+                  <div class="col-lg-1">
+                  </div>
+                </div>
+
+  <!--               <div class="form-group">
+                  <label class="col-lg-2 control-label">Employer:</label>
+                  <div class="col-lg-8">
+                    <input id="profileEmployerInput" class="form-control" type="text" placeholder="Employer" value="{{ getEmployer }}" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Employer Id:</label>
+                  <div class="col-lg-8">
+                    <input id="profileEmployerIdInput" class="form-control" type="text" placeholder="Employer Id" value="{{ getEmployerId }}" />
+                  </div>
+                </div> -->
+
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Avatar:</label>
+                  <div class="col-lg-8">
+                    <input id="profileAvatarInput" class="form-control" type="text" placeholder="/img/icons/Default_User.png" value="{{ getAvatar }}" />
+                  </div>
+                </div>
+
+
+                <hr>
+
+                <div class="form-group">
+                  <label for="profilePhoneInput" class="col-md-2 control-label">Phone</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="profilePhoneInput" placeholder="212-555-1234" value="{{ getPhone }}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="profileWebsiteInput" class="col-md-2 control-label">Website</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="profileWebsiteInput" placeholder="http://www.somewhere.com" value="{{ getWebsite }}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="profileAddressInput" class="col-md-2 control-label">Address</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="profileAddressInput" placeholder="123 Main St.  Apt 4" value="{{profile.address}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="profileCityInput" class="col-md-2 control-label">City</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="profileCityInput" placeholder="Brooklyn" value="{{profile.zip}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="profileStateInput" class="col-md-2 control-label">State</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="profileStateInput" placeholder="NY" value="{{profile.state}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="profileZipInput" class="col-md-2 control-label">Zip</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" id="profileZipInput" placeholder="11208" value="{{profile.zip}}">
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/with}}
+  </div>
+</template>
+
+<template name="dirtyUserSave">
+  <div class="actions">
+    <input id="submitProfileInfoButton" type="button" class="fullwidth btn btn-success {{isDirtyRecord}} primary" value="{{createOrSaveText}}">
+  </div>
+</template>

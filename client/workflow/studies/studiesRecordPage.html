@@ -1,0 +1,34 @@
+<template name="studiesRecordPage">
+  <div id="studiesRecordPage" class="page">
+    <div class="hidden">{{resized}}</div>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-6">
+          <h4>Study Parameters</h4>
+          <h6>{{_id}}</h6>
+        </div>
+        <div class="col col-md-6 pull-right">
+          <div id="saveClientButton" class="pull-right btn btn-info">Edit Study</div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-md-12">
+          <label for="studyNameInput" >Name</label>
+          <input id="studyNameInput" type="text" class="form-control" placeholder="..." value="{{name}}">
+          <br>
+
+          <label for="studyDescriptionInput" >Description</label>
+          <input id="studyDescriptionInput" type="text" class="form-control" placeholder="..." value="{{description}}">
+          <br>
+
+          <label for="studyUrlInput" >URL</label>
+          <input id="studyUrlInput" type="text" class="form-control" placeholder="..." value="{{url}}">
+          <br>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</template>

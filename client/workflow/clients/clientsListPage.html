@@ -1,0 +1,76 @@
+<template name="clientsListPage">
+  <div id="clientsListPage" class="page">
+    <div class="container">
+
+        <div class="row ">
+          <div class="col-md-6">
+            <input id="clientSearchInput" type="text" class="form-control" placeholder="search clients..." />
+          </div>
+          <div class="col-md-6 pull-right">
+            <button id="createClientButton" class="btn btn-info">Create Client</button>
+          </div>
+        </div>
+      <hr/>
+
+      <table id="clientsTable" class="table table-hover table-striped tablesorter">
+        <thead>
+        <tr>
+          <th>
+            <span class="line"></span>ObjectId
+          </th>
+          <th>
+            <span class="line"></span>Brand Name
+          </th>
+          <th>
+            <span class="line"></span>Description
+          </th>
+          <th>
+            <span class="line"></span>Owner
+          </th>
+          <th>
+            <span class="line"></span>Created At
+          </th>
+          <th>
+            <span class="line"></span>URL
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{#each clientsList}}
+        {{> clientListItem }}
+        {{/each}}
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</template>
+
+
+
+
+<template name="clientListItem">
+  <tr class="clientListItem">
+    <td>
+      {{_id}}
+<!--       <i class="fa fa-book"></i> -->
+    </td>
+    <td>
+      {{ name }}
+    </td>
+    <td>
+      {{ description }}
+    </td>
+    <td>
+      {{ owner }}
+    </td>
+    <td>
+      {{ getCreatedAt }}
+    </td>
+    <td>
+      {{ url }}
+    </td>
+  </tr>
+</template>

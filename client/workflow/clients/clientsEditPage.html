@@ -1,0 +1,49 @@
+<template name="clientsEditPage">
+  <div id="clientsEditPage" class="page">
+    <div class="hidden">{{resized}}</div>
+    <div class="container">
+<!--       {{#with selectedClient }}
+        <div id="pad-wrapper"> -->
+<!--           <div class="row">
+            <div class="col-md-12">
+              <h2 class="pull-left">
+                {{ getClientName }}
+              </h2>
+              <div id="saveClientButton" class="pull-right btn btn-info">Save</div>
+            </div>
+            <div class="col-md-12">
+              <h4>Client Id:  {{ _id._str }}</h4>
+            </div>
+          </div>
+          <hr> -->
+
+          <div class="row">
+            <div class="col col-md-12">
+              <h4>Client Configuration</h4>
+              <br>
+            </div>
+            <div class="col col-md-12">
+              <label for="clientNameInput" >Name</label>
+              <input id="clientNameInput" type="text" class="form-control" placeholder="..." value="{{name}}">
+              <br>
+
+              <label for="clientDescriptionInput" >Description</label>
+              <input id="clientDescriptionInput" type="text" class="form-control" placeholder="..." value="{{description}}">
+              <br>
+
+              <label for="clientUrlInput" >URL</label>
+              <input id="clientUrlInput" type="text" class="form-control" placeholder="..." value="{{url}}">
+              <br>
+
+
+            </div>
+          </div>
+          <hr>
+          <div id="saveClientButton" class="pull-right btn btn-info">Save Client</div>
+
+
+<!--         </div>
+      {{/with}} -->
+    </div>
+  </div>
+</template>

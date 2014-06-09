@@ -25,6 +25,33 @@ Forms.allow({
 });
 
 
+Studies =  new Meteor.Collection("studies");
+Studies.allow({
+  insert: function(){
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
+});
+
+Clients =  new Meteor.Collection("clients");
+Clients.allow({
+  insert: function(){
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
+});
+
+
 // TODO:  refactor Items to FormItems
 Items = new Meteor.Collection("items");
 Items.allow({

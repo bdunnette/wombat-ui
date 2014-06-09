@@ -1,0 +1,103 @@
+<template name="usersListPage">
+  <div id="usersListPage" class="page">
+    <div class="content">
+      <div id="pad-wrapper" class="padded pad-wrapper">
+
+        <div class="row head">
+          <div class="col-md-8">
+            <h4>Users</h4>
+          </div>
+          <div class=col-md-2>
+            <div class="searchColumn">
+              <input id="usersSearchInput" class="form-control" type="text" placeholder="Search users..." value="{{getSearchValue}}" />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="newRecordColumn">
+              <a href="/newuser" class="form-control btn btn-success pull-right">
+                <span>&#43;</span>
+                NEW USER
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users table -->
+        <div class="row">
+          <div class="col-md-12">
+            <table id="usersTable" class="table table-hover table-striped">
+              <thead>
+              <tr>
+                <th class="col-md-3 sortable">
+                  Username
+                </th>
+                <th class="col-md-2 sortable">
+                  <span class="line"></span>CreatedAt
+                </th>
+                <th class="col-md-2 sortable">
+                  <span class="line"></span>Full Name
+                </th>
+                <th class="col-md-1 sortable">
+                  <span class="line"></span>Role
+                </th>
+                <th class="col-md-2 sortable">
+                  <span class="line"></span>Company
+                </th>
+                <th class="col-md-2 sortable align-right">
+                  <span class="line"></span>Email
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+
+              {{#each userInList }}
+                {{> userListItem }}
+              {{/each}}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!--<ul class="pagination pull-right">-->
+          <!--<li><a href="#">&#8249;</a></li>-->
+          <!--<li class="active"><a href="#">1</a></li>-->
+          <!--<li><a href="#">2</a></li>-->
+          <!--<li><a href="#">3</a></li>-->
+          <!--<li><a href="#">4</a></li>-->
+          <!--<li><a href="#">5</a></li>-->
+          <!--<li><a href="#">&#8250;</a></li>-->
+        <!--</ul>-->
+        <!-- end users table -->
+
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+<template name="userListItem">
+
+  <tr class="first userListItem">
+    <td>
+      <img src="{{ getAvatar }}" alt="contact" class="img-circle avatar hidden-phone" />
+      <a href="/users/{{ getUserIdString }}" class="name">{{ username }}</a></td>
+    <td>
+      {{ getProfileCreatedAt }}
+    </td>
+    <td>
+      {{ profile.name }}
+    </td>
+    <td>
+      {{ profile.role }}
+    </td>
+    <td>
+      {{ profile.company }}
+    </td>
+    <td class="align-right">
+      <a href="#">{{ getEmail }}</a>
+    </td>
+  </tr>
+
+</template>

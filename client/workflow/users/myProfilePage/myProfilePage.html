@@ -1,0 +1,89 @@
+<template name="myProfilePage">
+  <div id="myProfilePage" class="page">
+
+    {{#with user}}
+      <div class="content">
+        <div id="pad-wrapper" class="settings-wrapper">
+
+          {{#if isAlertVisible}}
+            <div class="row header">
+              <div class="alert alert-info">You have an invitation to join {{getEmployerInvitationName}}!
+               <div class="pull-right">
+                 <div id="acceptInvitationButton" class="btn btn-sm btn-info">Yes!  Join {{getEmployerInvitationName}}</div>
+                 <a id="declineInvitationButton" href="#">No Thanks</a>
+               </div>
+              </div>
+            </div>
+          {{/if}}
+
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1 avatar-box">
+              <div class="centered personal-image">
+                <img src="{{ getAvatar }}" class="avatar img-circle" alt="avatar" />
+              </div>
+              <br>
+            </div>
+
+            <div class="col-md-7 personal-info">
+              <div class="row">
+                <div class="col-md-8">
+                  <h3 class="name">{{ username }}</h3>
+                  <span class="area">User Id: {{_id}}</span><br>
+                </div>
+                <div class="col-md-4">
+                  <a id="editProfileButton" class="btn btn-info pull-right edit">
+                    Edit Profile
+                  </a>
+                </div>
+              </div>
+              <hr>
+              <div class="row profile">
+                <!-- bio, new note & orders column -->
+                <div class="col-md-9 bio">
+                  <div class="profile-box">
+                    <!-- biography -->
+                    <div class="col-md-12 section">
+                      <h6>Full Name</h6>
+                      <p>{{ profile.name }}</p>
+                      <br>
+
+                      <h6>Role</h6>
+                      <p>{{ profile.role }}</p>
+                      <br>
+
+                      <h6>Biography</h6>
+                      <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
+                      <br>
+
+                      <h6>Selected Study</h6>
+                      <p>{{getSelectedStudyName}}</p>
+                      <br>
+
+                      <h6>Selected Study Id</h6>
+                      <p>{{getSelectedStudyId}}</p>
+                      <br>
+
+                      <h6>Client Id</h6>
+                      <p>{{ getClientId }}</p>
+                      <br>
+
+                      <h6>Client Name</h6>
+                      <p>{{ getClientName }}</p>
+                      <br>
+
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- end main container -->
+
+    {{/with}}
+  </div>
+</template>

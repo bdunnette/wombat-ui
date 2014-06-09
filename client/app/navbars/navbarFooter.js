@@ -1,5 +1,5 @@
 Template.navbarFooter.helpers({
-  isFormBuilder: function(){
+  buildControls: function(){
     if(Router.current()){
       if(Router.current().path.indexOf('builder') > 0){
         return true;
@@ -10,7 +10,7 @@ Template.navbarFooter.helpers({
       return false;
     }
   },
-  isSavedForms: function(){
+  formControls: function(){
     if(Router.current()){
       if(Router.current().path.indexOf('form/') > 0){
         return true;
@@ -21,7 +21,29 @@ Template.navbarFooter.helpers({
       return false;
     }
   },
-  isCollectedData: function(){
+  userControls: function(){
+    if(Router.current()){
+      if(Router.current().path.indexOf('user/') > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  },
+  clientControls: function(){
+    if(Router.current()){
+      if(Router.current().path.indexOf('client/') > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  },
+  dataControls: function(){
     if(Router.current()){
       if(Router.current().path.indexOf('data/') > 0){
         return true;

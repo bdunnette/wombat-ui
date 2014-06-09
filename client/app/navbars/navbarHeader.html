@@ -22,9 +22,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {{#if isLoggedIn}}
+            <li><a id="studiesLink" href="/studies">Studies</a></li>
             <li><a id="savedFormLink" href="/forms">Forms</a></li>
             <li><a id="collectedDataLink" href="/data">Data</a></li>
             <li><a id="newFormLink" href="/builder">Design</a></li>
+            <li><a id="clientsLink" href="/clients">Clients</a></li>
           {{/if}}
         </ul>
 
@@ -34,6 +36,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{getUserName}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
+                <li><a href="/myprofile">My Profile</a></li>
                 <li><a href="/eula">End User License</a></li>
                 <li><a href="/privacy">Privacy Page</a></li>
                 <li><a href="/about">About</a></li>

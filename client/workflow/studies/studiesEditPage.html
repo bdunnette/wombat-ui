@@ -1,0 +1,30 @@
+<template name="studiesEditPage">
+  <div id="studiesEditPage" class="page">
+    <div class="hidden">{{resized}}</div>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-12">
+          <h4>Study Parameters</h4>
+          <br>
+        </div>
+        <div class="col col-md-12">
+          <label for="studyNameInput" >Name</label>
+          <input id="studyNameInput" type="text" class="form-control" placeholder="..." value="{{name}}">
+          <br>
+
+          <label for="studyDescriptionInput" >Description</label>
+          <input id="studyDescriptionInput" type="text" class="form-control" placeholder="..." value="{{description}}">
+          <br>
+
+          <label for="studyUrlInput" >URL</label>
+          <input id="studyUrlInput" type="text" class="form-control" placeholder="..." value="{{url}}">
+          <br>
+
+
+        </div>
+      </div>
+      <hr>
+      <div id="saveStudyButton" class="pull-right btn btn-info">Save Client</div>
+    </div>
+  </div>
+</template>

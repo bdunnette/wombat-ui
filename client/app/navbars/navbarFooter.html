@@ -5,48 +5,62 @@
 
         <div class="collapse navbar-collapse unselectable" id="bs-example-navbar-collapse-1">
           {{#if isLoggedIn }}
-          <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
 
-            {{#if isFormBuilder}}
-              <li><a id="clearFormLink"><u>C</u>lear Form</a></li>
-              <li><a id="saveFormLink"><u>S</u>ave Form</a></li>
-            {{/if}}
-
-            {{#if isSavedForms}}
-              {{#if isPublished}}
-              <li><a id="collectDataLink"><u>S</u>ave Data</a></li>
+              {{#if buildControls}}
+                <li><a id="clearFormLink"><u>C</u>lear Form</a></li>
+                <li><a id="saveFormLink"><u>S</u>ave Form</a></li>
               {{/if}}
-            {{/if}}
 
-            {{#if isCollectedData}}
-              {{#if isApproved}}
-<!--               <li><a id="nextDataLink"><u>N</u>ext</a></li> -->
-              <li><a id="approveDataLink"><u>R</u>eview</a></li>
-              {{else}}
-              <li><a id="deleteDataLink"><u>D</u>elete</a></li>
-              <li><a id="editDataLink"><u>E</u>dit Data</a></li>
-              <li><a id="approveDataLink"><u>A</u>pprove</a></li>
-              <li><a id="lockDataLink"><u>L</u>ock</a></li>
+              {{#if formControls}}
+                {{#if isPublished}}
+                <li><a id="collectDataLink"><u>S</u>ave Data</a></li>
+                {{/if}}
               {{/if}}
-            {{/if}}
 
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            {{#if isSavedForms}}
-              {{#if isPublished}}
-              <li><a id="publishFormLink"><u>U</u>npublish</a></li>
-              {{else}}
-              <li><a id="publishFormLink"><u>P</u>ublish</a></li>
-              <li><a id="editFormLink"><u>E</u>dit Form</a></li>
-              <li><a id="deleteFormLink"><u>D</u>elete Form</a></li>
+              {{#if dataControls}}
+                {{#if isApproved}}
+  <!--               <li><a id="nextDataLink"><u>N</u>ext</a></li> -->
+                <li><a id="approveDataLink"><u>R</u>eview</a></li>
+                {{else}}
+                <li><a id="deleteDataLink"><u>D</u>elete</a></li>
+                <li><a id="editDataLink"><u>E</u>dit Data</a></li>
+                <li><a id="approveDataLink"><u>A</u>pprove</a></li>
+                <li><a id="lockDataLink"><u>L</u>ock</a></li>
+                {{/if}}
               {{/if}}
-            {{/if}}
 
-            <li><a id="panelToggleLink"><u>P</u>anel</a></li>
-            <li><a id="helpLink"><u>H</u>elp</a></li>
-          </ul>
-          {{else}}
+              {{#if userControls }}
+                <li><a id="saveUserRecordLink" class="strikethrough">Save</a></li>
+                <li><a id="createUserRecordLink" class="strikethrough">Create</a></li>
+                <li><a id="deleteUserRecordLink" class="strikethrough">Delete</a></li>
+              {{/if}}
+
+              {{#if clientControls }}
+                <li><a id="saveClientLink" class="strikethrough">Save</a></li>
+                <li><a id="editClientLink" class="strikethrough">Edit</a></li>
+                <li><a id="deleteClientLink" class="strikethrough">Delete</a></li>
+              {{/if}}
+
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {{#if isSavedForms}}
+                {{#if isPublished}}
+                <li><a id="publishFormLink"><u>U</u>npublish</a></li>
+                {{else}}
+                <li><a id="publishFormLink"><u>P</u>ublish</a></li>
+                <li><a id="editFormLink"><u>E</u>dit Form</a></li>
+                <li><a id="deleteFormLink"><u>D</u>elete Form</a></li>
+                {{/if}}
+              {{/if}}
+
+              <li><a id="panelToggleLink"><u>P</u>anel</a></li>
+              <li><a id="helpLink"><u>H</u>elp</a></li>
+            </ul>
+            {{else}}
           {{/if}}
+
         </div>
       </div>
     </nav>

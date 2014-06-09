@@ -52,12 +52,12 @@ Template.formsListPage.helpers({
     }
   },
   rendered: function(){
-    $(this.find('#example')).tablesorter();
+    $(this.find('#formsTable')).tablesorter();
 
     Deps.autorun(function(){
       console.log(Session.get('receivedData'))
       setTimeout(function(){
-        $("#example").trigger("update");
+        $("#formsTable").trigger("update");
       }, 200);
     });
   }
@@ -96,7 +96,7 @@ Template.formsListPage.helpers({
   getPaginationCount: function(){
     return Session.get('formPaginationCount');
   },
-  paginationButtonList: function(){
+  formsPaginationButtonList: function(){
     var paginationArray = [];
     for (var i = 0; i < Session.get('formPaginationCount'); i++) {
       paginationArray[i] = {
@@ -124,7 +124,7 @@ Template.formsListPage.helpers({
 
 
 
-Template.paginationButton.helpers({
+Template.formsPaginationButton.helpers({
   pageActive: function(){
     if(this.index === Session.get('formSelectedPagination')){
       return "active";
