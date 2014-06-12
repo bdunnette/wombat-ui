@@ -7,6 +7,8 @@
         <div class="panel-heading">
           <i class="fa {{getApprovalIcon}} fa-2x pull-right"></i>
           <i class="fa {{getLockedIcon}} fa-2x pull-right"></i>
+          <!--TODO add link to trash icon to delte file -->
+          <i class="fa {{getDeleteIcon}} fa-2x pull-right"></i>
           <h4>{{getFormName}}</h4>
         </div>
         <div class="panel-body">
@@ -15,7 +17,11 @@
           {{/each}}
         </div>
         <div class="panel-footer">
-          <div>{{ _id }} | Created By: {{getCreatedBy}} | Previous Version: {{previousVersion}} </div>
+            {{#if isInitialVersion}}
+              <div>{{ _id }} | Created By: {{getCreatedBy}} | Initial Version </div>
+            {{else}}
+              <div>{{ _id }} | Created By: {{getCreatedBy}} | <a id = "previousVersionID" href = "#">Previous Version: </a>{{getPreviousVersion}}</div>
+            {{/if}}
         </div>
       </div>
 

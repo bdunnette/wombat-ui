@@ -13,20 +13,27 @@ Router.map(function(){
   });
 });
 Template.dataPreviewPage.events({
-  'click .panel-footer':function(){
+  'click #previousVersionID':function(){
     var record = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log( 'clicked on panel footer ', record.previousVersion);
-    Session.set('selectedDataRecord', record.previousVersion);
+    Session.set('currentDataRecord', record.previousVersion);
     Router.go('/data/' + record.previousVersion);
+  },
+  'click .fa-trash-o':function(){
+   Meteor.call('deleteDataRecord', Session.get('currentDataRecord'));
+  },
+  'click .fa-lock':function(){
+   Meteor.call('lockDataRecord', Session.get('currentDataRecord'));
   }
-});
+  });
 
 Template.dataPreviewPage.helpers({
   dataSchema: function(){
     console.log('data.schema', this.schema);
     console.log('selectedDataRecord', Session.get('selectedDataRecord'));
+    console.log('currentDataRecord', Session.get('currentDataRecord'));
 
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
 
     if(dataRecord){
@@ -55,8 +62,9 @@ Template.dataPreviewPage.helpers({
     }
   },
   getFormName: function(){
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
+    //console.log('selectedDataRecord', Session.get('selectedDataRecord'));
     if(dataRecord){
       if(dataRecord.formName){
         return dataRecord.formName;
@@ -67,8 +75,36 @@ Template.dataPreviewPage.helpers({
       return 'No record.';
     }
   },
+   getPreviousVersion: function(){
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
+    console.log('dataRecord', dataRecord);
+    if(dataRecord){
+      if(dataRecord.previousVersion){
+        return dataRecord.previousVersion;
+      }else{
+        return "Initial Version";
+      }
+    }else{
+      return 'No record.';
+    }
+  },
+  //TODO need to redo this part, not right but works
+   isInitialVersion: function(){
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
+    console.log('dataRecord', dataRecord);
+    if(dataRecord){
+      if(dataRecord.previousVersion){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return 'No record.';
+    }
+  },
+
   getCreatedBy: function(){
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
     if(dataRecord){
       if(dataRecord.ownerUsername){
