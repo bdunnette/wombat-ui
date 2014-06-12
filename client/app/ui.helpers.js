@@ -14,6 +14,12 @@ UI.registerHelper('getApprovalIcon', function(){
   }
 });
 
+UI.registerHelper('getDeleteIcon', function(){
+  if ( !this.deleted ) {
+    return 'fa-trash-o';
+  }
+});
+
 UI.registerHelper('getLockedIcon', function(){
   if(this.locked){
     return 'fa-lock';

@@ -25,6 +25,8 @@
             <th>Schema ID</th>
             <th>Approved</th>
             <th>Locked</th>
+            <th>Study/Form Name</th>
+            <th>Deleted?</th>
           </tr>
         </thead>
         <tbody>
@@ -56,5 +58,7 @@
     <td>{{ schema_id }}</td>
     <td class="centered"><i class="fa {{ getApprovalIcon }}"></i></td>
     <td class="centered"><i class="fa {{ getLockedIcon }}"></i></td>
+    <td>{{ formName }}</td>
+    <td>{{ deleted }}</td>
   </tr>
 </template>

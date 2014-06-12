@@ -67,7 +67,7 @@ Template.dataBlockPreview.helpers({
   getLabelText: function(){
     var resultString = "Q: ";
 
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('dataRecord', dataRecord);
 
     if(dataRecord){
@@ -93,7 +93,7 @@ Template.dataBlockPreview.helpers({
   },
   getInputValue: function(){
 
-    var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+    var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log('getInputValue: dataRecord', dataRecord);
 
 
