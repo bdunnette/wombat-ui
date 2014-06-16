@@ -12,11 +12,12 @@
         </div>
       <hr/>
 
-      <table id="studiesTable" class="table table-hover table-striped tablesorter">
+      <table id="tableOfStudyForms" class="table table-hover table-striped tablesorter">
         <thead>
           <tr>
             <th>Study ID</th>
             <th>Study Name</th>
+            <th>Client</th>
             <th>Owner</th>
             <th># Forms</th>
             <th>Tags</th>
@@ -45,12 +46,12 @@
 </template>
 
 <template name="studyRowItem">
-  <tr class="customerRow">
+  <tr class="individualFormRow">
 <!--     <td><i class="fa {{ getStar }}"></i></td> -->
 <!--     <td>{{ createdAt }}</td> -->
     <td>{{ _id }}</td>
     <td>{{ name }}</td>
-    <td>{{ description }}</td>
+    <td>{{ client }}</td>
     <td>{{ owner }}</td>
     <td>{{ numberForms }}</td>
     <td>{{ studyTags }}</td>

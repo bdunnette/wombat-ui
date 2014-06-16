@@ -47,7 +47,7 @@ Template.userEditPage.events({
   'click #findClientButton':function(){
     var self = this;
     console.log('this.id', this._id);
-    if(Wombat.isAdminedBy(Meteor.userId())){
+    //if(Wombat.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', this._id);
 
       $('#clientSearchModal').modal("show");
@@ -59,12 +59,12 @@ Template.userEditPage.events({
           employer.user_id = self._id;
           console.log("Employer", employer);
 
-          Meteor.call('setUserEmployer', employer, function(error, result){
+          Meteor.call('setUserClient', employer, function(error, result){
             if(error){
-              console.error(error);
+              console.error('error updating user', error);
             }
             if(result){
-              console.log('created user :' + result);
+              console.log('created user' + result);
             }
           });
         }
@@ -74,13 +74,13 @@ Template.userEditPage.events({
         Session.set('selectedClient', null);
       });
 
-    }else{
-      Session.set('promptTitle', 'User Not Assigned to a Client');
-      Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
-      $('#promptModal').modal("show");
+    //}else{
+    //  Session.set('promptTitle', 'User Not Assigned to a Client');
+    //  Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
+    //  $('#promptModal').modal("show");
 
       // alert('Please contact your administrator to set your employer.');
-    }
+    //}
   },
   'keydown #profileUsernameInput':function(){
     Session.set('isDirtyUserRecord', true);
@@ -335,9 +335,9 @@ Template.userEditPage.helpers({
   },
   getClient: function(){
     console.log("Template.userEditPage.getCompany");
-    if(Session.get('selectedClientId')){
-      console.log(Session.get('selectedClientId').name);
-      return Session.get('selectedClientId').name;
+    if(Session.get('selectedClient')){
+      console.log(Session.get('selectedClient').name);
+      return Session.get('selectedClient').name;
     }else{
       if(this.profile){
         if(this.profile.client){
@@ -451,7 +451,7 @@ Template.dirtyUserSave.events({
     if(this._id){
       Meteor.call('updateUser', input, function(error, result){
         if(error){
-          console.error(error);
+          console.error('error updating user', error);
         }
         if(result){
           console.log('created user :' + result);
@@ -460,7 +460,7 @@ Template.dirtyUserSave.events({
     }else{
       Meteor.call('createNewUser', input, function(error, result){
         if(error){
-          console.error(error);
+          console.error('error creating new user', error);
         }
         if(result){
           console.log('created user :' + result);

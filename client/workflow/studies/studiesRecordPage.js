@@ -13,8 +13,12 @@ Router.map(function(){
   });
 });
 Template.studiesRecordPage.events({
-  'click #studyEditButton':function(){
-    Router.go('/builder/' + this._id);
+  'click .individualFormRow':function(event){
+    Router.go('/form/' + this._id);
+    event.preventDefault();
+  },
+  'click #editStudyButton':function(){
+    Router.go('/edit/study/' + this._id);
   },
   'click #studyDeleteButton':function(){
     if(confirm('Are you sure you want to delete ' + this._id + "?")){
@@ -57,6 +61,14 @@ Template.studiesRecordPage.events({
 });
 
 Template.studiesRecordPage.helpers({
+  formsList: function(){
+    var study = Studies.findOne({_id: this._id});
+    if(study){
+      return Forms.find({ _id: {$in: study.forms }});
+    }else{
+      return [];
+    }
+  },
   studySchema: function(){
     console.log('study.schema', this.schema);
     var study = Studies.findOne(Session.get('currentForm'));

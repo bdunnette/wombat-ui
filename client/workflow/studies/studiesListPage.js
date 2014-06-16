@@ -84,7 +84,7 @@ Template.studiesListPage.events({
     Session.set('studySelectedPagination', this.index);
     Session.set('studySkipCount', this.index * Session.get('studyTableLimit'));
   },
-  'click .customerRow':function(){
+  'click .individualFormRow':function(){
     Session.set('currentForm', this._id);
     Router.go('/studies/' + this._id);
     //alert(this._id);
@@ -140,6 +140,7 @@ Template.studiesPaginationButton.helpers({
 
 
 Template.studyRowItem.events({
+
   'click .fa-star':function(){
     Forms.update({_id: this._id}, {$set:{
       'stared':false

@@ -84,7 +84,7 @@ Template.formsListPage.events({
     Session.set('formSelectedPagination', this.index);
     Session.set('formSkipCount', this.index * Session.get('formTableLimit'));
   },
-  'click .customerRow':function(){
+  'click .individualFormRow':function(){
     Session.set('currentForm', this._id);
     Router.go('/form/' + this._id);
     //alert(this._id);

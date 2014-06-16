@@ -15,5 +15,5 @@ Meteor.publish('clients', function(){
   return Clients.find();
 });
 Meteor.publish(null, function (){
-  return Meteor.roles.find({})
+  return Meteor.roles.find();
 })

@@ -1,16 +1,16 @@
 <!-- set up the modal to start hidden and fade in and out -->
-<template name="studySearchModal">
-  <div id="studySearchModal" class="modal fade">
+<template name="formSearchModal">
+  <div id="formSearchModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Select Study</h4>
+          <h4>Select Form</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="studySearchModalInput" class="fullwidth form-control" placeholder="search..." value="{{getSearchTerm}}">
+          <input type="text" id="formSearchModalInput" name="formSearchModalInput" class="fullwidth form-control" placeholder="search..." value="{{getSearchTerm}}">
           <ul class="list-group">
-            {{#each studysList}}
-              {{> studySearchModalItem}}
+            {{#each formList}}
+              {{> formSearchModalItem}}
             {{/each}}
           </ul>
         </div>
@@ -22,8 +22,8 @@
   </div>
 </template>
 
-<template name="studySearchModalItem">
+<template name="formSearchModalItem">
   <li class="list-group-item" data-dismiss="modal">
-    {{name}}
+    {{formName}}
   </li>
 </template>

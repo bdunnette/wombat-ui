@@ -65,3 +65,24 @@ UI.registerHelper('getAvatar', function() {
     return "/images/icons/Default_User.png";
   }
 });
+
+// UI.registerHelper('getClient', function(){
+//   console.log("UI.registerHelper.getClient");
+//   if(Session.get('selectedClientId')){
+//     //console.log(Session.get('selectedClientId').name);
+//     return Session.get('selectedClientId').name;
+//   }else{
+//     if(this.profile){
+//       if(this.profile.client){
+//         //console.log("this.profile.client: " + this.profile.client);
+//         return this.profile.client;
+//       }else{
+//         //console.log("---");
+//         return "No client specified in user profile.";
+//       }
+//     }else{
+//       //console.log("---");
+//       return "---";
+//     }
+//   }
+// });
