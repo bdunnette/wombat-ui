@@ -109,13 +109,16 @@ Template.builderPage.helpers({
           inputType = "color";
           elementType = "color";
         }else if(Session.get('movedElementId') === "numericInputBlock"){
+          labelText = "Q: Lorem numberum...";
           inputType = "number";
-          elementType = "number";
+          elementType = "input";
         }else if(Session.get('movedElementId') === "textareaInputBlock"){
+          labelText = "Q: Lorem textum...";
           elementType = "textarea";
         }else if(Session.get('movedElementId') === "textInputBlock"){
+          labelText = "Q: Lorem textae...";
           elementType = "input";
-          text = "Lorem ipsum...";
+          //inputValue = "ipsum dolar sit amet...";
         }else if(Session.get('movedElementId') === "spacerBlock"){
           inputType = "spacer";
           elementType = "spacer"
@@ -123,7 +126,7 @@ Template.builderPage.helpers({
           elementType = "yesno";
           inputType = "yesno";
         }else if(Session.get('movedElementId') === "sectionTitleBlock"){
-          labelText = "New Section";
+          labelText = "Section ipsum...";
           inputType = "section";
           elementType = "section";
         }
