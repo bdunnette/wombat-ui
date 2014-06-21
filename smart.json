@@ -8,6 +8,7 @@
     "bowser": {},
     "font-awesome": {},
     "session-extended-api": {},
-    "roles": {}
+    "roles": {},
+    "selenium-nightwatch": {}
   }
 }
