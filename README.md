@@ -1,7 +1,7 @@
 wombat-ui
 =========
 
-Clinical Form Builder app for Pharmaceutical Trials Data Collection. 
+Clinical Form Builder app for Pharmaceutical Trials Data Collection.
 
 ==============================
 ### Install Meteor Environment
@@ -56,10 +56,24 @@ cd wombat-ui
 sudo mrt
 ````
 
+============================
+### Run Acceptance Tests
+
+````sh
+# run your application as usual
+terminal-a$ cd wombat-ui
+terminal-a$ sudo mrt
+
+# then open up a second terminal and run_nightwatch to run all tests
+terminal-b$ sudo ./run_nightwatch.sh
+
+# or specify a specific test
+terminal-b$ sudo ./run_nightwatch.sh -t tests/homePage.js
+
+````
+
 
 ------------------------
 ### Licensing
 
 All rights reserved.  Wombat & Co.
-
-
