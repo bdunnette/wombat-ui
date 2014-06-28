@@ -109,12 +109,12 @@ Router.onBeforeAction(function() {
   hideSidebars();
 }, {except: ['builderPage']});
 
-Router.onBeforeAction(function() {
-  if(!bowser.webkit){
-    this.render('browserNotSupportedPage');
-    this.pause();
-  }
-});
+// Router.onBeforeAction(function() {
+//   if(!bowser.webkit){
+//     this.render('browserNotSupportedPage');
+//     this.pause();
+//   }
+// });
 
 
 //--------------------------------------------------------------
