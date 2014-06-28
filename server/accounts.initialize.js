@@ -10,19 +10,20 @@ if (Meteor.users.find().count() === 0) {
         username: "sysadmin",
         name: "System Admin",
         password: "sysadmin321$",
-        roles: ["employee", "admin", "coordinator", "reviewer", "builder"]
+        roles: ["sysadmin"]
+        // roles: ["employee", "sysadmin", "coordinator", "reviewer", "builder"]
       }, {
         email: "janedoe@wombat.com",
         username: "janedoe",
         name: "Jane Doe",
         password: "janedoe123",
-        roles: ["employee", "builder", "coordinator"]
+        roles: ["dataentry"]
       },{
         email: "johndoe@wombat.com",
         username: "johndoe",
         name: "John Doe",
         password: "johndoe123",
-        roles: ["employee", "reviewer"]
+        roles: ["reviewer"]
       }
     ];
 
@@ -33,7 +34,8 @@ if (Meteor.users.find().count() === 0) {
           email: user.email,
           password: user.password,
           profile: {
-              name: user.name
+              name: user.name,
+              roles: user.roles
           },
           username: user.username
       });

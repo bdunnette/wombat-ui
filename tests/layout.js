@@ -6,17 +6,19 @@ module.exports = {
     client
       .url("http://localhost:3000")
       .waitForElementVisible("body", 1000)
-      .assert.elementPresent('#promptModal')
-      .assert.elementPresent('#confirmModal')
-      .assert.elementPresent('#keybindingsModal')
-      .assert.elementPresent('#clientSearchModal')
-      .assert.elementPresent('#campaignSearchModal')
-      .assert.elementPresent('#selectRoleModal')
-      .assert.elementPresent('#westPanel')
-      .assert.elementPresent('#eastPanel')
-      .assert.elementPresent('#mainPanel')
-      .assert.elementPresent('#navbarHeader')
-      .assert.elementPresent('#mainPanel')
+
+      .verify.elementPresent('#navbarHeader')
+      .verify.elementPresent('#navbarHeaderNav')
+      .verify.elementPresent('#navbarBrandLink')
+
+      .verify.elementPresent('#westPanel')
+      .verify.elementPresent('#eastPanel')
+      .verify.elementPresent('#appLayout')
+      .verify.elementPresent('#mainPanel')
+      .verify.elementPresent('#navbarHeader')
+
+      .verify.elementPresent('#navbarFooter')
+
       .end();
   }
 };

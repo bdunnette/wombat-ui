@@ -7,18 +7,22 @@ module.exports = {
       .url("http://localhost:3000")
 
       .waitForElementVisible("body", 1000)
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+
+      .click("#signInLink").pause(200)
+
       .waitForElementVisible("#entrySignInPage", 1000)
       .verify.elementPresent("#emailInput")
       .verify.elementPresent("#passwordInput")
       .verify.elementPresent("#entrySignInButton")
 
       .setValue("#emailInput", "sysadmin")
-      .setValue("#passwordInput", "sysadmin")
+      .setValue("#passwordInput", "sysadmin321$")
 
       .click("#entrySignInButton")
       .pause(200)
-      .waitForElementVisible("#introPage", 10000)
-
+      .waitForElementVisible("#homePage", 10000)
 
       // open the menu
       .waitForElementVisible("#northeastDropDownLink", 1000)
@@ -38,34 +42,31 @@ module.exports = {
       .verify.containsText('#editProfileButton', "Edit Profile")
 
       .verify.elementPresent('#profileAvatar')
-      .verify.elementPresent('#profileUserName')
-      .verify.elementPresent('#profileUserRole')
-      .verify.elementPresent('#profileUserId')
 
+      .verify.elementPresent('#profileFullName')
       .verify.elementPresent('#profileFullNameLabel')
-      .verify.elementPresent('#profileFullNameText')
-      .verify.elementPresent('#profileSelectedCampaignLabel')
-      .verify.elementPresent('#profileSelectedCampaignText')
-      .verify.elementPresent('#profileSelectedCampaignIdLabel')
-      .verify.elementPresent('#profileSelectedCampaignIdText')
-      .verify.elementPresent('#profileEmployerLabel')
-      .verify.elementPresent('#profileEmployerText')
-      .verify.elementPresent('#profileEmployerIdLabel')
-      .verify.elementPresent('#profileEmployerIdText')
+      .verify.elementPresent('#profileUserRole')
+      .verify.elementPresent('#profileUserRoleLabel')
 
+      .verify.elementPresent('#profileSelectedStudyLabel')
+      .verify.elementPresent('#profileSelectedStudyText')
+      .verify.elementPresent('#profileSelectedStudyIdLabel')
+      .verify.elementPresent('#profileSelectedStudyIdText')
 
-      .verify.containsText('#profileUserRole', "SysAdmin")
+      .verify.elementPresent('#profileOrganizationLabel')
+      .verify.elementPresent('#profileOrganizationText')
+      .verify.elementPresent('#profileOrganizationIdLabel')
+      .verify.elementPresent('#profileOrganizationIdText')
+
+      .verify.containsText('#profileUserRole', "sysadmin")
 
       .verify.containsText('#profileFullNameLabel', "Full Name")
-      .verify.containsText('#profileSelectedCampaignLabel', "Selected Campaign")
-      .verify.containsText('#profileEmployerLabel', "Employer")
-      .verify.containsText('#profileEmployerIdLabel', "Employer Id")
+      .verify.containsText('#profileUserRoleLabel', "Role")
+      .verify.containsText('#profileSelectedStudyLabel', "Selected Study")
+      .verify.containsText('#profileOrganizationLabel', "Sponsor Name")
 
-      .verify.containsText('#profileFullNameText', "System Administrator")
-      .verify.containsText('#profileEmployerText', "Thinaire")
-      //.verify.containsText('#profileSelectedCampaignText', "")
-      //.verify.containsText('#profileEmployerIdText', "Employer Id")
-
+      .verify.containsText('#profileFullName', "System Administrator")
+      .verify.containsText('#profileUserRole', "sysadmin")
 
       // click terms of service
       .click("#editProfileButton")
@@ -89,7 +90,7 @@ module.exports = {
       .verify.visible('#profileEmailLabel')
       .verify.visible('#profileNameLabel')
       .verify.visible('#profileTitleLabel')
-      .verify.visible('#findCompanyButton')
+      .verify.visible('#findOrganizationButtonLabel')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarLabel')
       .verify.visible('#profilePhoneLabel')
@@ -103,7 +104,7 @@ module.exports = {
       .verify.visible('#profileEmailInput')
       .verify.visible('#profileNameInput')
       .verify.visible('#profileTitleInput')
-      .verify.visible('#findCompanyButton')
+      .verify.visible('#findClientButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarInput')
       .verify.visible('#profilePhoneInput')
@@ -114,11 +115,10 @@ module.exports = {
       .verify.visible('#profileZipInput')
 
       .verify.attributeEquals('#profileUsernameInput', "value", "sysadmin")
-      .verify.attributeEquals('#profileEmailInput', "value", "sysadmin@thinaire.net")
+      .verify.attributeEquals('#profileEmailInput', "value", "sysadmin@wombat.com")
       .verify.attributeEquals('#profileNameInput', "value", "System Administrator")
       .verify.attributeEquals('#profileTitleInput', "value", "")
-      .verify.containsText('#findCompanyButton', "Thinaire")
-      .verify.containsText('#findRoleButton', "SysAdmin")
+      .verify.containsText('#findRoleButton', "sysadmin")
       .verify.attributeEquals('#userAvatarImage', 'src', 'http://localhost:3000/images/icons/Default_User.png')
       .verify.containsText('#profilePhoneInput', "")
       .verify.containsText('#profileWebsiteInput', "")
@@ -126,7 +126,6 @@ module.exports = {
       .verify.containsText('#profileCityInput', "")
       .verify.containsText('#profileStateInput', "")
       .verify.containsText('#profileZipInput', "")
-
 
       .end();
   }

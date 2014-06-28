@@ -82,6 +82,41 @@ Template.userEditPage.events({
       // alert('Please contact your administrator to set your employer.');
     //}
   },
+  'click #findRoleButton': function(){
+    var self = this;
+    if(Insights.isAdminedBy(Meteor.userId())){
+      Session.set('selectedUser', this._id);
+
+      $('#selectRoleModal').modal("show");
+
+      $('#selectRoleModal').on('hidden.bs.modal', function (e) {
+        var role = Session.get('selectedRole');
+
+        if(role){
+          role.user_id = self._id;
+          console.log("Role", role);
+
+          Meteor.call('setUserRole', role, function(error, result){
+            if(error){
+              console.error(error);
+            }
+            if(result){
+              console.log('updated role :' + result);
+            }
+          });
+        }
+        // setting the record dirty may not be needed, if we want to save things right away
+        // but we set it just to be safe
+        Session.set('isDirtyRecord', true);
+        Session.set('selectedRole', null);
+      });
+
+    }else{
+      Session.set('promptTitle', 'User Not Assigned to a Company');
+      Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
+      $('#promptModal').modal("show");
+    }
+  },
   'keydown #profileUsernameInput':function(){
     Session.set('isDirtyUserRecord', true);
   },
@@ -354,7 +389,24 @@ Template.userEditPage.helpers({
     }
   },
   getRole: function(){
-    return "---";
+    console.log("Template.userEditPage.getRole");
+    if(Session.get('selectedUserRole')){
+      //console.log(Session.get('selectedClientId').name);
+      return Session.get('selectedUserRole').name;
+    }else{
+      if(this.profile){
+        if(this.profile.role){
+          console.log("this.profile.role", this.profile.role);
+          return this.profile.role;
+        }else{
+          console.log("---");
+          return "---";
+        }
+      }else{
+        console.log("---");
+        return "No role set?";
+      }
+    }
   },
   getEmployer: function(){
     if(Session.get('selectedClientId')){

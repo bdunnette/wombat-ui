@@ -20,7 +20,9 @@
 
     {{> yield region='header' }}
     {{> inPageAlert }}
-    {{> yield }}
+    <div id="mainPanel">
+      {{> yield }}
+    </div>
     {{> eastPanel }}
     {{> yield region='footer' }}
   </div>
