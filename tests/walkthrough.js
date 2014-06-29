@@ -55,6 +55,7 @@ module.exports = {
 
         .verify.visible('#addNewFieldTab')
 
+
         // clear all elements in the form
         .click('#clearFormLink')
         .verify.elementNotPresent('#list .item:first-child')
@@ -75,9 +76,11 @@ module.exports = {
         .verify.visible('#editFieldTab')
         .verify.elementPresent('#questionInput')
         .verify.elementPresent('#defaultValueInput')
+        .verify.elementPresent('#orderInput')
         .clearValue('#questionInput')
         .clearValue('#defaultValueInput')
         .setValue('#questionInput', "Full Name")
+        .verify.attributeEquals('#orderInput', 'value', '0')
 
         .click('#saveFormBlockParamsButton').pause(100)
         .verify.elementPresent('#list .item:first-child')
@@ -99,6 +102,7 @@ module.exports = {
         .clearValue('#questionInput')
         .clearValue('#defaultValueInput')
         .setValue('#questionInput', "Are you alergic to asprin?")
+        .verify.attributeEquals('#orderInput', 'value', '1')
 
         .click('#saveFormBlockParamsButton').pause(100)
         .verify.elementPresent('#list .item:nth-child(2)')
