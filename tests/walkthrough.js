@@ -80,7 +80,7 @@ module.exports = {
         .clearValue('#questionInput')
         .clearValue('#defaultValueInput')
         .setValue('#questionInput', "Full Name")
-        .verify.attributeEquals('#orderInput', 'value', '0')
+        .verify.attributeEquals('#orderInput', 'value', '1')
 
         .click('#saveFormBlockParamsButton').pause(100)
         .verify.elementPresent('#list .item:first-child')
@@ -102,7 +102,7 @@ module.exports = {
         .clearValue('#questionInput')
         .clearValue('#defaultValueInput')
         .setValue('#questionInput', "Are you alergic to asprin?")
-        .verify.attributeEquals('#orderInput', 'value', '1')
+        .verify.attributeEquals('#orderInput', 'value', '2')
 
         .click('#saveFormBlockParamsButton').pause(100)
         .verify.elementPresent('#list .item:nth-child(2)')
