@@ -49,8 +49,8 @@ Template.userProfilePage.events({
 
 Template.userProfilePage.helpers({
   getSelectedCampaignId: function(){
-    if(Meteor.user().profile){
-      if(Meteor.user().profile.selected_campaign_id){
+    if(Meteor.user()){
+      if(Meteor.user().profile){
         return Meteor.user().profile.selected_campaign_id;
       }else{
         return 'Campaign Id not found.';
@@ -60,8 +60,8 @@ Template.userProfilePage.helpers({
     }
   },
   getSelectedCampaignName: function(){
-    if(Meteor.user().profile){
-      if(Meteor.user().profile.selected_campaign){
+    if(Meteor.user()){
+      if(Meteor.user().profile){
         return Meteor.user().profile.selected_campaign;
       }else{
         return 'Campaign not found.';

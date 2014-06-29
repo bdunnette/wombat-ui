@@ -2,132 +2,76 @@
   <div id="userProfilePage" class="page">
 
       <div class="content">
-        <div id="pad-wrapper" class="user-profile">
+        <div id="pad-wrapper" class="settings-wrapper">
 
-
-          <div class="row header">
-            <div class="col-md-8">
-              <img src="{{getAvatar}}" alt="contact" class="avatar img-circle" />
-              <h3 class="name">{{ username }}</h3>
-              <span class="area">{{profile.role}}:  {{ _id }}</span>
-            </div>
-            {{#if isAdmin}}
-              <div class="btn-group pull-right">
-                <button id="editProfileButton" class="medium btn btn-warning">Edit Profile</button>
-                <button id="deleteProfileButton" class="medium btn btn-danger">Delete</button>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1 avatar-box">
+              <div class="centered personal-image">
+                <img id="profileAvatar" src="{{ getAvatar }}" class="avatar img-circle" alt="avatar" />
               </div>
-            {{else}}
-              <button id="editProfileButton" class="medium btn btn-warning">Edit</button>
-            {{/if}}
-          </div>
+              <br>
+            </div>
+          <div class="col-md-7 personal-info">
+            <div class="row">
+              <div class="col-md-8">
+                <h3 id="profileUserName" class="name">{{ username }}</h3>
+                <span class="area">User Id: {{_id}}</span><br>
+              </div>
+              <div class="col-md-4">
+                <a id="editProfileButton" class="btn btn-info pull-right edit">
+                  Edit Profile
+                </a>
+              </div>
+            </div>
+            <hr>
+            <div class="row profile">
+              <div class="col-md-9 bio">
+                <div class="profile-box">
+                  <div class="col-md-12 section">
+                    <h6>Biography</h6>
+                    <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
+                    <br>
 
-          <div class="row profile">
-            <!-- bio, new note & orders column -->
-            <div class="col-md-9 bio">
-              <div class="profile-box">
-                <!-- biography -->
-                <div class="col-md-12 section">
-                  <h6>Biography</h6>
-                  <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
-                  <br>
+                    <h6>Selected Campaigns</h6>
+                    <p>{{getSelectedCampaignName}}</p>
+                    <br>
 
-                  <h6>Selected Campaigns</h6>
-                  <p>{{getSelectedCampaignName}}</p>
-                  <br>
+                    <h6>Selected Campaign Id</h6>
+                    <p>{{getSelectedCampaignId}}</p>
 
-                  <h6>Selected Campaign Id</h6>
-                  <p>{{getSelectedCampaignId}}</p>
+                    <h6>Employer Id</h6>
+                    <p>{{ getEmployerId }}</p>
 
-                  <h6>Employer Id</h6>
-                  <p>{{ getEmployerId }}</p>
+                    <h6>Employer Name</h6>
+                    <p>{{ getEmployerName }}</p>
 
-                  <h6>Employer Name</h6>
-                  <p>{{ getEmployerName }}</p>
+                    <h6>Employer Invitation</h6>
+                    <p>{{ getEmployerInvitationName }}</p>
 
-                  <h6>Employer Invitation</h6>
-                  <p>{{ getEmployerInvitationName }}</p>
+                    <h6>Employer Invitation Id</h6>
+                    <p>{{ getEmployerInvitationId }}</p>
 
-                  <h6>Employer Invitation Id</h6>
-                  <p>{{ getEmployerInvitationId }}</p>
+                  </div>
 
                 </div>
+              </div>
 
-
-
-                <!--<h6>Recent Campaigns</h6>-->
-                <!--<br>-->
-                <!--&lt;!&ndash; recent orders table &ndash;&gt;-->
-                <!--<table class="table table-hover">-->
-                  <!--<thead>-->
-                  <!--<tr>-->
-                    <!--<th class="col-md-2">-->
-                      <!--Campaign ID-->
-                    <!--</th>-->
-                    <!--<th class="col-md-3">-->
-                      <!--<span class="line"></span>-->
-                      <!--Date Start-->
-                    <!--</th>-->
-                    <!--<th class="col-md-3">-->
-                      <!--<span class="line"></span>-->
-                      <!--Date End-->
-                    <!--</th>-->
-                    <!--<th class="col-md-3">-->
-                      <!--<span class="line"></span>-->
-                      <!--Interactions-->
-                    <!--</th>-->
-                  <!--</tr>-->
-                  <!--</thead>-->
-                  <!--<tbody>-->
-                  <!--&lt;!&ndash; row &ndash;&gt;-->
-                  <!--<tr class="first">-->
-                    <!--<td>-->
-                      <!--<a href="#">#459</a>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                      <!--Jan 03, 2014-->
-                    <!--</td>-->
-                    <!--<td>-->
-                      <!--Jan 14, 2014-->
-                    <!--</td>-->
-                    <!--<td>-->
-                      <!--11000-->
-                    <!--</td>-->
-                  <!--</tr>-->
-
-
-                  <!--</tbody>-->
-                <!--</table>-->
-
-                <!--<div class="col-md-12 section comment">-->
-                  <!--<h6>Add a quick note</h6>-->
-                  <!--<p>Add a note about this user to keep a history of your interactions.</p>-->
-                  <!--<textarea></textarea>-->
-                  <!--<a href="#">Attach files</a>-->
-                  <!--<div class="col-md-12 submit-box pull-right">-->
-                  <!--<input type="submit" class="btn-glow primary" value="Add Note">-->
-                  <!--<span>OR</span>-->
-                  <!--<input type="reset" value="Cancel" class="reset">-->
-                  <!--</div>-->
-                <!--</div>-->
-
+              <div class="col-md-3 col-xs-12 address pull-right">
+                <h6>Address</h6>
+                <iframe width="300" height="133" scrolling="no" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
+                <ul>
+                  <li>{{ profile.address }} </li>
+                  <li>{{ profile.city}}, {{profile.state}}  {{profile.zip}}</li>
+                  <li>{{ profile.phone }}</li>
+                  <li>{{ profile.website }}</li>
+                </ul>
               </div>
             </div>
-
-            <!-- side address column -->
-            <div class="col-md-3 col-xs-12 address pull-right">
-              <h6>Address</h6>
-              <iframe width="300" height="133" scrolling="no" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
-              <ul>
-                <li>{{ profile.address }} </li>
-                <li>{{ profile.city}}, {{profile.state}}  {{profile.zip}}</li>
-                <li>{{ profile.phone }}</li>
-                <li>{{ profile.website }}</li>
-              </ul>
-            </div>
           </div>
+
         </div>
       </div>
-      <!-- end main container -->
+    </div>
 
   </div>
 </template>
