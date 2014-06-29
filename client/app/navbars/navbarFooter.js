@@ -130,7 +130,7 @@ Template.navbarFooter.events({
   'click #panelToggleLink':function(){
     if(Meteor.user()){
       toggleWestPanel();
-      toggleEastPanel();
+      //toggleEastPanel();
     }
   },
   'click #eastPanelToggleLink':function(){
@@ -138,7 +138,7 @@ Template.navbarFooter.events({
     if(Meteor.user()){
       //$('#eastPanel').sidebar('toggle');
       toggleWestPanel();
-      toggleEastPanel();
+      //toggleEastPanel();
     }
   },
 

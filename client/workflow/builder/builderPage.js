@@ -30,7 +30,7 @@ Router.map(function(){
       return {};
     },
     onAfterAction:function(){
-      showSidebars();
+      showWestPanel();
     }
   });
 });
@@ -42,7 +42,9 @@ Template.builderPage.events({
     Items.remove(this._id);
   },
   'click .item':function(){
+    Session.set('selectedBuilderTab','editFieldTab');
     Session.set('selectedBlockItem', this._id);
+    console.log('selectedBuilderTab', Session.get('selectedBuilderTab'));
   },
   'click .yes-button':function(){
     Session.set('selectedBlockItem', this._id);
@@ -58,6 +60,10 @@ Template.builderPage.events({
 });
 
 Template.builderPage.helpers({
+  // resized: function(){
+  //   $('#builderPage').css('width', window.innerWidth - 275);
+  //   return Session.get('resized');
+  // },
   items: function(){
     return Items.find({}, { sort: { rank: 1 } });
   },
@@ -96,64 +102,68 @@ Template.builderPage.helpers({
       accept: ".dragDropBlock",
       activeClass: 'visible',
       drop: function(){
-        //$('#' + Session.get('movedElementId')).appendTo("#" + this.id);
-        //$('#' + Session.get('movedElementId')).appendTo("#sortableListPanel");
-        // $('#' + Session.get('movedElementId')).css('top', '0');
-        // $('#' + Session.get('movedElementId')).css('left', '0');
-        var inputType = "text";
-        var elementType = "input";
-        var labelText = "";
-        var text = "";
-
-        if(Session.get('movedElementId') === "colorInputBlock"){
-          inputType = "color";
-          elementType = "color";
-        }else if(Session.get('movedElementId') === "numericInputBlock"){
-          labelText = "Q: Lorem numberum...";
-          inputType = "number";
-          elementType = "input";
-        }else if(Session.get('movedElementId') === "textareaInputBlock"){
-          labelText = "Q: Lorem textum...";
-          elementType = "textarea";
-        }else if(Session.get('movedElementId') === "textInputBlock"){
-          labelText = "Q: Lorem textae...";
-          elementType = "input";
-          //inputValue = "ipsum dolar sit amet...";
-        }else if(Session.get('movedElementId') === "spacerBlock"){
-          inputType = "spacer";
-          elementType = "spacer"
-        }else if(Session.get('movedElementId') === "yesNoInputBlock"){
-          elementType = "yesno";
-          inputType = "yesno";
-        }else if(Session.get('movedElementId') === "sectionTitleBlock"){
-          labelText = "Section ipsum...";
-          inputType = "section";
-          elementType = "section";
-        }
-
-        var lastRank = 0;
-        Items.find().forEach(function(doc){
-          if(doc.rank > lastRank){
-            lastRank = doc.rank + 1;
-          }
-        });
-
-        var newObject = {
-          block_type: Session.get('movedElementId'),
-          rank: lastRank,
-          inputType: inputType,
-          inputValue: '',
-          elementType: elementType,
-          labelText: labelText,
-          text: text
-        };
-        console.log('newObject', newObject);
-
+        addBlockToForm();
         setTimeout(function(){
-          Items.insert(newObject);
           Session.clear('movedElementId');
-        }, 50);
+        }, 100);
+
       }
     });
   }
 });
+
+
+addBlockToForm = function(){
+  Session.set('selectedBuilderTab','addNewFieldTab');
+
+  var inputType = "text";
+  var elementType = "input";
+  var labelText = "";
+  var text = "";
+
+  if(Session.get('movedElementId') === "colorInputBlock"){
+    inputType = "color";
+    elementType = "color";
+  }else if(Session.get('movedElementId') === "numericInputBlock"){
+    labelText = "Q: Lorem numberum...";
+    inputType = "number";
+    elementType = "input";
+  }else if(Session.get('movedElementId') === "textareaInputBlock"){
+    labelText = "Q: Lorem textum...";
+    elementType = "textarea";
+  }else if(Session.get('movedElementId') === "textInputBlock"){
+    labelText = "Q: Lorem textae...";
+    elementType = "input";
+    //inputValue = "ipsum dolar sit amet...";
+  }else if(Session.get('movedElementId') === "spacerBlock"){
+    inputType = "spacer";
+    elementType = "spacer"
+  }else if(Session.get('movedElementId') === "yesNoInputBlock"){
+    elementType = "yesno";
+    inputType = "yesno";
+  }else if(Session.get('movedElementId') === "sectionTitleBlock"){
+    labelText = "Section ipsum...";
+    inputType = "section";
+    elementType = "section";
+  }
+
+  var lastRank = 0;
+  Items.find().forEach(function(doc){
+    if(doc.rank > lastRank){
+      lastRank = doc.rank + 1;
+    }
+  });
+
+  var newObject = {
+    block_type: Session.get('movedElementId'),
+    rank: lastRank,
+    inputType: inputType,
+    inputValue: '',
+    elementType: elementType,
+    labelText: labelText,
+    text: text
+  };
+  console.log('newObject', newObject);
+
+  return Items.insert(newObject);
+}

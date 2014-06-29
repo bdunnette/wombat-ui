@@ -15,48 +15,63 @@ UI.body.resized = function(){
 
 toggleWestPanel = function(){
   if($('body').hasClass('leftSidebar')){
-    $('body').removeClass('leftSidebar');
-    $('#westPanel').removeClass('active');
+    hideWestPanel();
   }else{
-    $('body').addClass('leftSidebar');
-    $('#westPanel').addClass('active');
+    showWestPanel();
   }
 }
-toggleEastPanel = function(){
-  if($('body').hasClass('rightSidebar')){
-    $('body').removeClass('rightSidebar');
-    $('#eastPanel').removeClass('active');
-  }else{
-    $('body').addClass('rightSidebar');
-    $('#eastPanel').addClass('active');
-  }
+showWestPanel = function(){
+  $('body').addClass('leftSidebar');
+  $('#westPanel').addClass('active');
 }
+hideWestPanel = function(){
+  $('body').removeClass('leftSidebar');
+  $('#westPanel').removeClass('active');
+}
+
+// toggleEastPanel = function(){
+//   if($('body').hasClass('rightSidebar')){
+//     $('body').removeClass('rightSidebar');
+//     $('#eastPanel').removeClass('active');
+//   }else{
+//     $('body').addClass('rightSidebar');
+//     $('#eastPanel').addClass('active');
+//   }
+// }
 toggleSidebars = function(){
   if(Meteor.user()){
     toggleWestPanel();
-    toggleEastPanel();
+    //toggleEastPanel();
   }
 }
 showSidebars = function(){
   if(!$('body').hasClass('leftSidebar')){
     $('body').addClass('leftSidebar');
     $('#westPanel').addClass('active');
+    $('#navbarHeader').addClass('sidebar-compensation');
+    $('#navbarHeader').removeClass('no-sidebar-compensation');
+    $('#mainPanel').addClass('sidebar-compensation');
+    $('#mainPanel').removeClass('no-sidebar-compensation');
   }
 
-  if(!$('body').hasClass('rightSidebar')){
-    $('body').addClass('rightSidebar');
-    $('#eastPanel').addClass('active');
-  }
+  // if(!$('body').hasClass('rightSidebar')){
+  //   $('body').addClass('rightSidebar');
+  //   $('#eastPanel').addClass('active');
+  // }
 }
 hideSidebars = function(){
   if($('body').hasClass('leftSidebar')){
-    $('body').removeClass('leftSidebar');
+    //$('body').removeClass('leftSidebar');
     $('#westPanel').removeClass('active');
+    $('#navbarHeader').removeClass('sidebar-compensation');
+    $('#navbarHeader').addClass('no-sidebar-compensation');
+    $('#mainPanel').removeClass('sidebar-compensation');
+    $('#mainPanel').addClass('no-sidebar-compensation');
   }
-  if($('body').hasClass('rightSidebar')){
-    $('body').removeClass('rightSidebar');
-    $('#eastPanel').removeClass('active');
-  }
+  // if($('body').hasClass('rightSidebar')){
+  //   $('body').removeClass('rightSidebar');
+  //   $('#eastPanel').removeClass('active');
+  // }
 }
 
 
@@ -106,7 +121,7 @@ Router.onBeforeAction(function() {
   ]
 });
 Router.onBeforeAction(function() {
-  hideSidebars();
+  hideWestPanel();
 }, {except: ['builderPage']});
 
 // Router.onBeforeAction(function() {

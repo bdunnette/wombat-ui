@@ -4,15 +4,8 @@
 
 Template.navbarHeader.events({
   'click #navbarBrandLink':function(){
-    // only toggle the sidebar if the user is logged in
-    if(Meteor.user()){
-      //$('#westPanel').sidebar('toggle');
-      //toggleWestPanel();
-      Router.go('/');
-    }else{
-      Router.go('/');
-    }
-  },
+    Router.go('/');
+  },  
   'click #logOutLink':function(){
     Router.go('/sign-out');
   }

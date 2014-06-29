@@ -2,9 +2,6 @@ Meteor.startup(function(){
   Mousetrap.bind('shift+e', function() {
     $('#errorPanel').sidebar('toggle');
   });
-  // Mousetrap.bind('shift+s', function() {
-  //   $('#eastPanel').sidebar('toggle');
-  // });
   // Mousetrap.bind('shift+m', function() {
   //   $('#westPanel').sidebar('toggle');
   // });

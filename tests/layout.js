@@ -12,7 +12,6 @@ module.exports = {
       .verify.elementPresent('#navbarBrandLink')
 
       .verify.elementPresent('#westPanel')
-      .verify.elementPresent('#eastPanel')
       .verify.elementPresent('#appLayout')
       .verify.elementPresent('#mainPanel')
       .verify.elementPresent('#navbarHeader')

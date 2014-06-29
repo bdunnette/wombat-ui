@@ -1,39 +1,58 @@
 
 <template name="westPanel">
   <aside id="westPanel" class="padded ui sidebar with-sidebar-offset">
-    <ul class="list-group">
-      <li id="textInputBlock" class="dragDropBlock list-group-item">
-          <label class="smallgray" for="firstNameInput">Text Input</label>
-<!--           <input id="firstNameInput" class="form-control" type="text" placeholder="First Name" value="{{FirstName}}" {{first_name_enabled}}> -->
-      </li>
-      <li id="textareaInputBlock" class="dragDropBlock list-group-item">
-        <label class="smallgray" for="notesInput">Textarea</label>
-<!--         <textarea id="notesInput"  class="form-control" rows="3" placeholder="Notes" value="Lorem ipsum..." {{web_enabled}}></textarea> -->
-      </li>
-      <li id="numericInputBlock" class="dragDropBlock list-group-item">
-        <label class="smallgray" for="numberInput">Numeric Input</label>
-<!--         <input id="numberInput" class="form-control" type="number" placeholder="123456" value="{{Number}}" {{generic_enabled}}> -->
-      </li>
-<!--       <li id="colorInputBlock" class="dragDropBlock list-group-item">
-        <label class="smallgray" for="colorInput">Color Picker</label>
-        <input id="colorInput" class="form-control" type="color" placeholder="#33ff88" value="#{{Color}}" {{generic_enabled}}>
-      </li> -->
-      <li id="spacerBlock" class="dragDropBlock list-group-item">
-        <label class="smallgray">Spacer</label>
-<!--         <hr> -->
-      </li>
-      <li id="sectionTitleBlock" class="dragDropBlock list-group-item">
-        <label class="smallgray">Section Title</label>
-<!--         <h4 class="sectionTitle">Section Title</h4> -->
-      </li>
-      <li id="yesNoInputBlock" class="dragDropBlock list-group-item">
-        <label class="smallgray" for="yesNoInput">Yes/No Input</label>
-<!--         <input id="yesNoInput" class="form-control" type="number" placeholder="123456" value="{{Number}}" {{generic_enabled}}> -->
-<!--         <div class="btn-group">
-          <button id="yesButton" type="button" class="btn btn-info" readonly>Yes</button>
-          <button id="noButton" type="button" class="btn btn-default" readonly>No</button>
-        </div> -->
-      </li>
+
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li id="addNewFieldTab" class="{{addNewFieldTabActive}}"><a href="#addNewFieldPanel">Add new field</a></li>
+      <li id="editFieldTab" class="{{editFieldTabActive}}"><a href="#editFieldPanel">Edit field</a></li>
     </ul>
+
+    <!-- Tab panes -->
+    <!-- <div class="tab-content"> -->
+      {{#if isAddNewFieldTab }}
+        <div class="tab-pane" id="addNewFieldPanel">
+          <ul class="list-group">
+            <li id="textInputBlock" class="dragDropBlock list-group-item">
+              <label class="smallgray" for="firstNameInput">Text Input</label>
+            </li>
+            <li id="textareaInputBlock" class="dragDropBlock list-group-item">
+              <label class="smallgray" for="notesInput">Textarea</label>
+            </li>
+            <li id="numericInputBlock" class="dragDropBlock list-group-item">
+              <label class="smallgray" for="numberInput">Numeric Input</label>
+            </li>
+            <li id="spacerBlock" class="dragDropBlock list-group-item">
+              <label class="smallgray">Spacer</label>
+            </li>
+            <li id="sectionTitleBlock" class="dragDropBlock list-group-item">
+              <label class="smallgray">Section Title</label>
+            </li>
+            <li id="yesNoInputBlock" class="dragDropBlock list-group-item">
+              <label class="smallgray" for="yesNoInput">Yes/No Input</label>
+            </li>
+          </ul>
+        </div>
+      {{else}}
+        <div class="tab-pane" id="editFieldPanel">
+          {{#with selectedFormBlock}}
+            <ul class="list-group">
+              <li class="list-group-item">
+                  <label class="smallgray" for="questionInput">Question Text</label>
+                  <textarea id="questionInput" class="form-control" rows="10" type="text" placeholder="Q:  How many asprins do you take a day?">{{getQuestionText}}</textarea>
+              </li>
+              <li class="list-group-item">
+                  <label class="smallgray" for="defaultValueInput">Default Value</label>
+                  <input id="defaultValueInput" class="form-control" type="text" placeholder="..." value="{{getDefaultValue}}">
+              </li>
+            </ul>
+            <button id="saveFormBlockParamsButton" class="fullwidth btn btn-info with-bottom-margin">Save</button>
+            <button id="deleteBlockButton" class="fullwidth btn btn-info">Delete</button>
+          {{/with}}
+        </div>
+      {{/if}}
+    <!-- </div> -->
+
   </aside>
 </template>
