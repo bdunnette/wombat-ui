@@ -170,13 +170,13 @@ module.exports = {
           .verify.elementPresent('#formBody .item:first-child .blockLabel')
           .verify.containsText('#formBody .item:first-child .blockLabel', 'Full Name')
 
-          .verify.elementPresent('#formBody .item:nth-child(1)')
-          .verify.elementPresent('#formBody .item:nth-child(1) .yesNoText')
-          .verify.containsText('#formBody .item:nth-child(1) .yesNoText', 'Q: Are you alergic to asprin?')
+          .verify.elementPresent('#formBody .item:nth-child(2)')
+          .verify.elementPresent('#formBody .item:nth-child(2) .yesNoText')
+          .verify.containsText('#formBody .item:nth-child(2) .yesNoText', 'Q: Are you alergic to asprin?')
 
         .click('#publishFormLink')
 
-        
+
 
       // click glossary
       .click("#northeastDropDownLink")
