@@ -31,7 +31,7 @@
 //     user.profile.avatar = user.services.google.picture
 //   }else{
 //     if(user.profile.avatar == null){
-//       user.profile.avatar = '/img/icons/Default_User.png';
+//       user.profile.avatar = '/images/icons/Default_User.png';
 //     }
 //   }
 //

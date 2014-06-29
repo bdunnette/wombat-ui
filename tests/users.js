@@ -7,36 +7,25 @@ module.exports = {
     client
       .url("http://localhost:3000")
 
+      .waitForElementVisible("body", 1000)
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+
+      .click("#signInLink").pause(200).pause(200)
+
       // signin to Inisights as sysadmin
       .waitForElementVisible("#entrySignInPage", 1000)
         .verify.elementPresent("#emailInput")
         .verify.elementPresent("#passwordInput")
         .verify.elementPresent("#entrySignInButton")
-      .setValue("#emailInput", "sysadmin")
-      .setValue("#passwordInput", "sysadmin")
-      .click("#entrySignInButton")
-      .pause(1000)
+        .setValue("#emailInput", "sysadmin")
+        .setValue("#passwordInput", "sysadmin321$")
 
+      .click("#entrySignInButton").pause(200)
 
-      // click the ThinAire logo, and open the sidebar
-      .click("#navbarBrandLink")
-      .pause(1000)
+      .waitForElementVisible("#homePage", 1000)
 
-      .waitForElementVisible("#sidebarTemplate", 1000)
-        .verify.elementPresent('#sidebarNav')
-        .verify.elementPresent('#sidebarMenu')
-        .verify.elementPresent('#sidebarMenuHomeItem')
-        .verify.elementPresent('#sidebarMenuHomeLink')
-        .verify.elementPresent('#sidebarMenuCampaignsItem')
-        .verify.elementPresent('#sidebarMenuCampaignsLink')
-        .verify.elementPresent('#sidebarMenuUsersItem')
-        .verify.elementPresent('#sidebarMenuUsersLink')
-        .verify.elementPresent('#sidebarMenuClientsItem')
-        .verify.elementPresent('#sidebarMenuClientsLink')
-
-      .click("#sidebarMenuUsersLink")
-      .pause(1000)
-
+      .click("#usersLink").pause(200)
 
       // test that the page contains search and control elements
       .waitForElementVisible("#usersListPage", 1000)
@@ -72,11 +61,11 @@ module.exports = {
 
       .verify.elementPresent('#usersTable .userListItem:first-child')
         .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
-        .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', 'http://localhost:3000/images/icons/Default_User.png')
+        // .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
+        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
+        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
+        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
+        // .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', 'http://localhost:3000/images/icons/Default_User.png')
 
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(1)')
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(2)')
@@ -90,8 +79,8 @@ module.exports = {
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', '2014')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'System Administrator')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'SysAdmin')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'Thinaire')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'sysadmin@thinaire.net')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'Wombat.com')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'sysadmin@wombat.com')
 
 
       // test searching for 'sysadmin' username
@@ -104,8 +93,8 @@ module.exports = {
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'johndoe')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', '2014')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'John Doe')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'User')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'ACME, Inc')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'Reviewer')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'ACME Pharmaceuticals')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'johndoe@acme.com')
 
       // test searching for 'sysadmin' username
@@ -118,9 +107,9 @@ module.exports = {
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'janedoe')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', '2014')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'Jane Doe')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'User')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'Thinaire')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'janedoe@thinaire.net')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'Data Entry')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'ACME Pharmaceuticals')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'janedoe@acme.com')
 
       .click("#newUserButton")
       .pause(1000)
@@ -143,7 +132,7 @@ module.exports = {
       .verify.visible('#profileEmailLabel')
       .verify.visible('#profileNameLabel')
       .verify.visible('#profileTitleLabel')
-      .verify.visible('#findCompanyButton')
+      .verify.visible('#findClientButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarLabel')
       .verify.visible('#profilePhoneLabel')
@@ -157,7 +146,7 @@ module.exports = {
       .verify.visible('#profileEmailInput')
       .verify.visible('#profileNameInput')
       .verify.visible('#profileTitleInput')
-      .verify.visible('#findCompanyButton')
+      .verify.visible('#findClientButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarInput')
       .verify.visible('#profilePhoneInput')
@@ -171,8 +160,6 @@ module.exports = {
       .verify.containsText('#profileEmailInput', "")
       .verify.containsText('#profileNameInput', "")
       .verify.containsText('#profileTitleInput', "")
-      .verify.containsText('#findCompanyButton', "No profile.")
-      .verify.containsText('#findRoleButton', "No role set?")
       .verify.attributeEquals('#userAvatarImage', 'src', 'http://localhost:3000/images/icons/Default_User.png')
       .verify.containsText('#profilePhoneInput', "")
       .verify.containsText('#profileWebsiteInput', "")
@@ -181,6 +168,9 @@ module.exports = {
       .verify.containsText('#profileStateInput', "")
       .verify.containsText('#profileZipInput', "")
 
+      .pause(500)
+      .verify.containsText('#findClientButton', "No organization set in profile.")
+      .verify.containsText('#findRoleButton', "No role set.")
 
 
 

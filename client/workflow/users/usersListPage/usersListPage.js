@@ -30,8 +30,7 @@ Template.usersListPage.helpers({
       Session.set('usersListReceivedData', new Date());
       Session.set('usersListPaginationCount', Math.floor(Meteor.users.find().count() / Session.get('usersListTableLimit')));
 
-
-      if(Insights.checkForHexRegExp.test(Session.get('usersListSearchFilter'))){
+      if(Wombat.checkForHexCode.test(Session.get('usersListSearchFilter'))){
         return Meteor.users.find({_id: new Meteor.Collection.ObjectID(Session.get('usersListSearchFilter'))});
       }else{
         return Meteor.users.find({$or:[
@@ -43,7 +42,6 @@ Template.usersListPage.helpers({
           {'email.address': { $regex: Session.get('usersListSearchFilter'), $options: 'i' }}
 
           ]},{limit: Session.get('usersListTableLimit'), skip: Session.get('usersListSkipCount')});
-
       }
     },
     getSearchValue: function(){
@@ -89,10 +87,10 @@ Template.userListItem.helpers({
       if(this.profile.avatar){
         return this.profile.avatar;
       }else{
-        return '/img/icons/Default_User.png';
+        return '/images/icons/Default_User.png';
       }
     }else{
-      return '/img/icons/Default_User.png';
+      return '/images/icons/Default_User.png';
     }
   },
   getUserIdString: function(){

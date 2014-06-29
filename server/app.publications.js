@@ -14,6 +14,11 @@ Meteor.publish('studies', function(){
 Meteor.publish('clients', function(){
   return Clients.find();
 });
+Meteor.publish('usersDirectory', function(){
+  return Meteor.users.find();
+});
+
+
 Meteor.publish(null, function (){
   return Meteor.roles.find();
 })

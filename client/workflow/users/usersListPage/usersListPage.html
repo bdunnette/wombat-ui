@@ -5,7 +5,7 @@
 
         <div class="row head">
           <div class="col-md-8">
-            <h4>Users</h4>
+            <h4 id="usersListPageTitle">Users</h4>
           </div>
           <div class=col-md-2>
             <div class="searchColumn">
@@ -14,7 +14,7 @@
           </div>
           <div class="col-md-2">
             <div class="newRecordColumn">
-              <a href="/newuser" class="form-control btn btn-success pull-right">
+              <a id="newUserButton" href="/newuser" class="form-control btn btn-success pull-right">
                 <span>&#43;</span>
                 NEW USER
               </a>
@@ -28,22 +28,22 @@
             <table id="usersTable" class="table table-hover table-striped">
               <thead>
               <tr>
-                <th class="col-md-3 sortable">
+                <th id="usersTableUsernameColumn" class="col-md-3 sortable">
                   Username
                 </th>
-                <th class="col-md-2 sortable">
+                <th id="usersTableCreatedAtColumn" class="col-md-2 sortable">
                   <span class="line"></span>CreatedAt
                 </th>
-                <th class="col-md-2 sortable">
+                <th id="usersTableFullNameColumn" class="col-md-2 sortable">
                   <span class="line"></span>Full Name
                 </th>
-                <th class="col-md-1 sortable">
+                <th id="usersTableRoleColumn" class="col-md-1 sortable">
                   <span class="line"></span>Role
                 </th>
-                <th class="col-md-2 sortable">
+                <th id="usersTableCompanyColumn" class="col-md-2 sortable">
                   <span class="line"></span>Company
                 </th>
-                <th class="col-md-2 sortable align-right">
+                <th id="usersTableEmailColumn" class="col-md-2 sortable align-right">
                   <span class="line"></span>Email
                 </th>
               </tr>
@@ -59,17 +59,6 @@
           </div>
         </div>
 
-        <!--<ul class="pagination pull-right">-->
-          <!--<li><a href="#">&#8249;</a></li>-->
-          <!--<li class="active"><a href="#">1</a></li>-->
-          <!--<li><a href="#">2</a></li>-->
-          <!--<li><a href="#">3</a></li>-->
-          <!--<li><a href="#">4</a></li>-->
-          <!--<li><a href="#">5</a></li>-->
-          <!--<li><a href="#">&#8250;</a></li>-->
-        <!--</ul>-->
-        <!-- end users table -->
-
       </div>
     </div>
   </div>
@@ -81,7 +70,6 @@
 
   <tr class="first userListItem">
     <td>
-      <img src="{{ getAvatar }}" alt="contact" class="img-circle avatar hidden-phone" />
       <a href="/users/{{ getUserIdString }}" class="name">{{ username }}</a></td>
     <td>
       {{ getProfileCreatedAt }}
@@ -90,7 +78,7 @@
       {{ profile.name }}
     </td>
     <td>
-      {{ profile.role }}
+      {{ profile.roles }}
     </td>
     <td>
       {{ profile.company }}

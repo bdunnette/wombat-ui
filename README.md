@@ -60,8 +60,11 @@ sudo mrt
 ### Run Acceptance Tests
 
 ````sh
+
+# optional:  you may want to reset your application data
+terminal-a$ sudo mrt reset
+
 # run your application as usual
-terminal-a$ cd wombat-ui
 terminal-a$ sudo mrt
 
 # then open up a second terminal and run_nightwatch to run all tests

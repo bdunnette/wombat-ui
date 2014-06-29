@@ -7,6 +7,10 @@ module.exports = {
       .url("http://localhost:3000")
 
       .waitForElementVisible("body", 1000)
+      .verify.elementPresent('#landingPage')
+
+      .click("#signInLink")
+
       .waitForElementVisible("#entrySignInPage", 1000)
       .waitForElementVisible("#emailInput", 1000)
       .waitForElementVisible("#passwordInput", 1000)
@@ -20,14 +24,13 @@ module.exports = {
       .verify.elementPresent('#forgotPasswordLink')
       .verify.elementPresent('#entrySignInButton')
 
-      .setValue("#emailInput", "janedoe")
-      .setValue("#passwordInput", "janedoe")
+      .setValue("#emailInput", "sysadmin")
+      .setValue("#passwordInput", "sysadmin321$")
 
       .click("#entrySignInButton")
       .pause(1000)
 
-      .waitForElementVisible("#introPage", 1000)
-      .verify.containsText("#introPageTitle", "Welcome to Thinaire Insights")
+      .waitForElementVisible("#homePage", 1000)
       .end();
   }
 };

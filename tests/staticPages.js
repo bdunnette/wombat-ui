@@ -4,21 +4,13 @@
 module.exports = {
   "Static Pages" : function (client) {
     client
-      .url("http://localhost:3000/landing")
+      .url("http://localhost:3000")
 
       .waitForElementVisible("body", 1000)
-      .waitForElementVisible("#landingPage", 1000)
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
 
-      .verify.elementPresent("#publicHeader")
-      .verify.elementPresent("#navBarTitle")
-      .verify.elementPresent("#signInButtonLink")
-      .verify.elementPresent("#signUpButtonLink")
-
-      .verify.elementPresent("#hero")
-      .verify.elementPresent("#features")
-      .verify.elementPresent("#developmentTeam")
-
-      .click("#signInButtonLink")
+      .click("#signInLink").pause(200)
       .pause(1000)
 
       .waitForElementVisible("#entrySignInPage", 1000)
@@ -26,11 +18,13 @@ module.exports = {
       .verify.elementPresent("#passwordInput")
       .verify.elementPresent("#entrySignInButton")
 
-      .setValue("#emailInput", "janedoe")
-      .setValue("#passwordInput", "janedoe")
+      .setValue("#emailInput", "sysadmin")
+      .setValue("#passwordInput", "sysadmin321$")
 
       .click("#entrySignInButton")
       .pause(1000)
+
+      .waitForElementVisible("#homePage", 1000)
 
       // open the menu
       .click("#northeastDropDownLink")
@@ -41,19 +35,19 @@ module.exports = {
       .verify.containsText("#userProfileLink", "Profile")
 
       .verify.elementPresent('#termsOfServiceLink')
-      .verify.containsText("#termsOfServiceLink", "Terms of service")
+      .verify.containsText("#termsOfServiceLink", "End User License")
 
       .verify.elementPresent('#privacyPolicyLink')
-      .verify.containsText("#privacyPolicyLink", "Privacy policy")
+      .verify.containsText("#privacyPolicyLink", "Privacy Page")
 
       .verify.elementPresent('#glossaryLink')
       .verify.containsText("#glossaryLink", "Glossary")
 
-      .verify.elementPresent('#feedbackSupportLink')
-      .verify.containsText("#feedbackSupportLink", "Feedback & Support")
+      // .verify.elementPresent('#feedbackSupportLink')
+      // .verify.containsText("#feedbackSupportLink", "Feedback & Support")
 
-      .verify.elementPresent('#logOutLink')
-      .verify.containsText("#logOutLink", "Log out")
+      .verify.elementPresent('#signOutLink')
+      .verify.containsText("#signOutLink", "Sign-Out")
 
       // click terms of service
       .click("#termsOfServiceLink")
@@ -80,9 +74,9 @@ module.exports = {
       .click("#northeastDropDownLink")
       .pause(500)
       .verify.elementPresent("#northeastDropDownMenu")
-      .click("#logOutLink")
+      .click("#signOutLink")
       .pause(2000)
-      .waitForElementVisible("#entrySignInPage", 1000)
+      .waitForElementVisible("#landingPage", 1000)
       .end();
   }
 };

@@ -2,7 +2,7 @@
 // http://nightwatchjs.org/api
 
 module.exports = {
-  "Intro Page" : function (client) {
+  "Home Page" : function (client) {
     client
       .url("http://localhost:3000")
 
@@ -43,7 +43,7 @@ module.exports = {
       .pause(1000)
 
       .waitForElementVisible("#entryErrorMessage", 1000)
-      .verify.containsText('#entryErrorMessage', "User not found")
+      .verify.containsText('#entryErrorMessage', "Incorrect password")
       .verify.cssClassPresent('#entryErrorMessage', 'alert')
       .verify.cssClassPresent('#entryErrorMessage', 'alert-danger')
 

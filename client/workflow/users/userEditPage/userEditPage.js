@@ -13,7 +13,6 @@ Router.map(function(){
     template: 'userEditPage',
     onBeforeAction: function(){
       Session.set('selectedUser', this.params.id);
-      setPageTitle("New User");
     },
     waitOn: function(){
       Meteor.subscribe('userDirectory');
@@ -370,42 +369,28 @@ Template.userEditPage.helpers({
   },
   getClient: function(){
     console.log("Template.userEditPage.getCompany");
-    if(Session.get('selectedClient')){
-      console.log(Session.get('selectedClient').name);
-      return Session.get('selectedClient').name;
-    }else{
-      if(this.profile){
-        if(this.profile.client){
-          console.log("this.profile.client: " + this.profile.client);
-          return this.profile.client;
-        }else{
-          console.log("---");
-          return "---";
-        }
+    if(this.profile){
+      if(this.profile.company){
+        console.log("this.profile.client: " + this.profile.company);
+        return this.profile.company;
       }else{
-        console.log("---");
-        return "No profile.";
+        return "No organization set in profile.";
       }
+    }else{
+      return Session.get('selectedClient').name;
     }
   },
   getRole: function(){
     console.log("Template.userEditPage.getRole");
-    if(Session.get('selectedUserRole')){
-      //console.log(Session.get('selectedClientId').name);
-      return Session.get('selectedUserRole').name;
-    }else{
-      if(this.profile){
-        if(this.profile.role){
-          console.log("this.profile.role", this.profile.role);
-          return this.profile.role;
-        }else{
-          console.log("---");
-          return "---";
-        }
+    if(this.profile){
+      if(this.profile.roles){
+        console.log("this.profile.role", this.profile.roles);
+        return this.profile.roles;
       }else{
-        console.log("---");
-        return "No role set?";
+        return "No role set.";
       }
+    }else{
+      return Session.get('selectedUserRole').name;
     }
   },
   getEmployer: function(){
@@ -415,7 +400,7 @@ Template.userEditPage.helpers({
       if(this.profile){
         return this.profile.employer;
       }else{
-        return "---";
+        return "No employer in profile.";
       }
     }
   },

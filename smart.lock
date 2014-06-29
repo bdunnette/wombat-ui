@@ -11,7 +11,8 @@
       "font-awesome": {},
       "session-extended-api": {},
       "roles": {},
-      "selenium-nightwatch": {}
+      "selenium-nightwatch": {},
+      "moment": {}
     },
     "packages": {
       "bootstrap-3": {
@@ -56,13 +57,18 @@
       },
       "roles": {
         "git": "https://github.com/alanning/meteor-roles.git",
-        "tag": "v1.2.9",
-        "commit": "969b17fac5dfec66b6b12bfce4e37471d1a241d4"
+        "tag": "v1.2.10",
+        "commit": "7ccb35de0a6cb0c9a0c3666badd04757e39c09a6"
       },
       "selenium-nightwatch": {
         "git": "https://github.com/awatson1978/selenium-nightwatch.git",
-        "tag": "v0.1.4",
-        "commit": "baeb074942ea3288b2a343b0fa88700e204c3d92"
+        "tag": "v0.3.0",
+        "commit": "a8fa38cf074ec4f7f656477ec00aeba22dbc3828"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.6.0",
+        "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
@@ -71,8 +77,8 @@
       },
       "nprogress": {
         "git": "https://github.com/zhouzhuojie/meteor-nprogress.git",
-        "tag": "v0.0.4",
-        "commit": "8333206b751a24fac1fbd1b03fa37621bcefe50c"
+        "tag": "v0.0.5",
+        "commit": "bb88a057166e0f1386ab8bc0a1e080b48aa59159"
       }
     }
   }

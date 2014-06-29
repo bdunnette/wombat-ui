@@ -2,7 +2,7 @@
 // http://nightwatchjs.org/api
 
 module.exports = {
-  "User Profile" : function (client) {
+  "My Profile" : function (client) {
     client
       .url("http://localhost:3000")
 
@@ -58,7 +58,7 @@ module.exports = {
       .verify.elementPresent('#profileOrganizationIdLabel')
       .verify.elementPresent('#profileOrganizationIdText')
 
-      .verify.containsText('#profileUserRole', "sysadmin")
+      .verify.containsText('#profileUserRole', "SysAdmin")
 
       .verify.containsText('#profileFullNameLabel', "Full Name")
       .verify.containsText('#profileUserRoleLabel', "Role")
@@ -66,7 +66,7 @@ module.exports = {
       .verify.containsText('#profileOrganizationLabel', "Sponsor Name")
 
       .verify.containsText('#profileFullName', "System Administrator")
-      .verify.containsText('#profileUserRole', "sysadmin")
+      .verify.containsText('#profileUserRole', "SysAdmin")
 
       // click terms of service
       .click("#editProfileButton")
@@ -118,7 +118,7 @@ module.exports = {
       .verify.attributeEquals('#profileEmailInput', "value", "sysadmin@wombat.com")
       .verify.attributeEquals('#profileNameInput', "value", "System Administrator")
       .verify.attributeEquals('#profileTitleInput', "value", "")
-      .verify.containsText('#findRoleButton', "sysadmin")
+      .verify.containsText('#findRoleButton', "SysAdmin")
       .verify.attributeEquals('#userAvatarImage', 'src', 'http://localhost:3000/images/icons/Default_User.png')
       .verify.containsText('#profilePhoneInput', "")
       .verify.containsText('#profileWebsiteInput', "")
