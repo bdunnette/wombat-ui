@@ -8,6 +8,7 @@ Router.map(function(){
     },
     data: function () {
       console.log('routing to: /data/', this.params.id);
+      Session.set('selectedDataRecord', this.params.id);
       return Data.findOne({_id: this.params.id});
     },
   });

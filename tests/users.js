@@ -40,7 +40,7 @@ module.exports = {
         .verify.elementPresent('#newUserButton')
         .verify.containsText("#newUserButton", "NEW USER")
 
-      // test the table
+      // users table
       .verify.elementPresent('#usersTable')
         .verify.elementPresent('#usersTableUsernameColumn')
         .verify.containsText("#usersTableUsernameColumn", "Username")
@@ -61,11 +61,6 @@ module.exports = {
 
       .verify.elementPresent('#usersTable .userListItem:first-child')
         .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        // .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
-        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
-        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
-        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
-        // .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', 'http://localhost:3000/images/icons/Default_User.png')
 
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(1)')
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(2)')

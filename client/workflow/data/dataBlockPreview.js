@@ -28,6 +28,7 @@ Template.dataBlockPreview.helpers({
     if(this.elementType === "yesno"){
       var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
       console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
 
       if(dataRecord){
         if(dataRecord.data[this._id] === "yes"){
@@ -45,6 +46,7 @@ Template.dataBlockPreview.helpers({
     if(this.elementType === "yesno"){
       var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
       console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
 
       if(dataRecord){
         if(dataRecord.data[this._id] === "no"){
@@ -68,11 +70,11 @@ Template.dataBlockPreview.helpers({
     var resultString = "Q: ";
 
     var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
-    console.log('dataRecord', dataRecord);
+    //console.log('dataRecord', dataRecord);
 
     if(dataRecord){
         var form = Forms.findOne(dataRecord.schema_id);
-        console.log('getLabelText: form', form);
+        //console.log('getLabelText: form', form);
 
         if(this.labelText){
             return resultString + this.labelText;
@@ -94,7 +96,7 @@ Template.dataBlockPreview.helpers({
   getInputValue: function(){
 
     var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
-    console.log('getInputValue: dataRecord', dataRecord);
+    //console.log('getInputValue: dataRecord', dataRecord);
 
 
     return dataRecord.data[this._id];

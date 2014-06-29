@@ -40,12 +40,12 @@
     <div id="item-{{_id}}" class="item {{isSelected}}">
       <div class="padded row">
         <div class="col col-md-10">
-          <p>{{getLabelText}}</p>
+          <p class="yesNoText">{{getLabelText}}</p>
         </div>
         <div class="col col-md-2">
           <div class="btn-group pull-right">
-            <button id="item-{{_id}}-yes" type="button" class="btn {{yesNoBlockYesValue}} yes-button" readonly>Yes</button>
-            <button id="item-{{_id}}-no" type="button" class="btn {{yesNoBlockNoValue}} no-button" readonly>No</button>
+            <button id="item-{{_id}}-yes" type="button" class="btn {{yesNoBlockYesValue}} yes-button readonly" readonly>Yes</button>
+            <button id="item-{{_id}}-no" type="button" class="btn {{yesNoBlockNoValue}} no-button readonly" readonly>No</button>
           </div>
         </div>
       </div>
