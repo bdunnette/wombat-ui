@@ -164,7 +164,7 @@ addBlockToForm = function(){
     elementType: elementType,
     labelText: labelText,
     text: text,
-    rank: Items.find().count()
+    rank: Items.find().count() + 1
   };
   console.log('newObject', newObject);
 

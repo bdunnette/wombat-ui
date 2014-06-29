@@ -246,12 +246,12 @@ saveForm = function(scope){
   };
   if(Session.get('currentForm')){
     Forms.update({_id: Session.get('currentForm')},{$set:{
-      stared: newForm.stared,
-      active: newForm.active,
+      //stared: newForm.stared,
+      //active: newForm.active,
       formName: newForm.formName,
       owner: newForm.owner,
       ownerUsername: newForm.ownerUsername,
-      schema: newForm.schema,
+      schema: Items.find({},{sort: {rank: 1}}).fetch(),
       numBlocks: newForm.numBlocks
     }});
   }else{
