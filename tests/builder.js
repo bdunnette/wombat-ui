@@ -101,8 +101,25 @@ module.exports = {
       .verify.elementPresent('#list .item:nth-child(2) .yesNoText')
       .verify.containsText('#list .item:nth-child(2) .yesNoText', 'Are you alergic to asprin?')
 
+      .click('#addNewFieldTab').pause(200)
+      .verify.elementPresent('#addNewFieldPanel')
 
+      //----------------------------------------------------------------------
+      // DATETIME BLOCK
 
+      // clicking yesno control in the sidebar should create a yesno block
+      .click('#dateTimeInputBlock').pause(200)
+      .verify.elementPresent('#list .item:nth-child(3)')
+      .verify.cssClassPresent('#list .item:nth-child(3)', 'selected')
+      .clearValue('#questionInput')
+      .clearValue('#defaultValueInput')
+      .setValue('#questionInput', "What day was your first adverse reaction?")
+
+      .click('#saveFormBlockParamsButton').pause(100)
+      .verify.elementPresent('#list .item:nth-child(3)')
+      .verify.cssClassPresent('#list .item:nth-child(3)', 'selected')
+      .verify.elementPresent('#list .item:nth-child(3) .dateTimeText')
+      .verify.containsText('#list .item:nth-child(3) .dateTimeText', 'What day was your first adverse reaction?')
 
 
       // click glossary

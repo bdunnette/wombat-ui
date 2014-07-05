@@ -54,5 +54,32 @@
     </div>
   {{/if}}
 
+  {{#if isDateTimeBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+      <label class="dateTimeText" for="input-{{_id}}">{{getLabelText}}</label>
+      <div class="padded">
+        <input id="input-{{_id}}" class="form-control" type="date" value="{{getInputValue}}">
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if isRadioBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}}">
+      <div class="padded row">
+        <div class="col col-md-6">
+          <p class="radioText">{{getLabelText}}</p>
+        </div>
+        <div class="col col-md-6">
+          <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default yes-button" readonly>1</button>
+            <button type="button" class="btn btn-default no-button" readonly>2</button>
+            <button type="button" class="btn btn-default no-button" readonly>3</button>
+            <button type="button" class="btn btn-default no-button" readonly>4</button>
+            <button type="button" class="btn btn-default no-button" readonly>5</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 
 </template>

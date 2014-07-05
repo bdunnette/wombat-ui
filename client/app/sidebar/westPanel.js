@@ -43,7 +43,16 @@ Template.westPanel.events({
     Session.set('selectedBlockItem', addBlockToForm());
     Session.set('selectedBuilderTab','editFieldTab');
   },
-
+  'click #dateTimeInputBlock':function(){
+    Session.set('movedElementId', 'dateTimeInputBlock');
+    Session.set('selectedBlockItem', addBlockToForm());
+    Session.set('selectedBuilderTab','dateTimeInputBlock');
+  },
+  'click #radioInputBlock':function(){
+    Session.set('movedElementId', 'radioInputBlock');
+    Session.set('selectedBlockItem', addBlockToForm());
+    Session.set('selectedBuilderTab','radioInputBlock');
+  },
   'click #addNewFieldTab':function(){
     Session.set('selectedBuilderTab','addNewFieldTab');
     console.log(Session.get('selectedBuilderTab'));

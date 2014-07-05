@@ -143,10 +143,15 @@ addBlockToForm = function(){
   }else if(Session.get('movedElementId') === "yesNoInputBlock"){
     elementType = "yesno";
     inputType = "yesno";
-  }else if(Session.get('movedElementId') === "sectionTitleBlock"){
-    labelText = "Section ipsum...";
-    inputType = "section";
-    elementType = "section";
+    labelText = "Lorum yesno...";
+  }else if(Session.get('movedElementId') === "radioInputBlock"){
+    elementType = "radio";
+    inputType = "radio";
+    labelText = "Lorum datum...";
+  }else if(Session.get('movedElementId') === "dateTimeInputBlock"){
+    labelText = "Lorum datum...";
+    inputType = "datetime";
+    elementType = "datetime";
   }
 
   var lastRank = 0;

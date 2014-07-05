@@ -33,6 +33,20 @@ Template.formBlock.helpers({
       return false;
     }
   },
+  isDateTimeBlock:function(){
+    if(this.elementType === "datetime"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  isRadioBlock:function(){
+    if(this.elementType === "radio"){
+      return true;
+    }else{
+      return false;
+    }
+  },
   isSectionTitle: function(){
     if(this.elementType === "section"){
       return true;
