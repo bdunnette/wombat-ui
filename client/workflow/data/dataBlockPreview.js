@@ -2,6 +2,13 @@
 // this page is very similar to formBlockPreivew.js, and could maybe be merged
 // but we want to be careful about the pattern
 
+Template.dataBlockPreview.events({
+  'click .item':function(){
+    Session.set('activeQuestion', this._id);
+  }
+});
+
+
 Template.dataBlockPreview.helpers({
   isInput: function(){
     if(this.elementType === "input"){

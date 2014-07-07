@@ -51,6 +51,32 @@ Clients.allow({
   }
 });
 
+Subjects =  new Meteor.Collection("subjects");
+Subjects.allow({
+  insert: function(){
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
+});
+
+Comments =  new Meteor.Collection("comments");
+Comments.allow({
+  insert: function(){
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
+});
+
 
 // TODO:  refactor Items to FormItems
 Items = new Meteor.Collection("items");

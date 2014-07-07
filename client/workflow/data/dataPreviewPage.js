@@ -1,3 +1,4 @@
+Session.setDefault('activeQuestion', false);
 
 Router.map(function(){
   this.route('dataPreviewPage', {
@@ -11,9 +12,26 @@ Router.map(function(){
       Session.set('selectedDataRecord', this.params.id);
       return Data.findOne({_id: this.params.id});
     },
+    onAfterAction: function(){
+      Session.set('activeQuestion', false);
+    }
   });
 });
 Template.dataPreviewPage.events({
+  'click .resolvedButton':function(){
+    Comments.insert({
+      createdAt: new Date(),
+      text: "Resolved.",
+      owner: Meteor.user().profile.name,
+      owner_id: Meteor.userId(),
+      question_id: this._id
+    });
+    $(event.target).val("");
+    Session.set('activeQuestion', false);
+  },
+  'click .page':function(){
+    Session.set('activeQuestion', false);
+  },
   'click #previousVersionID':function(){
     var record = Data.findOne({_id: Session.get('currentDataRecord')});
     console.log( 'clicked on panel footer ', record.previousVersion);
@@ -25,10 +43,38 @@ Template.dataPreviewPage.events({
   },
   'click .fa-lock':function(){
    Meteor.call('lockDataRecord', Session.get('currentDataRecord'));
-  }
-  });
+ },
+ 'keyup .comment-input': function(event){
+   if(event.keyCode == 13){
+     Comments.insert({
+       createdAt: new Date(),
+       text: $(event.target).val(),
+       owner: Meteor.user().profile.name,
+       owner_id: Meteor.userId(),
+       question_id: this._id
+     });
+     $(event.target).val("");
+   }
+ }
+});
 
 Template.dataPreviewPage.helpers({
+  answerHasComments: function(){
+    var comments = Comments.find();
+    if(comments.count() > 0){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  questionsList: function(){
+    return Comments.find({question_id: this._id});
+  },
+  isActiveQuestion: function(){
+    if(Session.get('activeQuestion') === this._id){
+      return Session.get('activeQuestion');
+    }
+  },
   dataSchema: function(){
     console.log('data.schema', this.schema);
     console.log('selectedDataRecord', Session.get('selectedDataRecord'));

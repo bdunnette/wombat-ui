@@ -4,5 +4,7 @@ Deps.autorun(function(){
   Meteor.subscribe('data');
   Meteor.subscribe('studies');
   Meteor.subscribe('clients');
+  Meteor.subscribe('subjects');
+  Meteor.subscribe('comments');
   Meteor.subscribe('usersDirectory');
 });

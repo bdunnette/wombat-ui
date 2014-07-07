@@ -14,6 +14,29 @@
         <div class="panel-body">
           {{#each dataSchema}}
             {{> dataBlockPreview }}
+            {{#if answerHasComments}}
+              <div class="horizontally-padded">
+                <ul class="list-group">
+                  {{#each questionsList}}
+                    <li class="list-group-item">{{text}}</li>
+                  {{/each}}
+                </ul>
+              </div>
+            {{/if}}
+            {{#if isActiveQuestion }}
+              <div class="horizontally-padded">
+                <div class="row">
+                  <div class="col col-md-9">
+                    <input type="text" class="comment-input form-control" value="">
+                  </div>
+                  <div class="col col-md-3">
+                    <div class="fullwidth resolvedButton btn btn-default">
+                      Resolved
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
           {{/each}}
         </div>
         <div class="panel-footer">
