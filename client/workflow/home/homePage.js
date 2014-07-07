@@ -9,3 +9,11 @@ Template.homePage.events({
     Router.go('/data');
   }
 });
+
+
+
+Template.homePage.helpers({
+  studiesList: function(){
+    return Studies.find();
+  },
+});

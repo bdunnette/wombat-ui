@@ -2,6 +2,7 @@
   <div id="studiesRecordPage" class="page">
     <div class="hidden">{{resized}}</div>
     <div class="container">
+      <!--
       <div class="row">
         <div class="col col-md-6">
           <h4>{{name}}</h4>
@@ -14,51 +15,65 @@
       <hr>
       <div class="row">
         <div class="col col-md-12">
-          <!-- <label for="studyNameInput" >Name</label>
-          <input id="studyNameInput" type="text" class="form-control" placeholder="..." value="{{name}}">
-          <br> -->
-
           <label for="studyDescriptionInput" >Study Description</label>
-          <input id="studyDescriptionInput" type="text" class="form-control" placeholder="..." value="{{description}}">
+          <div id="studyDescriptionText">
+            {{description}}
+          </div>
           <br>
-
-          <!-- <label for="studyUrlInput" >URL</label>
-          <input id="studyUrlInput" type="text" class="form-control" placeholder="..." value="{{url}}">
-          <br> -->
 
           <label for="studyUrlInput" >Sponsoring Client</label>
-          <input id="studyUrlInput" type="text" class="form-control" placeholder="..." value="{{client}}">
+          <div id="studyUrlText">
+            {{client}}
+          </div>
           <br>
-
 
         </div>
       </div>
-      <hr>
+      <hr> -->
 
       <div class="row">
         <div class="col col-md-12">
-          <h4>Forms</h4>
-          <table id="formsTable" class="table table-hover table-striped tablesorter">
-            <thead>
-              <tr>
-                <th>Stared</th>
-                <th>Form ID</th>
-                <th>Form Name</th>
-                <th>Owner</th>
-                <th># Blocks</th>
-                <th>Tags</th>
-                <th>Active</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each formsList}}
-                {{> formRowItem }}
-              {{/each}}
-            </tbody>
-          </table>
+
+          <!-- <div class="panel tile"> -->
+          <div class="panel tile">
+            <div class="panel-heading heading-wombat">
+              {{name}}
+              <div class="pull-right">
+                {{_id}}
+              </div><br>
+              {{client}}
+            </div>
+            <div class="padded panel-image-wombat">
+              {{description}}
+            </div>
+            <div class="panel-body">
+              <table id="formsTable" class="table table-hover tablesorter">
+                <thead>
+                  <tr>
+                    <th>Stared</th>
+                    <th>Form ID</th>
+                    <th>Form Name</th>
+                    <th>Owner</th>
+                    <th># Blocks</th>
+                    <th>Tags</th>
+                    <th>Active</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each formsList}}
+                    {{> formRowItem }}
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-footer">
+              <a id="editStudyButton">Edit Study</a>
+            </div>
+          </div>
+
         </div>
       </div>
-      <hr>
+      <!-- <hr> -->
 
     </div>
   </div>

@@ -2,40 +2,87 @@
   <div id="homePage" class="page">
     <div class="container">
 
+      <div class="row">
+        <div class="col col-md-6">
+          <div id="activeStudiesTile" class="panel tile">
+            <div class="panel-heading heading-wombat">
+              Active Studies
+            </div>
+            <div class="panel-body wombat-orange">
+              {{#each studiesList}}
+                <a href="/study/home/{{_id}}">{{ name }}</a>                              
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        <div class="col col-md-6">
+          <div id="activeStudiesTile" class="panel tile">
+            <div class="panel-heading heading-wombat">
+              Inactive Studies
+            </div>
+            <div class="panel-body">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div class="row">
-        <div class="col col-md-4">
-          <div id="savedFormsTile" class="panel panel-default">
+        <div class="col col-md-3">
+          <div id="savedFormsTile" class="panel tile">
+            <div class="panel-heading heading-wombat">
+              Forms
+            </div>
             <div class="panel-image">
                 <img id="savedFormsTileImage" src="/images/home/forms-square.jpg" class="panel-image-preview" />
             </div>
-            <div class="panel-footer text-center">
+            <!-- <div class="panel-footer text-center">
               <a id="savedFormsTileLink" href="/forms">Forms</a>
-            </div>
+            </div> -->
           </div>
         </div>
 
 
-        <div class="col col-md-4">
-          <div id="collectedDataTile" class="panel panel-default">
+        <div class="col col-md-3">
+          <div id="collectedDataTile" class="panel tile">
+            <div class="panel-heading heading-wombat">
+              Data
+            </div>
             <div class="panel-image">
                 <img id="collectedDataTileImage" src="/images/home/wordcloud.jpg" class="panel-image-preview" />
             </div>
-            <div class="panel-footer text-center">
+            <!-- <div class="panel-footer text-center">
               <a id="collectedDataTileLink" href="/data">Data</a>
-            </div>
+            </div> -->
           </div>
         </div>
 
+        <div class="col col-md-3">
+          <div id="collectedDataTile" class="panel tile">
+            <div class="panel-heading heading-wombat">
+              Comments
+            </div>
+            <div class="panel-image">
+                <img id="collectedDataTileImage" src="/images/home/wordcloud.jpg" class="panel-image-preview" />
+            </div>
+            <!-- <div class="panel-footer text-center">
+              <a id="collectedDataTileLink" href="/data">Data</a>
+            </div> -->
+          </div>
+        </div>
 
-        <div class="col col-md-4">
-          <div id="formBuilderTile" class="panel panel-default">
+        <div class="col col-md-3">
+          <div id="formBuilderTile" class="panel tile">
+            <div class="panel-heading heading-wombat">
+              Design
+            </div>
             <div class="panel-image">
                 <img id="formBuilderTileImage" src="/images/home/formbuilder.png" class="panel-image-preview" />
             </div>
-            <div class="panel-footer text-center">
+            <!-- <div class="panel-footer text-center">
                 <a id="formBuilderTileLink" href="/builder">Design</a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

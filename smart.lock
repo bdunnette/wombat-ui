@@ -17,8 +17,8 @@
     "packages": {
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v3.1.1-1",
-        "commit": "63dd38968828bb8963636df93e9a1c45e2dfe67e"
+        "tag": "v3.2.0-1",
+        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
@@ -62,8 +62,8 @@
       },
       "selenium-nightwatch": {
         "git": "https://github.com/awatson1978/selenium-nightwatch.git",
-        "tag": "v0.3.0",
-        "commit": "a8fa38cf074ec4f7f656477ec00aeba22dbc3828"
+        "tag": "v0.3.1",
+        "commit": "bf4165901b453b9b2e6fbb037157f25115eb5979"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
