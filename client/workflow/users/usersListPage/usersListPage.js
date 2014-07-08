@@ -82,17 +82,6 @@ Template.userListItem.helpers({
       return '';
     }
   },
-  getAvatar: function(){
-    if(this.profile){
-      if(this.profile.avatar){
-        return this.profile.avatar;
-      }else{
-        return '/images/icons/Default_User.png';
-      }
-    }else{
-      return '/images/icons/Default_User.png';
-    }
-  },
   getUserIdString: function(){
     return this._id._str;
   },

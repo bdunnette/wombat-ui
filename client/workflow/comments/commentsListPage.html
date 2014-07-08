@@ -15,9 +15,9 @@
       <table id="tableOfStudyForms" class="table table-hover table-striped tablesorter">
         <thead>
           <tr>
-            <th>Study ID</th>
-            <th>Owner</th>
+            <!-- <th>Comment ID</th> -->
             <th>Question</th>
+            <th>Owner</th>
             <th>Created</th>
             <th>Title</th>
           </tr>
@@ -29,27 +29,16 @@
         </tbody>
       </table>
       <hr>
-
-      <!-- <div class="btn-group">
-        {{#each subjectsPaginationButtonList }}
-          {{> subjectsPaginationButton }}
-        {{/each}}
-      </div> -->
     </div>
   </div>
 </template>
 
-<!-- <template name="subjectsPaginationButton">
-  <button id="pagination-btn-{{index}}" class="{{pageActive}} pagination-btn btn btn-default">{{getPage}}</button>
-</template> -->
 
 <template name="commentRowItem">
   <tr class="individualFormRow">
-<!--     <td><i class="fa {{ getStar }}"></i></td> -->
-<!--     <td>{{ createdAt }}</td> -->
-    <td>{{ _id }}</td>
-    <td>{{ owner }}</td>
+    <!-- <td>{{ _id }}</td> -->
     <td>{{ question_id }}</td>
+    <td>{{ owner }}</td>
     <td>{{ getCreatedAt }}</td>
     <td>{{ text }}</td>
   </tr>

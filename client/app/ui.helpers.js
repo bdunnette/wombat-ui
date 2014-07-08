@@ -1,3 +1,7 @@
+UI.registerHelper('getCreatedAt', function(){
+  return moment(this.createdAt).format("YYYY-MM-DD hh:mm a");
+});
+
 UI.registerHelper('isLoggedIn', function() {
   if(Meteor.userId()){
     return true;

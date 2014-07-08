@@ -19,12 +19,13 @@
       <table id="dataTable" class="table table-hover table-striped tablesorter">
         <thead>
           <tr>
-            <th>Data ID</th>
+            <!-- <th>Data ID</th> -->
             <th>Study/Form Name</th>
             <th>Created At</th>
-            <th>Schema ID</th>
-            <th>Approved</th>
-            <th>Locked</th>
+            <!-- <th>Schema ID</th> -->
+            <th class="centered">Comments</th>
+            <th class="centered">Approved</th>
+            <th class="centered">Locked</th>
             <th>Study/Form Name</th>
             <th>Deleted?</th>
           </tr>
@@ -52,10 +53,11 @@
 
 <template name="dataRowItem">
   <tr class="dataRow">
-    <td>{{ _id }}</td>
+    <!-- <td>{{ _id }}</td> -->
+    <!-- <td>{{ schema_id }}</td> -->
     <td>{{ formName }}</td>
-    <td>{{ createdAt }}</td>
-    <td>{{ schema_id }}</td>
+    <td>{{ getCreatedAt }}</td>
+    <td class="centered"><i class="fa {{ getCommentsIcon }}"></i></td>
     <td class="centered"><i class="fa {{ getApprovalIcon }}"></i></td>
     <td class="centered"><i class="fa {{ getLockedIcon }}"></i></td>
     <td>{{ formName }}</td>

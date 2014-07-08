@@ -154,6 +154,34 @@ Template.dataRowItem.events({
 });
 
 Template.dataRowItem.helpers({
+  getCommentsIcon: function(){
+    var result = "";
+
+    // lets look through each answer in the form questionaire
+    for(var index in this.data){
+      if(this.data.hasOwnProperty(index)){
+
+        // on each record, we look through the comments
+        var comments = Comments.find({question_id: index}).fetch();
+
+        // if we find any comments that match
+        if(comments.length > 0){
+          if(result === ""){
+            result = "fa-comments wombat-orange";
+          }
+
+          // look to the last one
+          // if it's marked as 'resolved'
+          var comment = comments[comments.length - 1];
+          if(comment.text === "Resolved."){
+            // display the open comments icon
+            result = "fa-comments-o";
+          }
+        }
+      }
+    }
+    return result;
+  },
   getStar:function(){
     if(this.stared){
       return 'fa-star';

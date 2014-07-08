@@ -86,7 +86,7 @@ Template.subjectsListPage.events({
     Router.go('/subjects/' + this._id);
     //alert(this._id);
   },
-  'click #createStudyButton':function(){
+  'click #createSubjectButton':function(){
     Router.go('/new/subject/');
   }
 });

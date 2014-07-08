@@ -13,7 +13,7 @@
         <thead>
           <tr>
             <th id="formsTableStarredColumn">Starred</th>
-            <th id="formsTableFormIdColumn">Form ID</th>
+            <!-- <th id="formsTableFormIdColumn">Form ID</th> -->
             <th id="formsTableFormNameColumn">Form Name</th>
             <th id="formsTableOwnerColumn">Owner</th>
             <th id="formsTableNumBlocksColumn"># Blocks</th>
@@ -47,11 +47,11 @@
 <template name="formRowItem">
   <tr class="individualFormRow">
     <td><i class="fa {{ getStar }}"></i></td>
-    <td>{{ _id }}</td>
+    <!-- <td>{{ _id }}</td> -->
     <td>{{ formName }}</td>
     <td>{{ ownerUsername }}</td>
     <td>{{ numBlocks }}</td>
-    <td>{{ createdAt }}</td>
+    <td>{{ getCreatedAt }}</td>
     <td>{{ active }}</td>
   </tr>
 </template>
