@@ -1,18 +1,18 @@
 
 
 Router.map(function(){
-  this.route('clientRecordRoute', {
-    path: '/client/:id',
-    template: 'clientsRecordPage',
+  this.route('sponsorRecordRoute', {
+    path: '/sponsor/:id',
+    template: 'sponsorsRecordPage',
     onBeforeAction: function(){
-      setPageTitle("Client");
+      setPageTitle("Sponsors");
     },
     waitOn: function(){
       Meteor.subscribe('settings');
-      return Meteor.subscribe('clients');
+      return Meteor.subscribe('sponsors');
     },
     data: function () {
-      return Clients.findOne({_id: this.params.id});
+      return Sponsors.findOne({_id: this.params.id});
     }
   });
 });
@@ -21,34 +21,31 @@ Router.map(function(){
 
 
 
-Template.clientsRecordPage.clientRecord = function(){
-  if(this){
-    return Clients.findOne(this._id);
-  }else{
-    return {
-      name: "---",
-      description: "---",
-      url: "---",
-      owner: "---",
-      owner_id: "---"
-    };
-  }
-};
-Template.clientsRecordPage.getClientName = function(){
-  return this.name;
-};
-Template.clientsRecordPage.events({
-  'click #editClientButton':function(){
-    Router.go('/editclient/'  + this._id._str);
+Template.sponsorsRecordPage.events({
+  'click #editSponsorButton':function(){
+    Router.go('/editsponsor/'  + this._id._str);
   },
-  'click #deleteClientButton':function(){
-    var userIsSure = confirm("Are you sure you want to delete creative #" + this._id._str);
+  'click #deleteSponsorButton':function(){
+    var userIsSure = confirm("Are you sure you want to delete sponsor #" + this._id._str);
     if(userIsSure){
-      Clients.remove({_id: this._id});
-      Router.go('/clients/');
+      Sponsors.remove({_id: this._id});
+      Router.go('/sponsors/');
     }
   },
-  'click #cancelEmailInviteButton':function(){
-    Session.set('isInvitingUser', false);
+  getSponsorName: function(){
+    return this.name;
+  },
+  sponsorRecord: function(){
+    if(this){
+      return Sponsors.findOne(this._id);
+    }else{
+      return {
+        name: "---",
+        description: "---",
+        url: "---",
+        owner: "---",
+        owner_id: "---"
+      };
+    }
   }
 });

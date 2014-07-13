@@ -32,9 +32,9 @@ Template.navbarFooter.helpers({
       return false;
     }
   },
-  clientControls: function(){
+  sponsorControls: function(){
     if(Router.current()){
-      if(Router.current().path.indexOf('client/') > 0){
+      if(Router.current().path.indexOf('sponsor/') > 0){
         return true;
       }else{
         return false;
@@ -185,21 +185,47 @@ Template.navbarFooter.events({
     var previousRecord = Session.get('currentDataRecord');
 
     var newDataRecord = {
+      active: true,
       createdAt: new Date(),
       schema_id: this._id,
       formName: this.formName,
+      subjectName: Session.get('selectedSubject').name,
+      subjectId: Session.get('selectedSubject')._id,
       ownerUsername: Meteor.user().username,
       previousVersion : previousRecord,
       data: {}
     }
-    record.schema.forEach(function(block){
-      //newDataRecord.data[block._id] = $("#input-" + block._id).val();
+    for (var i = 0; i < record.schema.length; i++) {
+      var block = record.schema[i];
+
       if(Session.get('item-' + block._id + '-yesno')){
         newDataRecord.data[block._id] = Session.get('item-' + block._id + '-yesno');
+      }else if(Session.get('item-' + block._id + '-radio')){
+        newDataRecord.data[block._id] = Session.get('item-' + block._id + '-radio');
       }else{
-        newDataRecord.data[block._id] = $("#input-" + block._id).val();
+        if($("#input-" + block._id).val()){
+          newDataRecord.data[block._id] = $("#input-" + block._id).val();
+        }else{
+          newDataRecord.data[block._id] = "---";
+        }
       }
-    });
+
+    }
+
+    // record.schema.forEach(function(block){
+    //   //newDataRecord.data[block._id] = $("#input-" + block._id).val();
+    //   if(Session.get('item-' + block._id + '-yesno')){
+    //     newDataRecord.data[block._id] = Session.get('item-' + block._id + '-yesno');
+    //   }else if(Session.get('item-' + block._id + '-radio')){
+    //     newDataRecord.data[block._id] = Session.get('item-' + block._id + '-radio');
+    //   }else{
+    //     if($("#input-" + block._id).val()){
+    //       newDataRecord.data[block._id] = $("#input-" + block._id).val();
+    //     }else{
+    //       newDataRecord.data[block._id] = "---";
+    //     }
+    //   }
+    // });
 
     Data.insert(newDataRecord);
     Router.go('/data');
@@ -227,9 +253,9 @@ Template.navbarFooter.events({
 
 });
 
-
+// TODO: move to global helper object
 saveForm = function(scope){
-  var blockItems = Items.find().fetch();
+  var blockItems = Items.find({},{sort: {rank: 1}}).fetch();
   console.log("Saving  Schema: ", JSON.stringify(blockItems));
   console.log('_id', scope._id);
 

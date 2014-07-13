@@ -38,8 +38,8 @@ Studies.allow({
   }
 });
 
-Clients =  new Meteor.Collection("clients");
-Clients.allow({
+Sponsors =  new Meteor.Collection("sponsors");
+Sponsors.allow({
   insert: function(){
     return true;
   },

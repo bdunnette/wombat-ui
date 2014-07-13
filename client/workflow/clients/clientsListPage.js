@@ -1,26 +1,26 @@
-Session.setDefault('clientsListSearchFilter', '');
-Session.setDefault('clientsListPaginationCount', 1);
-Session.setDefault('clientsListSelectedPagination', 0);
-Session.setDefault('clientsListSkipCount', 0);
+Session.setDefault('sponsorsListSearchFilter', '');
+Session.setDefault('sponsorsListPaginationCount', 1);
+Session.setDefault('sponsorsListSelectedPagination', 0);
+Session.setDefault('sponsorsListSkipCount', 0);
 
 // TODO: refactor usersListTableLimit to usersListTableEntriesLimit
-Session.setDefault('clientsListTableLimit', 50);
+Session.setDefault('sponsorsListTableLimit', 50);
 
 
 
 Router.map(function(){
-  this.route('clientsListRoute', {
-    path: '/clients',
-    template: 'clientsListPage',
+  this.route('sponsorsListRoute', {
+    path: '/sponsors',
+    template: 'sponsorsListPage',
     onBeforeAction: function(){
-      setPageTitle("Clients");
+      setPageTitle("Sponsors");
     },
     waitOn: function(){
       Meteor.subscribe('settings');
-      return Meteor.subscribe('clients');
+      return Meteor.subscribe('sponsors');
     },
     onAfterAction: function() {
-      Session.set('currentPage', 'clientsListPage');
+      Session.set('currentPage', 'sponsorsListPage');
       Session.set('isOnListPage', true);
     }
   });
@@ -31,57 +31,57 @@ Router.map(function(){
 
 
 
-//TODO: refactor clientsListBlock to clientsListPage
-Template.clientsListPage.helpers({
-  clientsList: function () {
-    Session.set('clientsListReceivedData', new Date());
-    Session.set('clientsListPaginationCount', Math.floor(Clients.find().count() / Session.get('clientsListTableLimit')));
+//TODO: refactor sponsorsListBlock to sponsorsListPage
+Template.sponsorsListPage.helpers({
+  sponsorsList: function () {
+    Session.set('sponsorsListReceivedData', new Date());
+    Session.set('sponsorsListPaginationCount', Math.floor(Sponsors.find().count() / Session.get('sponsorsListTableLimit')));
 
-    if(Wombat.checkForHexCode.test(Session.get('clientsListSearchFilter'))){
-      return Clients.find({_id: new Meteor.Collection.ObjectID(Session.get('clientsListSearchFilter'))});
+    if(Wombat.checkForHexCode.test(Session.get('sponsorsListSearchFilter'))){
+      return Sponsors.find({_id: new Meteor.Collection.ObjectID(Session.get('sponsorsListSearchFilter'))});
     }else{
-      return Clients.find({$or:[
+      return Sponsors.find({$or:[
           {name: {
-            $regex: Session.get('clientsListSearchFilter'),
+            $regex: Session.get('sponsorsListSearchFilter'),
             $options: 'i'
           }},
-          {name: { $regex: Session.get('clientsListSearchFilter'), $options: 'i' }},
-          {description: { $regex: Session.get('clientsListSearchFilter'), $options: 'i' }},
-          {owner: { $regex: Session.get('clientsListSearchFilter'), $options: 'i' }}
+          {name: { $regex: Session.get('sponsorsListSearchFilter'), $options: 'i' }},
+          {description: { $regex: Session.get('sponsorsListSearchFilter'), $options: 'i' }},
+          {owner: { $regex: Session.get('sponsorsListSearchFilter'), $options: 'i' }}
         ]},{
-          limit: Session.get('clientsListTableLimit'),
-          skip: Session.get('clientsListSkipCount'),
+          limit: Session.get('sponsorsListTableLimit'),
+          skip: Session.get('sponsorsListSkipCount'),
           sort: {name: 1}
         });
 
     }
-    //return Clients.find({},{sort: {_id: -1}});
+    //return Sponsors.find({},{sort: {_id: -1}});
   },
   rendered: function(){
-    $(this.find('#clientsTable')).tablesorter();
+    $(this.find('#sponsorsTable')).tablesorter();
 
     Deps.autorun(function(){
       setTimeout(function(){
-        $("#clientsTable").trigger("update");
+        $("#sponsorsTable").trigger("update");
       }, 200);
     });
   }
 });
 
 
-Template.clientsListPage.events({
-  'click .clientListItem': function () {
-    Session.set('selectedClientId', {
+Template.sponsorsListPage.events({
+  'click .sponsorListItem': function () {
+    Session.set('selectedSponsorId', {
       _id: this._id,
       name: this.name
     });
-    Router.go('/client/' + this._id);
+    Router.go('/sponsor/' + this._id);
   },
-  'keyup #clientsSearchInput':function(){
-    Session.set('clientsListSearchFilter', $('#clientsSearchInput').val());
+  'keyup #sponsorsSearchInput':function(){
+    Session.set('sponsorsListSearchFilter', $('#sponsorsSearchInput').val());
   },
-  'click #createClientButton':function(){
-    Router.go('/newclient');
+  'click #createSponsorButton':function(){
+    Router.go('/newsponsor');
     //alert('click');
   }
 });
@@ -90,7 +90,7 @@ Template.clientsListPage.events({
 
 
 
-Template.clientListItem.getId = function(){
+Template.sponsorListItem.getId = function(){
   if(this._id){
     if(this._id._str){
       return this._id._str;
@@ -103,7 +103,7 @@ Template.clientListItem.getId = function(){
 };
 
 // sorry, this has a lot of double negatives
-Template.clientsListPage.isCrudPattern = function(){
+Template.sponsorsListPage.isCrudPattern = function(){
   if(Session.get('modalReturnRoute')){
     return false;
   }else{

@@ -1,31 +1,31 @@
-<template name="clientsRecordPage">
-  <div id="clientsRecordPage" class="page">
+<template name="sponsorsRecordPage">
+  <div id="sponsorsRecordPage" class="page">
     <div class="hidden">{{resized}}</div>
 
     <div class="container">
-      {{#with clientRecord }}
+      {{#with sponsorRecord }}
       <div id="pad-wrapper">
         <div class="row">
           <div class="col-md-12">
             <h2 class="pull-left">
-              {{ getClientName }}
+              {{ getSponsorName }}
             </h2>
 
 <!--             {{#if isAdmin}}
             <div class="btn-group pull-right">
               <button id="selectAsEmployerButton" class="medium btn btn-success">Select Employer</button>
-              <button id="editClientButton" class="medium btn btn-warning">Edit Client</button>
-              <button id="deleteClientButton" class="medium btn btn-danger">Delete</button>
+              <button id="editSponsorButton" class="medium btn btn-warning">Edit Sponsor</button>
+              <button id="deleteSponsorButton" class="medium btn btn-danger">Delete</button>
             </div>
             {{else}}
             <button id="selectAsEmployerButton" class="medium btn btn-success">Select Employer</button>
-            <button id="editClientButton" class="medium btn btn-warning">Edit</button>
+            <button id="editSponsorButton" class="medium btn btn-warning">Edit</button>
             {{/if}} -->
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <h4>Client Id:  {{ _id }}</h4>
+            <h4>Sponsor Id:  {{ _id }}</h4>
           </div>
         </div>
         <hr>
@@ -35,40 +35,40 @@
           <div class="col col-md-12">
             <div class="col col-md-6">
               <div class="field-box">
-                <label for="clientNameInput" class="control-label">Name</label>
-                <input id="clientNameInput" type="text" class="form-control inline-input" placeholder="..." value="{{name}}" readonly>
+                <label for="sponsorNameInput" class="control-label">Name</label>
+                <input id="sponsorNameInput" type="text" class="form-control inline-input" placeholder="..." value="{{name}}" readonly>
               </div>
 
               <div class="field-box">
-                <label for="clientDescriptionInput" class="control-label">Description</label>
-                <input id="clientDescriptionInput" type="text" class="form-control inline-input" placeholder="..." value="{{description}}" readonly>
+                <label for="sponsorDescriptionInput" class="control-label">Description</label>
+                <input id="sponsorDescriptionInput" type="text" class="form-control inline-input" placeholder="..." value="{{description}}" readonly>
               </div>
 
               <div class="field-box">
-                <label for="clientUrlInput" class="control-label">Url</label>
-                <input id="clientUrlInput" type="text" class="form-control inline-input" placeholder="..." value="{{url}}" readonly>
+                <label for="sponsorUrlInput" class="control-label">Url</label>
+                <input id="sponsorUrlInput" type="text" class="form-control inline-input" placeholder="..." value="{{url}}" readonly>
               </div>
 
             </div>
             <div class="col col-md-6">
 
               <div class="left-column col col-md-6 field-box">
-                <label for="clientOwnerInput" >Owner</label>
-                <input id="clientOwnerInput" type="text" class="form-control" placeholder="..." value="{{ owner }}" readonly>
+                <label for="sponsorOwnerInput" >Owner</label>
+                <input id="sponsorOwnerInput" type="text" class="form-control" placeholder="..." value="{{ owner }}" readonly>
               </div>
               <div class="right-column col col-md-6 field-box">
-                <label for="clientOwnerIdInput" >Owner ID</label>
-                <input id="clientOwnerIdInput" type="text" class="form-control" placeholder="..." value="{{ owner_id }}" readonly>
+                <label for="sponsorOwnerIdInput" >Owner ID</label>
+                <input id="sponsorOwnerIdInput" type="text" class="form-control" placeholder="..." value="{{ owner_id }}" readonly>
               </div>
 
 
               <div class="left-column col col-md-6 field-box">
-                <label for="clientCreatorInput" >Creator</label>
-                <input id="clientCreatorInput" type="text" class="form-control" placeholder="..." value="{{ creator }}" readonly>
+                <label for="sponsorCreatorInput" >Creator</label>
+                <input id="sponsorCreatorInput" type="text" class="form-control" placeholder="..." value="{{ creator }}" readonly>
               </div>
               <div class="right-column col col-md-6 field-box">
-                <label for="clientCreatorIdInput" >Creator ID</label>
-                <input id="clientCreatorIdInput" type="text" class="form-control" placeholder="..." value="{{ creator_id }}" readonly>
+                <label for="sponsorCreatorIdInput" >Creator ID</label>
+                <input id="sponsorCreatorIdInput" type="text" class="form-control" placeholder="..." value="{{ creator_id }}" readonly>
               </div>
             </div>
           </div>

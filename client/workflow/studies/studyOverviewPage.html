@@ -15,16 +15,33 @@
               </div>
             </div>
             <div class="panel-body">
-              <ul class="nav nav-tabs" role="tablist">
-                {{#each formsList}}
-                  <li class="tab"><a role="tab" data-toggle="tab">{{formName}}</a></li>
+              {{#if userHasBeenSelected}}
+                <ul class="nav nav-tabs" role="tablist">
+                  {{#each formsList}}
+                    <li class="tab"><a role="tab" data-toggle="tab">{{formName}}</a></li>
+                  {{/each}}
+                </ul>
+                <br>
+                {{#each formSchema}}
+                  {{> formBlockPreview }}
                 {{/each}}
-              </ul>
-              <br>
-              {{#each formSchema}}
-                {{> formBlockPreview }}
-              {{/each}}
-
+              {{else}}
+                <div class="row">
+                  <div class="col col-md-6 col-md-offset-3">
+                    <h2 class="fullwidth centered">Select Subject</h2>
+                    <input id="subjectSearchInput" type="text" class="fullwidth form-control" placeholder="Jane Doe">
+                    <br>
+                    <ul id="subjectsResultList" class="list-group">
+                      {{#each resultsList}}
+                        <a class="list-group-item" tabindex="{{getTabIndex}}">
+                          <h4 class="list-group-item-heading">{{ name }}</h4>
+                          <h6>{{_id}}</h6>
+                        </a>
+                      {{/each}}
+                    </ul>
+                  </div>
+                </div>
+              {{/if}}
             </div>
             <div class="panel-footer">
               <a>Save (Not Implemented Yet)</a>

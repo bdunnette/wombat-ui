@@ -23,3 +23,6 @@ selenium-nightwatch
 moment
 blaze-layout
 ui
+
+clinical-ui-sidebars
+clinical-ui-helpers

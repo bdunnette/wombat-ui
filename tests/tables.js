@@ -48,9 +48,9 @@ module.exports = {
       .verify.elementPresent("#builderPage")
 
       // clients
-      .click("#clientsLink")
+      .click("#sponsorsLink")
       .pause(500)
-      .verify.elementPresent("#clientsListPage")
+      .verify.elementPresent("#sponsorsListPage")
 
       // users
       .click("#usersLink")

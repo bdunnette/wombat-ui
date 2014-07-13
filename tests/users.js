@@ -127,7 +127,7 @@ module.exports = {
       .verify.visible('#profileEmailLabel')
       .verify.visible('#profileNameLabel')
       .verify.visible('#profileTitleLabel')
-      .verify.visible('#findClientButton')
+      .verify.visible('#findSponsorButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarLabel')
       .verify.visible('#profilePhoneLabel')
@@ -141,7 +141,7 @@ module.exports = {
       .verify.visible('#profileEmailInput')
       .verify.visible('#profileNameInput')
       .verify.visible('#profileTitleInput')
-      .verify.visible('#findClientButton')
+      .verify.visible('#findSponsorButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarInput')
       .verify.visible('#profilePhoneInput')
@@ -164,7 +164,7 @@ module.exports = {
       .verify.containsText('#profileZipInput', "")
 
       .pause(500)
-      .verify.containsText('#findClientButton', "No organization set in profile.")
+      .verify.containsText('#findSponsorButton', "No organization set in profile.")
       .verify.containsText('#findRoleButton', "No role set.")
 
 

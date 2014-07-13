@@ -22,8 +22,8 @@ Meteor.methods({
       'profile.name': input.profile.name,
       'profile.title': input.profile.title,
 
-      'profile.client': input.profile.client,
-      'profile.client_id': input.profile.client_id,
+      'profile.sponsor': input.profile.sponsor,
+      'profile.sponsor_id': input.profile.sponsor_id,
 
       'profile.avatar': input.profile.avatar,
       'profile.phone': input.profile.phone,

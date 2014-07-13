@@ -1,5 +1,5 @@
 Session.setDefault('selectedCommentId', false);
-Session.setDefault('selectedClient', {_id: "---", name: "---"});
+Session.setDefault('selectedSponsor', {_id: "---", name: "---"});
 Session.setDefault('isDeletingFormFromComment', false);
 
 
@@ -48,27 +48,27 @@ Template.commentsEditPage.events({
     console.log('deleteCommentButton.id', this._id);
     if(confirm('Are you sure you want to delete this record?')){
       Comments.remove({_id: this._id});
-      Session.set('selectedClient', {_id: "---", name: "---"});
+      Session.set('selectedSponsor', {_id: "---", name: "---"});
       Router.go('/comments');
     }
   },
-  'click #findCommentClientButton':function(){
+  'click #findCommentSponsorButton':function(){
     var self = this;
     //console.log('this.id', this._id);
     //if(Wombat.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', Meteor.userId());
 
-      $('#clientSearchModal').modal("show");
+      $('#sponsorSearchModal').modal("show");
 
-      $('#clientSearchModal').on('hidden.bs.modal', function (e) {
-        //Session.get('selectedClient');
+      $('#sponsorSearchModal').on('hidden.bs.modal', function (e) {
+        //Session.get('selectedSponsor');
 
 
-        //Session.set('selectedClient', null);
+        //Session.set('selectedSponsor', null);
       });
 
     //}else{
-    //  Session.set('promptTitle', 'User Not Assigned to a Client');
+    //  Session.set('promptTitle', 'User Not Assigned to a Sponsor');
     //  Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
     //  $('#promptModal').modal("show");
     //}

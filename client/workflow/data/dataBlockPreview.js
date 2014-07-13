@@ -10,6 +10,27 @@ Template.dataBlockPreview.events({
 
 
 Template.dataBlockPreview.helpers({
+  isSpacer: function(){
+    if(this.elementType === "spacer"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  isTextBlock: function(){
+    if(this.elementType === "plaintext"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  isRadioBlock: function(){
+    if(this.elementType === "radio"){
+      return true;
+    }else{
+      return false;
+    }
+  },
   isInput: function(){
     if(this.elementType === "input"){
       return true;
@@ -74,7 +95,7 @@ Template.dataBlockPreview.helpers({
     }
   },
   getLabelText: function(){
-    var resultString = "Q: ";
+    var resultString = "";
 
     var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
     //console.log('dataRecord', dataRecord);
@@ -101,11 +122,93 @@ Template.dataBlockPreview.helpers({
     }
   },
   getInputValue: function(){
-
     var dataRecord = Data.findOne({_id: Session.get('currentDataRecord')});
-    //console.log('getInputValue: dataRecord', dataRecord);
-
-
     return dataRecord.data[this._id];
+  },
+
+  getValueActive1: function(){
+    if(this.elementType === "radio"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "1"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+    }else{
+      return "btn-default";
+    }
+  },
+  getValueActive2: function(){
+    if(this.elementType === "radio"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "2"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+    }else{
+      return "btn-default";
+    }
+  },
+  getValueActive3: function(){
+    if(this.elementType === "radio"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "3"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+    }else{
+      return "btn-default";
+    }
+  },
+  getValueActive4: function(){
+    if(this.elementType === "radio"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "4"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+    }else{
+      return "btn-default";
+    }
+  },
+  getValueActive5: function(){
+    if(this.elementType === "radio"){
+      var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
+      console.log('getInputValue: dataRecord', dataRecord);
+      console.log('this._id', this._id);
+
+      if(dataRecord){
+        if(dataRecord.data[this._id] === "5"){
+          return "btn-info";
+        }else{
+          return "btn-default";
+        }
+      }
+    }else{
+      return "btn-default";
+    }
   }
 });

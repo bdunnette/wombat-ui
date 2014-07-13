@@ -1,28 +1,26 @@
-Session.setDefault('clientSearchFilter', '');
-Session.setDefault('selectedClient', null);
+Session.setDefault('sponsorSearchFilter', '');
+Session.setDefault('selectedSponsor', null);
 
-Template.clientSearchModal.clientList = function(){
-  return Clients.find({name: {
-    $regex: Session.get('clientSearchFilter'),
+Template.sponsorSearchModal.sponsorList = function(){
+  return Sponsors.find({name: {
+    $regex: Session.get('sponsorSearchFilter'),
     $options: 'i',
-    $ne: 'Default Client'
+    $ne: 'Default Sponsor'
   }});
 };
 
-Template.clientSearchModal.getClientCount = function(){
-  return Clients.find().count();
+
+Template.sponsorSearchModal.getSearchTerm = function(){
+  return Session.get('sponsorSearchFilter');
 };
-Template.clientSearchModal.getSearchTerm = function(){
-  return Session.get('clientSearchFilter');
-};
-Template.clientSearchModal.events({
+Template.sponsorSearchModal.events({
   'click .list-group-item':function(){
-    Session.set('selectedClient', {
+    Session.set('selectedSponsor', {
       _id: this._id,
       name: this.name
     });
   },
-  'keyup #clientSearchModalInput':function(){
-    Session.set('clientSearchFilter', $('#clientSearchModalInput').val());
+  'keyup #sponsorSearchModalInput':function(){
+    Session.set('sponsorSearchFilter', $('#sponsorSearchModalInput').val());
   }
 });

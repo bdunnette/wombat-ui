@@ -20,14 +20,13 @@
         <thead>
           <tr>
             <!-- <th>Data ID</th> -->
-            <th>Study/Form Name</th>
             <th>Created At</th>
-            <!-- <th>Schema ID</th> -->
+            <th>Study/Form Name</th>
+            <th>Subject Name</th>
             <th class="centered">Comments</th>
             <th class="centered">Approved</th>
             <th class="centered">Locked</th>
-            <th>Study/Form Name</th>
-            <th>Deleted?</th>
+            <th>Active</th>
           </tr>
         </thead>
         <tbody>
@@ -55,12 +54,12 @@
   <tr class="dataRow">
     <!-- <td>{{ _id }}</td> -->
     <!-- <td>{{ schema_id }}</td> -->
-    <td>{{ formName }}</td>
     <td>{{ getCreatedAt }}</td>
+    <td>{{ formName }}</td>
+    <td>{{ getSubjectName }}</td>
     <td class="centered"><i class="fa {{ getCommentsIcon }}"></i></td>
     <td class="centered"><i class="fa {{ getApprovalIcon }}"></i></td>
     <td class="centered"><i class="fa {{ getLockedIcon }}"></i></td>
-    <td>{{ formName }}</td>
-    <td>{{ deleted }}</td>
+    <td>{{ active }}</td>
   </tr>
 </template>

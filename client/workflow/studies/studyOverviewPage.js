@@ -14,6 +14,9 @@ Router.map(function(){
   });
 });
 Template.studyOverviewPage.events({
+  'click .list-group-item':function(){
+    Session.set('selectedSubject', this);
+  },
   'click .tab':function(){
     Session.set('visibleForm', this._id);
   },
@@ -65,6 +68,16 @@ Template.studyOverviewPage.events({
 });
 
 Template.studyOverviewPage.helpers({
+  resultsList: function(){
+    return Subjects.find();
+  },
+  userHasBeenSelected: function(){
+    if(Session.get('selectedSubject')){
+      return true;
+    }else{
+      return false;
+    }
+  },
   formSchema: function(){
     var form = Forms.findOne(Session.get('visibleForm'));
     if(form){

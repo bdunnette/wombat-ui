@@ -1,27 +1,27 @@
-Session.setDefault('selectedClientId', false);
+Session.setDefault('selectedSponsorId', false);
 
 
 Router.map(function(){
-  this.route('newClientRoute', {
-    path: '/newclient',
-    template: 'clientsEditPage',
+  this.route('newSponsorRoute', {
+    path: '/newsponsor',
+    template: 'sponsorsEditPage',
     onBeforeAction: function(){
-      setPageTitle("New Client");
+      setPageTitle("New Sponsor");
     }
   });
 
 
-  this.route('clientsEditRoute', {
-    path: '/editclient/:id',
-    template: 'clientsEditPage',
+  this.route('sponsorsEditRoute', {
+    path: '/editsponsor/:id',
+    template: 'sponsorsEditPage',
     onBeforeAction: function(){
-      setPageTitle("Edit Client");
+      setPageTitle("Edit Sponsor");
     },
     waitOn: function(){
-      return Meteor.subscribe('clients');
+      return Meteor.subscribe('sponsors');
     },
     data: function () {
-      return Clients.findOne({_id: this.params.id });
+      return Sponsors.findOne({_id: this.params.id });
     }
   });
 });
@@ -30,10 +30,10 @@ Router.map(function(){
 //------------------------------------------------
 // DATA LAYER
 
-Template.clientsEditPage.selectedClient = function(){
-  console.log(Session.get('selectedClientId'));
-  if(Session.get('selectedClientId')._id){
-    return Clients.findOne({_id: Session.get('selectedClientId')._id });
+Template.sponsorsEditPage.selectedSponsor = function(){
+  console.log(Session.get('selectedSponsorId'));
+  if(Session.get('selectedSponsorId')._id){
+    return Sponsors.findOne({_id: Session.get('selectedSponsorId')._id });
   }else{
     return {};
   }
@@ -42,24 +42,24 @@ Template.clientsEditPage.selectedClient = function(){
 //------------------------------------------------
 // EVENTS
 
-Template.clientsEditPage.events({
-  'click #saveClientButton':function(){
-    console.count('click #saveClientButton');
+Template.sponsorsEditPage.events({
+  'click #saveSponsorButton':function(){
+    console.count('click #saveSponsorButton');
     if(this._id){
       console.count('this._id: ' + this._id);
 
       var formObject = {
         _id: this._id,
-        name: $('#clientNameInput').val(),
-        description: $('#clientDescriptionInput').val(),
-        url: $('#clientUrlInput').val(),
+        name: $('#sponsorNameInput').val(),
+        description: $('#sponsorDescriptionInput').val(),
+        url: $('#sponsorUrlInput').val(),
         createdAt: new Date(),
         owner: Meteor.user().profile.name,
         owner_id: Meteor.userId()
       };
 
-      console.log('Clients updated.  Now trying to rename other collections.')
-      Meteor.call('renameClient', formObject, function(error, result){
+      console.log('Sponsors updated.  Now trying to rename other collections.')
+      Meteor.call('renameSponsor', formObject, function(error, result){
         if(error){
           console.error(error);
         }
@@ -69,11 +69,11 @@ Template.clientsEditPage.events({
       });
 
     }else{
-      var recordId = Clients.insert({
-        name: $('#clientNameInput').val(),
-        description: $('#clientDescriptionInput').val(),
-        url: $('#clientUrlInput').val(),
-        invite_code: $('#clientInviteCodeInput').val(),
+      var recordId = Sponsors.insert({
+        name: $('#sponsorNameInput').val(),
+        description: $('#sponsorDescriptionInput').val(),
+        url: $('#sponsorUrlInput').val(),
+        invite_code: $('#sponsorInviteCodeInput').val(),
         owner: Meteor.user().profile.name,
         owner_id: Meteor.userId(),
         creator: Meteor.user().profile.name,
@@ -84,14 +84,14 @@ Template.clientsEditPage.events({
 
 
     }
-    Router.go('/clients/');
+    Router.go('/sponsors/');
   }
 });
 
-Template.clientsEditPage.getClientName = function(){
+Template.sponsorsEditPage.getSponsorName = function(){
   if(this.name){
     return this.name;
   }else{
-    return "New Client";
+    return "New Sponsor";
   }
 };

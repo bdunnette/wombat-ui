@@ -1,15 +1,21 @@
 <template name="formBlock">
 
   {{#if isSpacer }}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
-<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
+    <div id="item-{{_id}}" class="item {{isSelected}} spacerBlock">
       <hr>
     </div>
   {{/if}}
 
+  {{#if isTextBlock }}
+    <div id="item-{{_id}}" class="item {{isSelected}} textBlock">
+      <div class="padded">
+        <p id="input-{{_id}}">{{getLabelText}}</p>
+      </div>
+    </div>
+  {{/if}}
+
   {{#if isSectionTitle }}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
-<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
+    <div id="item-{{_id}}" class="item {{isSelected}} sectionTitleBlock">
       <hr>
       <h4>{{getLabelText}}</h4>
     </div>
@@ -18,7 +24,6 @@
   {{#if isInput}}
     <div id="item-{{_id}}" class="item {{isSelected}}">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <input id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" value="{{getInputValue}}">
       </div>
@@ -26,9 +31,8 @@
   {{/if}}
 
   {{#if isTextarea}}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
+    <div id="item-{{_id}}" class="item {{isSelected}} textareaBlock">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}">{{getInputValue}}</textarea>
       </div>
@@ -36,7 +40,7 @@
   {{/if}}
 
   {{#if isYesNoBlock}}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
+    <div id="item-{{_id}}" class="item {{isSelected}} yesNoBlock">
       <div class="padded row">
         <div class="col col-md-10">
           <p class="yesNoText">{{getLabelText}}</p>
@@ -47,15 +51,12 @@
             <button type="button" class="btn btn-default no-button" readonly>No</button>
           </div>
         </div>
-<!--         <div class="col col-md-1">
-          <button type="button" class="close"><i class="fa fa-times"></i></button>
-        </div> -->
       </div>
     </div>
   {{/if}}
 
   {{#if isDateTimeBlock}}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
+    <div id="item-{{_id}}" class="item {{isSelected}} dateTimeBlock">
       <label class="dateTimeText" for="input-{{_id}}">{{getLabelText}}</label>
       <div class="padded">
         <input id="input-{{_id}}" class="form-control" type="date" value="{{getInputValue}}">
@@ -64,18 +65,18 @@
   {{/if}}
 
   {{#if isRadioBlock}}
-    <div id="item-{{_id}}" class="item {{isSelected}}">
+    <div id="item-{{_id}}" class="item {{isSelected}} radioBlock">
       <div class="padded row">
         <div class="col col-md-6">
           <p class="radioText">{{getLabelText}}</p>
         </div>
         <div class="col col-md-6">
           <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default yes-button" readonly>1</button>
-            <button type="button" class="btn btn-default no-button" readonly>2</button>
-            <button type="button" class="btn btn-default no-button" readonly>3</button>
-            <button type="button" class="btn btn-default no-button" readonly>4</button>
-            <button type="button" class="btn btn-default no-button" readonly>5</button>
+            <button type="button" class="btn btn-default yes-button" readonly>{{getValue1}}</button>
+            <button type="button" class="btn btn-default no-button" readonly>{{getValue2}}</button>
+            <button type="button" class="btn btn-default no-button" readonly>{{getValue3}}</button>
+            <button type="button" class="btn btn-default no-button" readonly>{{getValue4}}</button>
+            <button type="button" class="btn btn-default no-button" readonly>{{getValue5}}</button>
           </div>
         </div>
       </div>

@@ -13,13 +13,3 @@ Meteor.startup(function(){
 
   bowser = BrowserObserver.init();
 });
-
-
-setWallpaper = function(){
-  console.log('setting wallpaper...');
-  $('html').addClass('landscapeLogin');
-};
-removeWallpaper = function(){
-  console.log('removing wallpaper...');
-  $('html').removeClass('landscapeLogin');
-};

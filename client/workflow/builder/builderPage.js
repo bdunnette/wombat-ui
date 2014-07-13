@@ -45,6 +45,26 @@ Template.builderPage.events({
     Session.set('selectedBuilderTab','editFieldTab');
     Session.set('selectedBlockItem', this._id);
     console.log('selectedBuilderTab', Session.get('selectedBuilderTab'));
+
+    if(this.block_type === "colorInputBlock"){
+      Session.set('selectedBlockType', 'colorInputBlock');
+    }else if(this.block_type === "numericInputBlock"){
+      Session.set('selectedBlockType', 'numericInputBlock');
+    }else if(this.block_type === "textareaInputBlock"){
+      Session.set('selectedBlockType', 'textareaInputBlock');
+    }else if(this.block_type === "textInputBlock"){
+      Session.set('selectedBlockType', 'textInputBlock');
+    }else if(this.block_type === "plainTextBlock"){
+      Session.set('selectedBlockType', 'plainTextBlock');
+    }else if(this.block_type === "spacerBlock"){
+      Session.set('selectedBlockType', 'spacerBlock');
+    }else if(this.block_type === "yesNoInputBlock"){
+      Session.set('selectedBlockType', 'yesNoInputBlock');
+    }else if(this.block_type === "radioInputBlock"){
+      Session.set('selectedBlockType', 'radioInputBlock');
+    }else if(this.block_type === "dateTimeInputBlock"){
+      Session.set('selectedBlockType', 'dateTimeInputBlock');
+    }
   },
   'click .yes-button':function(){
     Session.set('selectedBlockItem', this._id);
@@ -115,7 +135,7 @@ Template.builderPage.helpers({
 });
 
 
-addBlockToForm = function(){
+addBlockToForm = function(seed){
   Session.set('selectedBuilderTab','addNewFieldTab');
 
   var inputType = "text";
@@ -123,35 +143,68 @@ addBlockToForm = function(){
   var labelText = "";
   var text = "";
 
+  if(seed){
+    var defaultValue1 = seed.defaultValue1;
+    var defaultValue2 = seed.defaultValue2;
+    var defaultValue3 = seed.defaultValue3;
+    var defaultValue4 = seed.defaultValue4;
+    var defaultValue5 = seed.defaultValue5;
+  }else{
+    var defaultValue1 = "1";
+    var defaultValue2 = "2";
+    var defaultValue3 = "3";
+    var defaultValue4 = "4";
+    var defaultValue5 = "4";
+  }
+
   if(Session.get('movedElementId') === "colorInputBlock"){
     inputType = "color";
     elementType = "color";
+    defaultValue = "";
   }else if(Session.get('movedElementId') === "numericInputBlock"){
     labelText = "Q: Lorem numberum...";
     inputType = "number";
     elementType = "input";
+    defaultValue = "";
   }else if(Session.get('movedElementId') === "textareaInputBlock"){
     labelText = "Q: Lorem textum...";
     elementType = "textarea";
+    defaultValue = "";
   }else if(Session.get('movedElementId') === "textInputBlock"){
     labelText = "Q: Lorem textae...";
     elementType = "input";
+    defaultValue = "";
     //inputValue = "ipsum dolar sit amet...";
+  }else if(Session.get('movedElementId') === "plainTextBlock"){
+    labelText = "Lorem ipsum dolar sit amet...";
+    elementType = "plaintext";
+    defaultValue = "";
+    inputValue = "";
   }else if(Session.get('movedElementId') === "spacerBlock"){
     inputType = "spacer";
-    elementType = "spacer"
+    elementType = "spacer";
+    defaultValue = "";
   }else if(Session.get('movedElementId') === "yesNoInputBlock"){
     elementType = "yesno";
     inputType = "yesno";
     labelText = "Lorum yesno...";
+    defaultValue = "";
   }else if(Session.get('movedElementId') === "radioInputBlock"){
     elementType = "radio";
     inputType = "radio";
     labelText = "Lorum datum...";
+    defaultValue = "";
+    defaultValue1 = defaultValue1;
+    defaultValue2 = defaultValue2;
+    defaultValue3 = defaultValue3;
+    defaultValue4 = defaultValue4;
+    defaultValue5 = defaultValue5;
+
   }else if(Session.get('movedElementId') === "dateTimeInputBlock"){
     labelText = "Lorum datum...";
     inputType = "datetime";
     elementType = "datetime";
+    defaultValue = "";
   }
 
   var lastRank = 0;
@@ -165,12 +218,19 @@ addBlockToForm = function(){
     block_type: Session.get('movedElementId'),
     rank: lastRank,
     inputType: inputType,
-    inputValue: '',
+    inputValue: defaultValue,
     elementType: elementType,
     labelText: labelText,
     text: text,
     rank: Items.find().count() + 1
   };
+  if(Session.get('movedElementId') === "radioInputBlock"){
+    newObject.defaultValue1 = defaultValue1;
+    newObject.defaultValue2 = defaultValue2;
+    newObject.defaultValue3 = defaultValue3;
+    newObject.defaultValue4 = defaultValue4;
+    newObject.defaultValue5 = defaultValue5;
+  }
   console.log('newObject', newObject);
 
   return Items.insert(newObject);

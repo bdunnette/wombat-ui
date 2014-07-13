@@ -3,7 +3,7 @@ Deps.autorun(function(){
   Meteor.subscribe('forms');
   Meteor.subscribe('data');
   Meteor.subscribe('studies');
-  Meteor.subscribe('clients');
+  Meteor.subscribe('sponsors');
   Meteor.subscribe('subjects');
   Meteor.subscribe('comments');
   Meteor.subscribe('usersDirectory');

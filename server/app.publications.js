@@ -11,8 +11,8 @@ Meteor.publish('data', function(){
 Meteor.publish('studies', function(){
   return Studies.find();
 });
-Meteor.publish('clients', function(){
-  return Clients.find();
+Meteor.publish('sponsors', function(){
+  return Sponsors.find();
 });
 Meteor.publish('subjects', function(){
   return Subjects.find();
@@ -27,4 +27,4 @@ Meteor.publish('usersDirectory', function(){
 
 Meteor.publish(null, function (){
   return Meteor.roles.find();
-})
+});

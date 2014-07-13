@@ -10,7 +10,7 @@
             </div>
             <div class="panel-body wombat-orange">
               {{#each studiesList}}
-                <a href="/study/home/{{_id}}">{{ name }}</a>
+                <a class="activeStudy" href="/study/home/{{_id}}">{{ name }}</a>
               {{/each}}
             </div>
           </div>
@@ -38,9 +38,6 @@
             <div class="panel-image">
                 <img id="formBuilderTileImage" src="/images/home/formbuilder.png" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-                <a id="formBuilderTileLink" href="/builder">Design</a>
-            </div> -->
           </div>
         </div>
 
@@ -52,9 +49,6 @@
             <div class="panel-image">
                 <img id="savedFormsTileImage" src="/images/home/forms-square.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-              <a id="savedFormsTileLink" href="/forms">Forms</a>
-            </div> -->
           </div>
         </div>
 
@@ -67,23 +61,17 @@
             <div class="panel-image">
                 <img id="collectedDataTileImage" src="/images/home/wordcloud.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-              <a id="collectedDataTileLink" href="/data">Data</a>
-            </div> -->
           </div>
         </div>
 
         <div class="col col-xs-3">
-          <div id="commentsTile" class="panel tile">
+          <div id="studiesTile" class="panel tile">
             <div class="panel-heading heading-wombat">
-              Comments
+              Studies
             </div>
             <div class="panel-image">
-                <img id="commentsTileImage" src="/images/home/comments.jpg" class="panel-image-preview" />
+                <img id="studiesTileImage" src="/images/home/clinical-studies.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-              <a id="collectedDataTileLink" href="/data">Data</a>
-            </div> -->
           </div>
         </div>
 
@@ -93,59 +81,47 @@
       <div class="row">
 
         <div class="col col-xs-3">
-          <div id="formBuilderTile" class="panel panel-default tile">
+          <div id="sponsorsTile" class="panel panel-default tile">
             <div class="panel-heading">
               Sponsors
             </div>
             <div class="panel-image">
-                <img id="formBuilderTileImage" src="/images/placeholder-240x240.gif" class="panel-image-preview" />
+                <img id="sponsorsTileImage" src="/images/home/sponsors.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-                <a id="formBuilderTileLink" href="/builder">Design</a>
-            </div> -->
           </div>
         </div>
 
         <div class="col col-xs-3">
-          <div id="savedFormsTile" class="panel panel-default tile">
+          <div id="usersTile" class="panel panel-default tile">
             <div class="panel-heading">
               Users
             </div>
             <div class="panel-image">
-                <img id="savedFormsTileImage" src="/images/placeholder-240x240.gif" class="panel-image-preview" />
+                <img id="usersTileImage" src="/images/home/users.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-              <a id="savedFormsTileLink" href="/forms">Forms</a>
-            </div> -->
           </div>
         </div>
 
 
         <div class="col col-xs-3">
-          <div id="collectedDataTile" class="panel panel-default tile">
+          <div id="subjectsTile" class="panel panel-default tile">
             <div class="panel-heading">
               Subjects
             </div>
             <div class="panel-image">
-                <img id="collectedDataTileImage" src="/images/placeholder-240x240.gif" class="panel-image-preview" />
+                <img id="subjectsTileImage" src="/images/home/subjects.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-              <a id="collectedDataTileLink" href="/data">Data</a>
-            </div> -->
           </div>
         </div>
 
         <div class="col col-xs-3">
-          <div id="commentsTile" class="panel panel-default tile">
+          <div id="auditTile" class="panel panel-default tile">
             <div class="panel-heading">
               Audit
             </div>
             <div class="panel-image">
-                <img id="commentsTileImage" src="/images/placeholder-240x240.gif" class="panel-image-preview" />
+                <img id="auditTileImage" src="/images/home/audit.jpg" class="panel-image-preview" />
             </div>
-            <!-- <div class="panel-footer text-center">
-              <a id="collectedDataTileLink" href="/data">Data</a>
-            </div> -->
           </div>
         </div>
 

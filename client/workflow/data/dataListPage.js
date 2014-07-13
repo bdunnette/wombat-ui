@@ -5,7 +5,7 @@ Session.setDefault('dataPaginationCount', 1);
 Session.setDefault('dataSelectedPagination', 0);
 Session.setDefault('dataSkipCount', 0);
 
-
+Session.setDefault('activeFilter', true);
 // ROUTING
 
 Router.map(function(){
@@ -43,15 +43,13 @@ Template.dataListPage.helpers({
       return Data.find({$or:[
         {_id: Session.get('dataSearchFilter')},
         {schema_id: Session.get('dataSearchFilter')}
-        ]});
+        ], active: Session.get('activeFilter')});
     }else{
       return Data.find({formName: {
         $regex: Session.get('dataSearchFilter'),
         $options: 'i'
-      }},{limit: Session.get('dataTableLimit'), skip: Session.get('dataSkipCount')});
+      }, active: Session.get('activeFilter')},{limit: Session.get('dataTableLimit'), skip: Session.get('dataSkipCount')});
     }
-
-
   },
   rendered: function(){
     $(this.find('#dataTable')).tablesorter();
@@ -154,6 +152,13 @@ Template.dataRowItem.events({
 });
 
 Template.dataRowItem.helpers({
+  getSubjectName: function(){
+    if(this.subjectName){
+      return this.subjectName;
+    }else{
+      return "---";
+    }
+  },
   getCommentsIcon: function(){
     var result = "";
 

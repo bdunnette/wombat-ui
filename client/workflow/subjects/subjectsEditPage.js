@@ -1,5 +1,5 @@
 Session.setDefault('selectedSubjectId', false);
-Session.setDefault('selectedClient', {_id: "---", name: "---"});
+Session.setDefault('selectedSponsor', {_id: "---", name: "---"});
 Session.setDefault('isDeletingFormFromSubject', false);
 
 
@@ -70,27 +70,27 @@ Template.subjectsEditPage.events({
     console.log('deleteSubjectButton.id', this._id);
     if(confirm('Are you sure you want to delete this record?')){
       Subjects.remove({_id: this._id});
-      Session.set('selectedClient', {_id: "---", name: "---"});
+      Session.set('selectedSponsor', {_id: "---", name: "---"});
       Router.go('/subjects');
     }
   },
-  'click #findSubjectClientButton':function(){
+  'click #findSubjectSponsorButton':function(){
     var self = this;
     //console.log('this.id', this._id);
     //if(Wombat.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', Meteor.userId());
 
-      $('#clientSearchModal').modal("show");
+      $('#sponsorSearchModal').modal("show");
 
-      $('#clientSearchModal').on('hidden.bs.modal', function (e) {
-        //Session.get('selectedClient');
+      $('#sponsorSearchModal').on('hidden.bs.modal', function (e) {
+        //Session.get('selectedSponsor');
 
 
-        //Session.set('selectedClient', null);
+        //Session.set('selectedSponsor', null);
       });
 
     //}else{
-    //  Session.set('promptTitle', 'User Not Assigned to a Client');
+    //  Session.set('promptTitle', 'User Not Assigned to a Sponsor');
     //  Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
     //  $('#promptModal').modal("show");
     //}
@@ -98,7 +98,7 @@ Template.subjectsEditPage.events({
   'click #saveSubjectButton':function(){
     console.count('click #saveSubjectButton');
 
-    var client = Session.get('selectedClient');
+    var sponsor = Session.get('selectedSponsor');
 
     var formObject = {
       name: $('#studyNameInput').val(),
@@ -107,8 +107,8 @@ Template.subjectsEditPage.events({
       createdAt: new Date(),
       owner: Meteor.user().profile.name,
       owner_id: Meteor.userId(),
-      client: client.name,
-      client_id: client._id
+      sponsor: sponsor.name,
+      sponsor_id: sponsor._id
     };
 
     if(this._id){
@@ -120,8 +120,8 @@ Template.subjectsEditPage.events({
         url: formObject.url,
         owner: formObject.owner,
         owner_id: formObject.owner_id,
-        client: formObject.client,
-        client_id: formObject.client_id
+        sponsor: formObject.sponsor,
+        sponsor_id: formObject.sponsor_id
       }});
       // console.log('Subjects updated.  Now trying to rename other collections.')
       // Meteor.call('renameSubject', formObject, function(error, result){
@@ -142,8 +142,8 @@ Template.subjectsEditPage.events({
         owner_id: formObject.owner_id,
         creator: Meteor.user().profile.name,
         creator_id: Meteor.userId(),
-        client: formObject.client,
-        client_id: formObject.client_id,
+        sponsor: formObject.sponsor,
+        sponsor_id: formObject.sponsor_id,
         forms: [],
         timestamp: new Date(),
         active: false
@@ -182,8 +182,8 @@ Template.subjectsEditPage.helpers({
       return [];
     }
   },
-  getSubjectClient: function(){
-    return Session.get('selectedClient').name;
+  getSubjectSponsor: function(){
+    return Session.get('selectedSponsor').name;
   },
   getSubjectName: function(){
     if(this.name){

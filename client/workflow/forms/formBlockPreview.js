@@ -3,6 +3,21 @@
 // but we want to be careful about the pattern
 
 Template.formBlockPreview.helpers({
+  isTextBlock: function(){
+    if(this.elementType === "plaintext"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  isRadioBlock: function(){
+    if(this.elementType === "radio"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+
   isInput: function(){
     if(this.elementType === "input"){
       return true;
@@ -31,6 +46,37 @@ Template.formBlockPreview.helpers({
       return false;
     }
   },
+  isSectionTitle: function(){
+    if(this.elementType === "section"){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  getLabelText: function(){
+    var resultString = "";
+    if(this.labelText){
+        return resultString + this.labelText;
+    }else{
+        return resultString;
+    }
+  },
+  getInputType: function(){
+    return this.inputType;
+  },
+  getInputPlaceholder: function(){
+    if(this.inputPlaceholder){
+      return this.inputPlaceholder;
+    }else{
+      return "...";
+    }
+  },
+  getInputValue: function(){
+    return this.inputValue;
+  },
+  getJson: function(){
+    return JSON.stringify(this);
+  },
   yesNoBlockYesValue: function(){
     if(Session.get('item-' + this._id + '-yesno')){
       if(Session.get('item-' + this._id + '-yesno') == 'yes'){
@@ -53,36 +99,62 @@ Template.formBlockPreview.helpers({
       return "btn-default";
     }
   },
-  isSectionTitle: function(){
-    if(this.elementType === "section"){
-      return true;
+
+  getValueActive1: function(){
+    if(Session.get('item-' + this._id + '-radio')){
+      if(Session.get('item-' + this._id + '-radio') == '1'){
+        return "btn-info";
+      }else{
+        return "btn-default";
+      }
     }else{
-      return false;
+      return "btn-default";
     }
   },
-  getLabelText: function(){
-    var resultString = "Q: ";
-    if(this.labelText){
-        return resultString + this.labelText;
+  getValueActive2: function(){
+    if(Session.get('item-' + this._id + '-radio')){
+      if(Session.get('item-' + this._id + '-radio') == '2'){
+        return "btn-info";
+      }else{
+        return "btn-default";
+      }
     }else{
-        return resultString;
+      return "btn-default";
     }
   },
-  getInputType: function(){
-    return this.inputType;
-  },
-  getInputPlaceholder: function(){
-    if(this.inputPlaceholder){
-      return this.inputPlaceholder;
+  getValueActive3: function(){
+    if(Session.get('item-' + this._id + '-radio')){
+      if(Session.get('item-' + this._id + '-radio') == '3'){
+        return "btn-info";
+      }else{
+        return "btn-default";
+      }
     }else{
-      return "...";
+      return "btn-default";
+    }
+
+  },
+  getValueActive4: function(){
+    if(Session.get('item-' + this._id + '-radio')){
+      if(Session.get('item-' + this._id + '-radio') == '4'){
+        return "btn-info";
+      }else{
+        return "btn-default";
+      }
+    }else{
+      return "btn-default";
     }
   },
-  getInputValue: function(){
-    return this.inputValue;
-  },
-  getJson: function(){
-    return JSON.stringify(this);
+  getValueActive5: function(){
+    if(Session.get('item-' + this._id + '-radio')){
+      if(Session.get('item-' + this._id + '-radio') == '5'){
+        return "btn-info";
+      }else{
+        return "btn-default";
+      }
+    }else{
+      return "btn-default";
+    }
   }
 });
 
@@ -90,13 +162,31 @@ Template.formBlockPreview.helpers({
 
 Template.formBlockPreview.events({
   'click .yes-button':function(){
-    //Session.set('selectedBlockItem', this._id);
     Session.set('item-' + this._id + '-yesno', 'yes');
-    // alert('yes: ' + this._id);
   },
   'click .no-button':function(){
-    //Session.set('selectedBlockItem', this._id);
     Session.set('item-' + this._id + '-yesno', 'no');
-    // alert('no: ' + this._id);
   },
+
+  'click .radio-1-button':function(){
+    //alert(this._id);
+    Session.set('item-' + this._id + '-radio', '1');
+  },
+  'click .radio-2-button':function(){
+    //alert(this._id);
+    Session.set('item-' + this._id + '-radio', '2');
+  },
+  'click .radio-3-button':function(){
+    //alert(this._id);
+    Session.set('item-' + this._id + '-radio', '3');
+  },
+  'click .radio-4-button':function(){
+    //alert(this._id);
+    Session.set('item-' + this._id + '-radio', '4');
+  },
+  'click .radio-5-button':function(){
+    //alert(this._id);
+    Session.set('item-' + this._id + '-radio', '5');
+  }
+
 });

@@ -1,5 +1,5 @@
 Session.setDefault('selectedStudyId', false);
-Session.setDefault('selectedClient', {_id: "---", name: "---"});
+Session.setDefault('selectedSponsor', {_id: "---", name: "---"});
 Session.setDefault('isDeletingFormFromStudy', false);
 
 
@@ -70,27 +70,27 @@ Template.studiesEditPage.events({
     console.log('deleteStudyButton.id', this._id);
     if(confirm('Are you sure you want to delete this record?')){
       Studies.remove({_id: this._id});
-      Session.set('selectedClient', {_id: "---", name: "---"});
+      Session.set('selectedSponsor', {_id: "---", name: "---"});
       Router.go('/studies');
     }
   },
-  'click #findStudyClientButton':function(){
+  'click #findStudySponsorButton':function(){
     var self = this;
     //console.log('this.id', this._id);
     //if(Wombat.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', Meteor.userId());
 
-      $('#clientSearchModal').modal("show");
+      $('#sponsorSearchModal').modal("show");
 
-      $('#clientSearchModal').on('hidden.bs.modal', function (e) {
-        //Session.get('selectedClient');
+      $('#sponsorSearchModal').on('hidden.bs.modal', function (e) {
+        //Session.get('selectedSponsor');
 
 
-        //Session.set('selectedClient', null);
+        //Session.set('selectedSponsor', null);
       });
 
     //}else{
-    //  Session.set('promptTitle', 'User Not Assigned to a Client');
+    //  Session.set('promptTitle', 'User Not Assigned to a Sponsor');
     //  Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
     //  $('#promptModal').modal("show");
     //}
@@ -98,7 +98,7 @@ Template.studiesEditPage.events({
   'click #saveStudyButton':function(){
     console.count('click #saveStudyButton');
 
-    var client = Session.get('selectedClient');
+    var sponsor = Session.get('selectedSponsor');
 
     var formObject = {
       name: $('#studyNameInput').val(),
@@ -107,8 +107,8 @@ Template.studiesEditPage.events({
       createdAt: new Date(),
       owner: Meteor.user().profile.name,
       owner_id: Meteor.userId(),
-      client: client.name,
-      client_id: client._id
+      sponsor: sponsor.name,
+      sponsor_id: sponsor._id
     };
 
     if(this._id){
@@ -120,8 +120,8 @@ Template.studiesEditPage.events({
         url: formObject.url,
         owner: formObject.owner,
         owner_id: formObject.owner_id,
-        client: formObject.client,
-        client_id: formObject.client_id
+        sponsor: formObject.sponsor,
+        sponsor_id: formObject.sponsor_id
       }});
       // console.log('Studies updated.  Now trying to rename other collections.')
       // Meteor.call('renameStudy', formObject, function(error, result){
@@ -142,8 +142,8 @@ Template.studiesEditPage.events({
         owner_id: formObject.owner_id,
         creator: Meteor.user().profile.name,
         creator_id: Meteor.userId(),
-        client: formObject.client,
-        client_id: formObject.client_id,
+        sponsor: formObject.sponsor,
+        sponsor_id: formObject.sponsor_id,
         forms: [],
         timestamp: new Date(),
         active: false
@@ -182,8 +182,8 @@ Template.studiesEditPage.helpers({
       return [];
     }
   },
-  getStudyClient: function(){
-    return Session.get('selectedClient').name;
+  getStudySponsor: function(){
+    return Session.get('selectedSponsor').name;
   },
   getStudyName: function(){
     if(this.name){

@@ -1,16 +1,16 @@
 <!-- set up the modal to start hidden and fade in and out -->
-<template name="clientSearchModal">
-  <div id="clientSearchModal" class="modal fade">
+<template name="sponsorSearchModal">
+  <div id="sponsorSearchModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Select Client</h4>
+          <h4>Select Sponsor</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="clientSearchModalInput" name="clientSearchModalInput" class="fullwidth form-control" placeholder="search..." value="{{getSearchTerm}}">
+          <input type="text" id="sponsorSearchModalInput" name="sponsorSearchModalInput" class="fullwidth form-control" placeholder="search..." value="{{getSearchTerm}}">
           <ul class="list-group">
-            {{#each clientList}}
-              {{>clientSearchModalItem}}
+            {{#each sponsorList}}
+              {{>sponsorSearchModalItem}}
             {{/each}}
           </ul>
         </div>
@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<template name="clientSearchModalItem">
+<template name="sponsorSearchModalItem">
   <li class="list-group-item" data-dismiss="modal">
     {{name}}
   </li>

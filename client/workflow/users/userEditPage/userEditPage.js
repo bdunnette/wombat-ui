@@ -4,7 +4,7 @@ Session.setDefault('modalReturnRoute', false);
 
 Session.setDefault('passwordConfirmed', false);
 Session.setDefault('selectedUser', false);
-Session.setDefault('selectedClientId', false);
+Session.setDefault('selectedSponsorId', false);
 Session.setDefault('functionPassing', null);
 
 Router.map(function(){
@@ -43,22 +43,22 @@ Router.map(function(){
 
 
 Template.userEditPage.events({
-  'click #findClientButton':function(){
+  'click #findSponsorButton':function(){
     var self = this;
     console.log('this.id', this._id);
     //if(Wombat.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', this._id);
 
-      $('#clientSearchModal').modal("show");
+      $('#sponsorSearchModal').modal("show");
 
-      $('#clientSearchModal').on('hidden.bs.modal', function (e) {
-        var employer = Session.get('selectedClient');
+      $('#sponsorSearchModal').on('hidden.bs.modal', function (e) {
+        var employer = Session.get('selectedSponsor');
 
         if(employer){
           employer.user_id = self._id;
           console.log("Employer", employer);
 
-          Meteor.call('setUserClient', employer, function(error, result){
+          Meteor.call('setUserSponsor', employer, function(error, result){
             if(error){
               console.error('error updating user', error);
             }
@@ -70,11 +70,11 @@ Template.userEditPage.events({
         // setting the record dirty may not be needed, if we want to save things right away
         // but we set it just to be safe
         Session.set('isDirtyUserRecord', true);
-        Session.set('selectedClient', null);
+        Session.set('selectedSponsor', null);
       });
 
     //}else{
-    //  Session.set('promptTitle', 'User Not Assigned to a Client');
+    //  Session.set('promptTitle', 'User Not Assigned to a Sponsor');
     //  Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
     //  $('#promptModal').modal("show");
 
@@ -367,17 +367,17 @@ Template.userEditPage.helpers({
       return "";
     }
   },
-  getClient: function(){
-    console.log("Template.userEditPage.getCompany");
+  getSponsor: function(){
+    console.log("Template.userEditPage.getSponsor");
     if(this.profile){
-      if(this.profile.company){
-        console.log("this.profile.client: " + this.profile.company);
-        return this.profile.company;
+      if(this.profile.sponsor){
+        console.log("this.profile.sponsor: " + this.profile.sponsor);
+        return this.profile.sponsor;
       }else{
-        return "No organization set in profile.";
+        return "No sponsor set in profile.";
       }
     }else{
-      return Session.get('selectedClient').name;
+      return Session.get('selectedSponsor').name;
     }
   },
   getRole: function(){
@@ -394,8 +394,8 @@ Template.userEditPage.helpers({
     }
   },
   getEmployer: function(){
-    if(Session.get('selectedClientId')){
-      return Session.get('selectedClientId').name;
+    if(Session.get('selectedSponsorId')){
+      return Session.get('selectedSponsorId').name;
     }else{
       if(this.profile){
         return this.profile.employer;
@@ -405,8 +405,8 @@ Template.userEditPage.helpers({
     }
   },
   getEmployerId: function(){
-    if(Session.get('selectedClientId')){
-      return Session.get('selectedClientId')._id;
+    if(Session.get('selectedSponsorId')){
+      return Session.get('selectedSponsorId')._id;
     }else{
       if(this.profile){
         return this.profile.employer_id;

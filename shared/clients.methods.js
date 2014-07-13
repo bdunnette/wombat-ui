@@ -1,10 +1,8 @@
 Meteor.methods({
-    setUserClient:function(client){
-    // console.log('setUserClient');
-    // console.log(employer);
-    return result = Meteor.users.update(client.user_id,{$set:{
-      'profile.client': client.name,
-      'profile.client_id': client._id
+    setUserSponsor:function(sponsor){
+    return result = Meteor.users.update(sponsor.user_id,{$set:{
+      'profile.sponsor': sponsor.name,
+      'profile.sponsor_id': sponsor._id
     }});
   }
 });

@@ -21,13 +21,13 @@ Meteor.methods({
     console.log('toggling deleted status on record', recordId);
     var record = Data.findOne({_id: recordId});
     if(record){
-      if( record.deleted ){
+      if(!record.active ){
         return Data.update({_id: recordId},{$set:{
-          deleted: false
+          active: true
         }});
       }else{
         return Data.update({_id: recordId},{$set:{
-          deleted: true
+          active: false
         }});
       }
     }else{
