@@ -1,14 +1,14 @@
-// UI.registerHelper('getCreatedAt', function(){
-//   return moment(this.createdAt).format("YYYY-MM-DD hh:mm a");
-// });
-//
-// UI.registerHelper('isLoggedIn', function() {
-//   if(Meteor.userId()){
-//     return true;
-//   }else{
-//     return false;
-//   }
-// });
+UI.registerHelper('getCreatedAt', function(){
+  return moment(this.createdAt).format("YYYY-MM-DD hh:mm a");
+});
+
+UI.registerHelper('isLoggedIn', function() {
+  if(Meteor.userId()){
+    return true;
+  }else{
+    return false;
+  }
+});
 
 UI.registerHelper('getApprovalIcon', function(){
   if(this.approved){
@@ -31,41 +31,76 @@ UI.registerHelper('getLockedIcon', function(){
     return 'fa-unlock';
   }
 });
-// UI.registerHelper('getProfileAvatar', function() {
-//   if(Meteor.user()){
-//     if(Meteor.user().profile){
-//       if(Meteor.user().profile.avatar){
-//         return Meteor.user().profile.avatar;
-//       }else{
-//         return "/images/icons/Default_User.png";
-//       }
-//     }else{
-//       return "/images/icons/Default_User.png";
-//     }
-//   }else{
-//     return "/images/icons/Default_User.png";
-//   }
-// });
-//
-// UI.registerHelper('getAvatar', function() {
-//   var userId;
-//   if(this._id){
-//     userId = this._id;
-//   }else{
-//     userId = Meteor.userId();
-//   }
-//   var userRecord = Meteor.users.findOne({_id: userId});
-//   if(userRecord){
-//     if(userRecord.profile){
-//       if(userRecord.profile.avatar){
-//         return userRecord.profile.avatar;
-//       }else{
-//         return "/images/icons/Default_User.png";
-//       }
-//     }else{
-//       return "/images/icons/Default_User.png";
-//     }
-//   }else{
-//     return "/images/icons/Default_User.png";
-//   }
-// });
+
+//===================================================
+
+UI.registerHelper('isTextBlock', function(){
+  if(this.elementType === "plaintext"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isRadioBlock', function(){
+  if(this.elementType === "radio"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isInput',function(){
+  if(this.elementType === "input"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isTextarea', function(){
+  if(this.elementType === "textarea"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isSpacer', function(){
+  if(this.elementType === "spacer"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isYesNoBlock', function(){
+  if(this.elementType === "yesno"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isSectionTitle', function(){
+  if(this.elementType === "section"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isDateTimeBlock', function(){
+  if(this.elementType === "datetime"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isTimeBlock', function(){
+  if(this.elementType === "time"){
+    return true;
+  }else{
+    return false;
+  }
+});
+UI.registerHelper('isSectionTitle', function(){
+  if(this.elementType === "section"){
+    return true;
+  }else{
+    return false;
+  }
+});

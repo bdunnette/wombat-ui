@@ -2,57 +2,9 @@
 // this page is very similar to dataBlockPreivew.js, and could maybe be merged
 // but we want to be careful about the pattern
 
-Template.formBlockPreview.helpers({
-  isTextBlock: function(){
-    if(this.elementType === "plaintext"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isRadioBlock: function(){
-    if(this.elementType === "radio"){
-      return true;
-    }else{
-      return false;
-    }
-  },
 
-  isInput: function(){
-    if(this.elementType === "input"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isTextarea: function(){
-    if(this.elementType === "textarea"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isSpacer: function(){
-    if(this.elementType === "spacer"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isYesNoBlock:function(){
-    if(this.elementType === "yesno"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isSectionTitle: function(){
-    if(this.elementType === "section"){
-      return true;
-    }else{
-      return false;
-    }
-  },
+
+Template.formBlockPreview.helpers({
   getLabelText: function(){
     var resultString = "";
     if(this.labelText){

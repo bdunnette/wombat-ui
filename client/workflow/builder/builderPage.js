@@ -64,6 +64,8 @@ Template.builderPage.events({
       Session.set('selectedBlockType', 'radioInputBlock');
     }else if(this.block_type === "dateTimeInputBlock"){
       Session.set('selectedBlockType', 'dateTimeInputBlock');
+    }else if(this.block_type === "timeInputBlock"){
+      Session.set('selectedBlockType', 'timeInputBlock');
     }
   },
   'click .yes-button':function(){
@@ -142,6 +144,7 @@ addBlockToForm = function(seed){
   var elementType = "input";
   var labelText = "";
   var text = "";
+  var defaultValue = "Section ipsum...";
 
   if(seed){
     var defaultValue1 = seed.defaultValue1;
@@ -174,7 +177,10 @@ addBlockToForm = function(seed){
     labelText = "Q: Lorem textae...";
     elementType = "input";
     defaultValue = "";
-    //inputValue = "ipsum dolar sit amet...";
+  }else if(Session.get('movedElementId') === "sectionTitleBlock"){
+    labelText = "Section ipsum...";
+    elementType = "section";
+    defaultValue = "";
   }else if(Session.get('movedElementId') === "plainTextBlock"){
     labelText = "Lorem ipsum dolar sit amet...";
     elementType = "plaintext";
@@ -199,11 +205,15 @@ addBlockToForm = function(seed){
     defaultValue3 = defaultValue3;
     defaultValue4 = defaultValue4;
     defaultValue5 = defaultValue5;
-
   }else if(Session.get('movedElementId') === "dateTimeInputBlock"){
     labelText = "Lorum datum...";
     inputType = "datetime";
     elementType = "datetime";
+    defaultValue = "";
+  }else if(Session.get('movedElementId') === "timeInputBlock"){
+    labelText = "Lorum datum...";
+    inputType = "time";
+    elementType = "time";
     defaultValue = "";
   }
 

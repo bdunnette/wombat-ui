@@ -75,6 +75,12 @@ Template.westPanel.events({
     Session.set('selectedBlockItem', addBlockToForm());
     Session.set('selectedBuilderTab','dateTimeInputBlock');
   },
+  'click #timeInputBlock':function(){
+    Session.set('selectedBlockType', 'timeInputBlock');
+    Session.set('movedElementId', 'timeInputBlock');
+    Session.set('selectedBlockItem', addBlockToForm());
+    Session.set('selectedBuilderTab','timeInputBlock');
+  },
   'click #radioInputBlock':function(){
     Session.set('selectedBlockType', 'radioInputBlock');
     Session.set('movedElementId', 'radioInputBlock');

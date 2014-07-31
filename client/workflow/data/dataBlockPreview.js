@@ -10,48 +10,6 @@ Template.dataBlockPreview.events({
 
 
 Template.dataBlockPreview.helpers({
-  isSpacer: function(){
-    if(this.elementType === "spacer"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isTextBlock: function(){
-    if(this.elementType === "plaintext"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isRadioBlock: function(){
-    if(this.elementType === "radio"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isInput: function(){
-    if(this.elementType === "input"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isTextarea: function(){
-    if(this.elementType === "textarea"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isYesNoBlock:function(){
-    if(this.elementType === "yesno"){
-      return true;
-    }else{
-      return false;
-    }
-  },
   yesNoBlockYesValue: function(){
     if(this.elementType === "yesno"){
       var dataRecord = Data.findOne({_id: Session.get('selectedDataRecord')});
@@ -85,13 +43,6 @@ Template.dataBlockPreview.helpers({
       }
     }else{
       return "btn-default";
-    }
-  },
-  isSectionTitle: function(){
-    if(this.elementType === "section"){
-      return true;
-    }else{
-      return false;
     }
   },
   getLabelText: function(){

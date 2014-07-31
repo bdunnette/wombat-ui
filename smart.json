@@ -1,6 +1,5 @@
 {
   "packages": {
-    "bootstrap-3": {},
     "iron-router": {},
     "event-hooks": {},
     "auto-nprogress": {},
@@ -10,6 +9,7 @@
     "session-extended-api": {},
     "roles": {},
     "selenium-nightwatch": {},
-    "moment": {}
+    "moment": {},
+    "bootstrap-3": {}
   }
 }

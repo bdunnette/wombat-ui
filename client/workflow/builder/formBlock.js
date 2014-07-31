@@ -12,55 +12,6 @@ Template.formBlock.helpers({
       return false;
     }
   },
-  isTextBlock: function(){
-    if(this.elementType === "plaintext"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isTextarea: function(){
-    if(this.elementType === "textarea"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isSpacer: function(){
-    if(this.elementType === "spacer"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isYesNoBlock:function(){
-    if(this.elementType === "yesno"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isDateTimeBlock:function(){
-    if(this.elementType === "datetime"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isRadioBlock:function(){
-    if(this.elementType === "radio"){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  isSectionTitle: function(){
-    if(this.elementType === "section"){
-      return true;
-    }else{
-      return false;
-    }
-  },
   getLabelText: function(){
     var resultString = "";
     if(this.labelText){

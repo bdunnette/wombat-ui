@@ -10,7 +10,7 @@
   {{#if isTextBlock }}
     <div id="item-{{_id}}" class="item">
       <div class="padded">
-        <p id="input-{{_id}}">{{getLabelText}}</p>
+        <p id="input-{{_id}}" readonly>{{getLabelText}}</p>
       </div>
     </div>
   {{/if}}
@@ -18,7 +18,7 @@
   {{#if isSectionTitle }}
     <div id="item-{{_id}}" class="item">
       <hr>
-      <h3>{getLabelText}}</h3>
+      <h3>{{getLabelText}}</h3>
     </div>
   {{/if}}
 
@@ -40,7 +40,7 @@
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
 <!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
-        <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}">{{getInputValue}}</textarea>
+        <textarea id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" readonly>{{getInputValue}}</textarea>
       </div>
     </div>
   {{/if}}
@@ -57,6 +57,24 @@
             <button id="item-{{_id}}-no" type="button" class="btn {{yesNoBlockNoValue}} no-button readonly" readonly>No</button>
           </div>
         </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if isDateTimeBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}} dateTimeBlock">
+      <label class="dateTimeText" for="input-{{_id}}">{{getLabelText}}</label>
+      <div class="padded">
+        <input id="input-{{_id}}" class="form-control" type="date" value="{{getInputValue}}" readonly>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if isTimeBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}} timeBlock">
+      <label class="timeText" for="input-{{_id}}">{{getLabelText}}</label>
+      <div class="padded">
+        <input id="input-{{_id}}" class="form-control" type="time" value="{{getInputValue}}" readonly>
       </div>
     </div>
   {{/if}}
