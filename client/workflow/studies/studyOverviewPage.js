@@ -14,7 +14,10 @@ Router.map(function(){
   });
 });
 Template.studyOverviewPage.events({
-  'click .list-group-item':function(){
+  'click .studyVisit':function(){
+    Session.set('selectedVisit', this);
+  },
+  'click .studySubject':function(){
     Session.set('selectedSubject', this);
   },
   'click .tab':function(){
@@ -68,8 +71,21 @@ Template.studyOverviewPage.events({
 });
 
 Template.studyOverviewPage.helpers({
+  getVisitLabel: function(){
+    return this;
+  },
+  visitsList: function(){
+    return this.visits;
+  },
   resultsList: function(){
     return Subjects.find();
+  },
+  visitHasBeenChosen: function(){
+    if(Session.get('selectedVisit')){
+      return true;
+    }else{
+      return false;
+    }
   },
   userHasBeenSelected: function(){
     if(Session.get('selectedSubject')){

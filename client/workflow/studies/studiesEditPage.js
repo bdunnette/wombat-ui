@@ -35,6 +35,29 @@ Router.map(function(){
 // EVENTS
 
 Template.studiesEditPage.events({
+  'click .visitLabel':function(){
+    //alert(this);
+    if(Session.get('isDeletingVisitFromStudy')){
+      var dataPayload = {
+        studyId: Session.get('selectedStudyId'),
+        label: this.toString()
+      }
+      Meteor.call('removeVisitFromStudy', dataPayload, function(error, result){
+        console.log(error);
+        console.log(result);
+      });
+      Session.set('isDeletingVisitFromStudy', false);
+    }
+  },
+  'click #addVisitToStudyButton':function(){
+    Studies.update({_id: this._id}, {$addToSet:{
+      'visits':$('#visitLabelInput').val()
+    }});
+    $('#visitLabelInput').val('');
+  },
+  'click #deleteVisitFromStudyButton':function(){
+    Session.set('isDeletingVisitFromStudy', true);
+  },
   'click .individualFormRow':function(){
     //alert('row ' + this._id + Session.get('selectedStudyId'));
     if(Session.get('isDeletingFormFromStudy')){
@@ -150,7 +173,6 @@ Template.studiesEditPage.events({
       });
       console.log(recordId);
 
-
     }
     Router.go('/studies/');
   }
@@ -162,6 +184,14 @@ Template.studiesEditPage.events({
 // HELPERS
 
 Template.studiesEditPage.helpers({
+  getVisitLabel: function(){
+    return this;
+  },
+  isDeletingVisitView: function(){
+    if(Session.get('isDeletingVisitFromStudy')){
+      return "danger-striped";
+    }
+  },
   isDeletingView: function(){
     if(Session.get('isDeletingFormFromStudy')){
       return "danger-striped";
@@ -172,6 +202,14 @@ Template.studiesEditPage.helpers({
       return true;
     }else{
       return false;
+    }
+  },
+  visitsList: function(){
+    var study = Studies.findOne({_id: this._id});
+    if(study){
+      return study.visits;
+    }else{
+      return [];
     }
   },
   formsList: function(){
