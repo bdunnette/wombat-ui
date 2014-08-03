@@ -130,15 +130,11 @@ Template.navbarFooter.events({
   'click #panelToggleLink':function(){
     if(Meteor.user()){
       toggleWestPanel();
-      //toggleEastPanel();
     }
   },
   'click #eastPanelToggleLink':function(){
-    // only toggle the sidebar if the user is logged in
     if(Meteor.user()){
-      //$('#eastPanel').sidebar('toggle');
       toggleWestPanel();
-      //toggleEastPanel();
     }
   },
 
@@ -202,6 +198,8 @@ Template.navbarFooter.events({
         newDataRecord.data[block._id] = Session.get('item-' + block._id + '-yesno');
       }else if(Session.get('item-' + block._id + '-radio')){
         newDataRecord.data[block._id] = Session.get('item-' + block._id + '-radio');
+      }else if(Session.get('item-' + block._id + '-multi')){
+        newDataRecord.data[block._id] = Session.get('item-' + block._id + '-multi');
       }else{
         if($("#input-" + block._id).val()){
           newDataRecord.data[block._id] = $("#input-" + block._id).val();
@@ -209,24 +207,7 @@ Template.navbarFooter.events({
           newDataRecord.data[block._id] = "---";
         }
       }
-
     }
-
-    // record.schema.forEach(function(block){
-    //   //newDataRecord.data[block._id] = $("#input-" + block._id).val();
-    //   if(Session.get('item-' + block._id + '-yesno')){
-    //     newDataRecord.data[block._id] = Session.get('item-' + block._id + '-yesno');
-    //   }else if(Session.get('item-' + block._id + '-radio')){
-    //     newDataRecord.data[block._id] = Session.get('item-' + block._id + '-radio');
-    //   }else{
-    //     if($("#input-" + block._id).val()){
-    //       newDataRecord.data[block._id] = $("#input-" + block._id).val();
-    //     }else{
-    //       newDataRecord.data[block._id] = "---";
-    //     }
-    //   }
-    // });
-
     Data.insert(newDataRecord);
     Router.go('/data');
   },
@@ -272,8 +253,6 @@ saveForm = function(scope){
   };
   if(Session.get('currentForm')){
     Forms.update({_id: Session.get('currentForm')},{$set:{
-      //stared: newForm.stared,
-      //active: newForm.active,
       formName: newForm.formName,
       owner: newForm.owner,
       ownerUsername: newForm.ownerUsername,

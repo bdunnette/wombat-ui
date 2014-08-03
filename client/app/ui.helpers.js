@@ -1,3 +1,5 @@
+
+
 UI.registerHelper('getCreatedAt', function(){
   return moment(this.createdAt).format("YYYY-MM-DD hh:mm a");
 });
@@ -102,5 +104,44 @@ UI.registerHelper('isSectionTitle', function(){
     return true;
   }else{
     return false;
+  }
+});
+UI.registerHelper('isMultiSelectBlock', function(){
+  if(this.elementType === "multiselect"){
+    return true;
+  }else{
+    return false;
+  }
+});
+
+
+UI.registerHelper('getSelectedActive', function(){
+  if(Session.get('item-' + this.question_id + '-multi')){
+    if(Session.get('item-' + this.question_id + '-multi') == this.value){
+      return "btn-info";
+    }else{
+      return "btn-default";
+    }
+  }else{
+    return "btn-default";
+  }
+});
+
+UI.registerHelper('getSelectItemValue', function(){
+  return this.value;
+});
+UI.registerHelper('getMultiSelectId', function(){
+  return this._id;
+});
+UI.registerHelper('selectItems', function(){
+  var self = this;
+  if(this.values){
+    console.log('this.values', this.values);
+    var array = [];
+    this.values.forEach(function(object){
+      object.question_id = self._id;
+      array.push(object);
+    });
+    return array;
   }
 });

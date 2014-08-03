@@ -74,7 +74,7 @@
   {{/if}}
 
   {{#if isRadioBlock}}
-    <div id="item-{{_id}}" class="item {{isSelected}} radioBlock">
+    <div id="item-{{_id}}" class="item0 {{isSelected}} radioBlock">
       <div class="padded row">
         <div class="col col-md-6">
           <p class="radioText">{{getLabelText}}</p>
@@ -86,6 +86,22 @@
             <button type="button" class="btn btn-default no-button" readonly>{{getValue3}}</button>
             <button type="button" class="btn btn-default no-button" readonly>{{getValue4}}</button>
             <button type="button" class="btn btn-default no-button" readonly>{{getValue5}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  {{#if isMultiSelectBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}} multiSelectBlock">
+      <div class="padded row">
+        <div class="col col-md-6">
+          <p class="radioText">{{getLabelText}}</p>
+        </div>
+        <div class="col col-md-6">
+          <div class="btn-group pull-right">
+            {{#each selectItems}}
+            <button type="button" class="btn btn-default yes-button" readonly>{{getSelectItemValue}}</button>
+            {{/each}}
           </div>
         </div>
       </div>

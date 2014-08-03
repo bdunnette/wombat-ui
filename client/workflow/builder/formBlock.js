@@ -1,4 +1,7 @@
 
+
+
+
 Template.formBlock.helpers({
   isSelected: function(){
     if(Session.get('selectedBlockItem') === this._id){

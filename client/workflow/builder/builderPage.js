@@ -44,7 +44,8 @@ Template.builderPage.events({
   'click .item':function(){
     Session.set('selectedBuilderTab','editFieldTab');
     Session.set('selectedBlockItem', this._id);
-    console.log('selectedBuilderTab', Session.get('selectedBuilderTab'));
+    Session.set('multiSelectValues', {values: this.values});
+    //console.log('selectedBuilderTab', Session.get('selectedBuilderTab'));
 
     if(this.block_type === "colorInputBlock"){
       Session.set('selectedBlockType', 'colorInputBlock');
@@ -66,6 +67,8 @@ Template.builderPage.events({
       Session.set('selectedBlockType', 'dateTimeInputBlock');
     }else if(this.block_type === "timeInputBlock"){
       Session.set('selectedBlockType', 'timeInputBlock');
+    }else if(this.block_type === "multiSelectInputBlock"){
+      Session.set('selectedBlockType', 'multiSelectInputBlock');
     }
   },
   'click .yes-button':function(){
@@ -215,6 +218,11 @@ addBlockToForm = function(seed){
     inputType = "time";
     elementType = "time";
     defaultValue = "";
+  }else if(Session.get('movedElementId') === "multiSelectInputBlock"){
+    labelText = "Lorum datum...";
+    inputType = "text";
+    elementType = "multiselect";
+    defaultValue = "";
   }
 
   var lastRank = 0;
@@ -232,6 +240,7 @@ addBlockToForm = function(seed){
     elementType: elementType,
     labelText: labelText,
     text: text,
+    values: [],
     rank: Items.find().count() + 1
   };
   if(Session.get('movedElementId') === "radioInputBlock"){

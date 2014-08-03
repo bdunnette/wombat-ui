@@ -25,12 +25,10 @@
   {{#if isInput}}
     <div id="item-{{_id}}" class="item {{isSelected}}">
       <label class="blockLabel" for="input-{{_id}}">{{getLabelText}}</label>
-<!--       <button type="button" class="close"><i class="fa fa-times"></i></button> -->
       <div class="padded">
         <div class="data-value">
           {{getInputValue}}
         </div>
-<!--         <input id="input-{{_id}}" class="form-control" type="{{getInputType}}" placeholder="{{getInputPlaceholder}}" value="{{getInputValue}}"> -->
       </div>
     </div>
   {{/if}}
@@ -97,5 +95,22 @@
       </div>
     </div>
   {{/if}}
+  {{#if isMultiSelectBlock}}
+    <div id="item-{{_id}}" class="item {{isSelected}} multiSelectBlock">
+      <div class="padded row">
+        <div class="col col-md-6">
+          <p class="radioText">{{getLabelText}}</p>
+        </div>
+        <div class="col col-md-6">
+          <div class="btn-group pull-right">
+            {{#each selectItems}}
+            <button id="item-{{_id}}-multi" type="button" class="btn {{getSelectedActive}} multiselect-button" readonly>{{getSelectItemValue}}</button>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
 
 </template>

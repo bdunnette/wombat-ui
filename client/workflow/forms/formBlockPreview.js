@@ -113,6 +113,9 @@ Template.formBlockPreview.helpers({
 
 
 Template.formBlockPreview.events({
+  'click .multiselect-button':function(){
+    Session.set('item-' + this.question_id + '-multi', this.value);
+  },
   'click .yes-button':function(){
     Session.set('item-' + this._id + '-yesno', 'yes');
   },
@@ -121,23 +124,18 @@ Template.formBlockPreview.events({
   },
 
   'click .radio-1-button':function(){
-    //alert(this._id);
     Session.set('item-' + this._id + '-radio', '1');
   },
   'click .radio-2-button':function(){
-    //alert(this._id);
     Session.set('item-' + this._id + '-radio', '2');
   },
   'click .radio-3-button':function(){
-    //alert(this._id);
     Session.set('item-' + this._id + '-radio', '3');
   },
   'click .radio-4-button':function(){
-    //alert(this._id);
     Session.set('item-' + this._id + '-radio', '4');
   },
   'click .radio-5-button':function(){
-    //alert(this._id);
     Session.set('item-' + this._id + '-radio', '5');
   }
 
