@@ -83,38 +83,33 @@ Template.userEditPage.events({
   },
   'click #findRoleButton': function(){
     var self = this;
-    if(Insights.isAdminedBy(Meteor.userId())){
-      Session.set('selectedUser', this._id);
 
-      $('#selectRoleModal').modal("show");
+    Session.set('selectedUser', this._id);
 
-      $('#selectRoleModal').on('hidden.bs.modal', function (e) {
-        var role = Session.get('selectedRole');
+    $('#selectRoleModal').modal("show");
 
-        if(role){
-          role.user_id = self._id;
-          console.log("Role", role);
+    $('#selectRoleModal').on('hidden.bs.modal', function (e) {
+      var role = Session.get('selectedRole');
 
-          Meteor.call('setUserRole', role, function(error, result){
-            if(error){
-              console.error(error);
-            }
-            if(result){
-              console.log('updated role :' + result);
-            }
-          });
-        }
-        // setting the record dirty may not be needed, if we want to save things right away
-        // but we set it just to be safe
-        Session.set('isDirtyRecord', true);
-        Session.set('selectedRole', null);
-      });
+      if(role){
+        role.user_id = self._id;
+        console.log("Role", role);
 
-    }else{
-      Session.set('promptTitle', 'User Not Assigned to a Company');
-      Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
-      $('#promptModal').modal("show");
-    }
+        Meteor.call('setUserRole', role, function(error, result){
+          if(error){
+            console.error(error);
+          }
+          if(result){
+            console.log('updated role :' + result);
+          }
+        });
+      }
+      // setting the record dirty may not be needed, if we want to save things right away
+      // but we set it just to be safe
+      Session.set('isDirtyRecord', true);
+      Session.set('selectedRole', null);
+    });
+
   },
   'keydown #profileUsernameInput':function(){
     Session.set('isDirtyUserRecord', true);

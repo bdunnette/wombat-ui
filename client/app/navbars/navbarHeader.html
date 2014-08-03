@@ -22,6 +22,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul id="westNavbarHeader" class="nav navbar-nav">
           {{#if isLoggedIn}}
+            <li><a id="selectedSubjectLink" href="#null">{{getSelectedSubject}}</a></li>
+
             <!-- <li><a id="sponsorsLink" href="/sponsors">Sponsors</a></li>
             <li><a id="studiesLink" href="/studies">Studies</a></li>
             <li><a id="newFormLink" href="/builder">Design</a></li>
@@ -35,7 +37,6 @@
 
         <ul id="eastNavHeaderMenu" class="nav navbar-nav navbar-right">
           {{#if isLoggedIn }}
-            <li><a href="#null">{{getSelectedSubject}}</a></li>
             <li id="northeastDropDown" class="dropdown">
               <a id="northeastDropDownLink" href="#" class="dropdown-toggle" data-toggle="dropdown">{{getUserName}}<b class="caret"></b></a>
               <ul id="northeastDropDownMenu" class="dropdown-menu">

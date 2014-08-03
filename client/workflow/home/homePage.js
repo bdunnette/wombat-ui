@@ -23,6 +23,9 @@ Template.homePage.events({
   'click #studiesTile':function(){
     Router.go('/studies');
   },
+  'click #auditTile':function(){
+    Router.go('/audit');
+  },
   // 'click #auditTile':function(){
   //   Router.go('/audit');
   // },

@@ -208,18 +208,40 @@ Template.navbarFooter.events({
         }
       }
     }
-    Data.insert(newDataRecord);
+    Data.insert(newDataRecord, function(error, result){
+      if(error){
+        HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Data", null, error);
+      }
+      if(result){
+        HipaaLogger.logEvent("create", Meteor.userId(), Meteor.user().profile.name, "Data", result, null, Session.get('selectedSubject')._id, Session.get('selectedSubject').name);
+      }
+    });
     Router.go('/data');
   },
   'click #publishFormLink':function(){
-    if(this.stared){
-      Forms.update({_id: this._id},{$set:{
+    var self = this;
+    if(self.stared){
+      Forms.update({_id: self._id},{$set:{
         stared: false
-      }});
+      }},function(error, result){
+        if(error){
+          HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Forms", null, error);
+        }
+        if(result){
+          HipaaLogger.logEvent("publish", Meteor.userId(), Meteor.user().profile.name, "Forms", self._id, null);
+        }
+      });
     }else{
       Forms.update({_id: this._id},{$set:{
         stared: true
-      }});
+      }}, function(error, result){
+        if(error){
+          HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Forms", null, error);
+        }
+        if(result){
+          HipaaLogger.logEvent("unpublish", Meteor.userId(), Meteor.user().profile.name, "Forms", self._id, null);
+        }
+      });
     }
   },
   'click #editFormLink':function(){
@@ -260,7 +282,14 @@ saveForm = function(scope){
       numBlocks: newForm.numBlocks
     }});
   }else{
-    Forms.insert(newForm);
+    Forms.insert(newForm, function(error, result){
+      if(error){
+        HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Forms", null, error);
+      }
+      if(result){
+        HipaaLogger.logEvent("create", Meteor.userId(), Meteor.user().profile.name, "Forms", result, null);
+      }
+    });
   }
   Router.go('/forms');
 }

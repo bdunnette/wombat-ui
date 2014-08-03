@@ -1,5 +1,21 @@
 
+UI.registerHelper('isRole', function(role) {
+  if(Meteor.user()){
+    var profileRole = Meteor.user().profile.role;
 
+    if(profileRole){
+      if(profileRole.indexOf(role) > -1){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }else{
+    return false;
+  }
+});
 UI.registerHelper('getCreatedAt', function(){
   return moment(this.createdAt).format("YYYY-MM-DD hh:mm a");
 });

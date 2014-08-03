@@ -4,6 +4,12 @@ Session.setDefault('selectedSubject', false);
 // template events
 
 Template.navbarHeader.events({
+  'click #selectedSubjectLink':function(){
+    $('#userSearchModal').modal("show");
+    $('#userSearchModal').on('hidden.bs.modal', function (e) {
+      Session.set('selectedSubject', Session.get('selectedUser'));
+    });
+  },
   'click #navbarBrandLink':function(){
     Router.go('/');
   },
@@ -31,8 +37,11 @@ Template.navbarHeader.helpers({
   getUserName: function(){
     if(Meteor.userId()){
       if(Meteor.user()){
-        //return Meteor.user().emails[0].address;
-        return Meteor.user().username;
+        if(Meteor.user().profile && Meteor.user().profile.name){
+          return Meteor.user().profile.name;
+        }else{
+          return Meteor.user().username;
+        }
       }else{
         return "---";
       }

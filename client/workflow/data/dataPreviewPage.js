@@ -10,7 +10,9 @@ Router.map(function(){
     data: function () {
       console.log('routing to: /data/', this.params.id);
       Session.set('selectedDataRecord', this.params.id);
-      return Data.findOne({_id: this.params.id});
+      var record = Data.findOne({_id: this.params.id});
+      HipaaLogger.logEvent("viewed", Meteor.userId(), Meteor.user().profile.name, "Data", this.params.id, null, record.subjectId, record.subjectName);
+      return record;
     },
     onAfterAction: function(){
       Session.set('activeQuestion', false);

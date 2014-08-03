@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-insecure
 less
 iron-router
 accounts-password
@@ -20,9 +19,9 @@ session-extended-api
 roles
 selenium-nightwatch
 moment
-blaze-layout
 ui
 
 clinical-ui-sidebars
 clinical-ui-helpers
 bootstrap-3
+hipaa-audit-log
