@@ -9,9 +9,11 @@
               Active Studies
             </div>
             <div class="panel-body wombat-orange">
-              {{#each studiesList}}
-                <a class="activeStudy" href="/study/home/{{_id}}">{{ name }}</a>
-              {{/each}}
+              <ul>
+                {{#each studiesList}}
+                  <li><a class="activeStudy" href="/study/home/{{_id}}">{{ name }}</a></li>
+                {{/each}}
+              </ul>
             </div>
           </div>
         </div>
