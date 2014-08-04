@@ -24,4 +24,4 @@ ui
 clinical-ui-sidebars
 clinical-ui-helpers
 bootstrap-3
-hipaa-audit-log
+clinical-ui-hipaa-log

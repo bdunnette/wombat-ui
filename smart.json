@@ -10,6 +10,7 @@
     "roles": {},
     "selenium-nightwatch": {},
     "moment": {},
-    "bootstrap-3": {}
+    "bootstrap-3": {},
+    "clinical-ui-hipaa-log": {}
   }
 }

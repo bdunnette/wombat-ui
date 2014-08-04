@@ -210,10 +210,10 @@ Template.navbarFooter.events({
     }
     Data.insert(newDataRecord, function(error, result){
       if(error){
-        HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Data", null, error);
+        HipaaLogger.logEvent("error", Meteor.userId(), "Data", null, error, null, null);
       }
       if(result){
-        HipaaLogger.logEvent("create", Meteor.userId(), Meteor.user().profile.name, "Data", result, null, Session.get('selectedSubject')._id, Session.get('selectedSubject').name);
+        HipaaLogger.logEvent("create", Meteor.userId(), "Data", result, null, newDataRecord.subjectId, newDataRecord.subjectName);
       }
     });
     Router.go('/data');
@@ -225,10 +225,10 @@ Template.navbarFooter.events({
         stared: false
       }},function(error, result){
         if(error){
-          HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Forms", null, error);
+          HipaaLogger.logEvent("error", Meteor.userId(), "Forms", null, error, null, null);
         }
         if(result){
-          HipaaLogger.logEvent("publish", Meteor.userId(), Meteor.user().profile.name, "Forms", self._id, null);
+          HipaaLogger.logEvent("publish", Meteor.userId(), "Forms", self._id, null, null, null);
         }
       });
     }else{
@@ -236,10 +236,10 @@ Template.navbarFooter.events({
         stared: true
       }}, function(error, result){
         if(error){
-          HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Forms", null, error);
+          HipaaLogger.logEvent("error", Meteor.userId(), "Forms", null, error, null, null);
         }
         if(result){
-          HipaaLogger.logEvent("unpublish", Meteor.userId(), Meteor.user().profile.name, "Forms", self._id, null);
+          HipaaLogger.logEvent("unpublish", Meteor.userId(), "Forms", self._id, null, null, null);
         }
       });
     }
@@ -284,10 +284,10 @@ saveForm = function(scope){
   }else{
     Forms.insert(newForm, function(error, result){
       if(error){
-        HipaaLogger.logEvent("error", Meteor.userId(), Meteor.user().profile.name, "Forms", null, error);
+        HipaaLogger.logEvent("error", Meteor.userId(), "Forms", null, error, null, null);
       }
       if(result){
-        HipaaLogger.logEvent("create", Meteor.userId(), Meteor.user().profile.name, "Forms", result, null);
+        HipaaLogger.logEvent("create", Meteor.userId(), "Forms", result, null, null, null);
       }
     });
   }

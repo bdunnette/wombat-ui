@@ -5,8 +5,8 @@ Session.setDefault('selectedSubject', false);
 
 Template.navbarHeader.events({
   'click #selectedSubjectLink':function(){
-    $('#userSearchModal').modal("show");
-    $('#userSearchModal').on('hidden.bs.modal', function (e) {
+    $('#subjectSearchModal').modal("show");
+    $('#subjectSearchModal').on('hidden.bs.modal', function (e) {
       Session.set('selectedSubject', Session.get('selectedUser'));
     });
   },
