@@ -213,7 +213,7 @@ Template.navbarFooter.events({
         HipaaLogger.logEvent("error", Meteor.userId(), "Data", null, error, null, null);
       }
       if(result){
-        HipaaLogger.logEvent("create", Meteor.userId(), "Data", result, null, newDataRecord.subjectId, newDataRecord.subjectName);
+        HipaaLogger.logEvent("create", Meteor.userId(), "Data", result, null, Session.get('selectedSubject')._id, Session.get('selectedSubject').name);
       }
     });
     Router.go('/data');
