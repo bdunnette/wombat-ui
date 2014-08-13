@@ -93,7 +93,7 @@ Template.westPanel.events({
     // Session.set('selectedBuilderTab','editFieldTab');
     // Session.set('selectedBlockItem', addBlockToForm());
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('plainTextBlock');
   },
   'click #textInputBlock':function(){
     // Session.set('selectedBlockType', 'textInputBlock');
@@ -101,7 +101,7 @@ Template.westPanel.events({
     // Session.set('selectedBuilderTab','editFieldTab');
     // Session.set('selectedBlockItem', addBlockToForm());
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('textInputBlock');
   },
   'click #textareaInputBlock':function(){
     // Session.set('selectedBlockType', 'textareaInputBlock');
@@ -109,7 +109,7 @@ Template.westPanel.events({
     // Session.set('selectedBuilderTab','editFieldTab');
     // Session.set('selectedBlockItem', addBlockToForm());
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('textareaInputBlock');
   },
   'click #numericInputBlock':function(){
     // Session.set('selectedBlockType', 'numericInputBlock');
@@ -117,7 +117,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('numericInputBlock');
   },
   'click #spacerBlock':function(){
     // Session.set('selectedBlockType', 'spacerBlock');
@@ -125,7 +125,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('spacerBlock');
   },
   'click #sectionTitleBlock':function(){
     // Session.set('selectedBlockType', 'sectionTitleBlock');
@@ -133,7 +133,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('sectionTitleBlock');
   },
   'click #yesNoInputBlock':function(){
     // Session.set('selectedBlockType', 'yesNoInputBlock');
@@ -141,7 +141,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('yesNoInputBlock');
   },
   'click #dateTimeInputBlock':function(){
     // Session.set('selectedBlockType', 'dateTimeInputBlock');
@@ -149,7 +149,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('dateTimeInputBlock');
   },
   'click #timeInputBlock':function(){
     // Session.set('selectedBlockType', 'timeInputBlock');
@@ -157,7 +157,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('timeInputBlock');
   },
   'click #radioInputBlock':function(){
     // Session.set('selectedBlockType', 'radioInputBlock');
@@ -165,7 +165,7 @@ Template.westPanel.events({
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
 
-    initiateAddingBlock('multiSelectInputBlock');
+    initiateAddingBlock('radioInputBlock');
   },
   'click #multiSelectInputBlock':function(){
     // Session.set('selectedBlockType', 'multiSelectInputBlock');

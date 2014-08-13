@@ -30,7 +30,7 @@ Template.usersListPage.helpers({
       Session.set('usersListReceivedData', new Date());
       Session.set('usersListPaginationCount', Math.floor(Meteor.users.find().count() / Session.get('usersListTableLimit')));
 
-      if(Wombat.checkForHexCode.test(Session.get('usersListSearchFilter'))){
+      if(ClinicalTrials.checkForHexCode.test(Session.get('usersListSearchFilter'))){
         return Meteor.users.find({_id: new Meteor.Collection.ObjectID(Session.get('usersListSearchFilter'))});
       }else{
         return Meteor.users.find({$or:[
