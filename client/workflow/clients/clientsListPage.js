@@ -37,7 +37,7 @@ Template.sponsorsListPage.helpers({
     Session.set('sponsorsListReceivedData', new Date());
     Session.set('sponsorsListPaginationCount', Math.floor(Sponsors.find().count() / Session.get('sponsorsListTableLimit')));
 
-    if(Wombat.checkForHexCode.test(Session.get('sponsorsListSearchFilter'))){
+    if(ClinicalTrials.checkForHexCode.test(Session.get('sponsorsListSearchFilter'))){
       return Sponsors.find({_id: new Meteor.Collection.ObjectID(Session.get('sponsorsListSearchFilter'))});
     }else{
       return Sponsors.find({$or:[

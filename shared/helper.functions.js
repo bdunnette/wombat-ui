@@ -5,7 +5,7 @@ SimpleRationalRanks = {
 };
 
 
-Wombat = {
+ClinicalTrials = {
   isAdminedBy: function(userId){
     var user = Meteor.users.findOne(userId);
     if((user.profile.role === "Admin") || (user.profile.role === "SysAdmin")){

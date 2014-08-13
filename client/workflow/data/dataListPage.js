@@ -172,7 +172,7 @@ Template.dataRowItem.helpers({
         // if we find any comments that match
         if(comments.length > 0){
           if(result === ""){
-            result = "fa-comments wombat-orange";
+            result = "fa-comments primary-color";
           }
 
           // look to the last one

@@ -6,12 +6,12 @@ if (Meteor.users.find().count() === 0) {
     console.log("Running on localhost and no users found.  Lets create some.");
 
     var users = [{
-        email: "sysadmin@wombat.com",
+        email: "sysadmin@clinical-trials.meteor.com",
         username: "sysadmin",
         name: "System Administrator",
         password: "sysadmin321$",
         roles: ["SysAdmin"],
-        company: "Wombat.com"
+        company: "clinical-trials.meteor.com"
         // roles: ["employee", "sysadmin", "coordinator", "reviewer", "builder"]
       }, {
         email: "janedoe@acme.com",

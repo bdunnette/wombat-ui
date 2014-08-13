@@ -1,10 +1,10 @@
-wombat-ui
+clinical-trials
 =========
 
-Clinical Form Builder app for Pharmaceutical Trials Data Collection.
+HIPAA compliant data collection application for use in Clinical Trials.
 
 ==============================
-### Install Meteor Environment
+#### Install Meteor Environment
 
 ````sh
 # install meteor
@@ -48,16 +48,16 @@ mrt --version
 ````
 
 ============================
-### Install Application
+#### Install Application
 
 ````sh
-git clone https://github.com/awatson1978/wombat-ui.git
-cd wombat-ui
+git clone https://github.com/awatson1978/clinical-trials.git
+cd clinical-trials
 sudo mrt
 ````
 
 ============================
-### Run Acceptance Tests
+#### Run Acceptance Tests
 
 ````sh
 
@@ -75,8 +75,40 @@ terminal-b$ sudo ./run_nightwatch.sh -t tests/homePage.js
 
 ````
 
+============================
+#### HIPAA Compliance  
+
+
+````
+meteor add force-ssl
+````
+
+============================
+#### Clinical Trial Protocol Templates  
+
+[Phase III Trials Protocol Template (NIH - Neurological Disorders and Stroke)](http://www.ninds.nih.gov/research/clinical_research/toolkit/protocol.htm)  
+[Clinical Trials Protocol Templates (NIH - Allergy and Infection Diseases)](http://www.niaid.nih.gov/labsandresources/resources/toolkit/protocol/Pages/protocol.aspx)  
+[Interventional Clinical Protocol Template (NIH - Dental and Craniofacial Research)](http://www.nidcr.nih.gov/Research/ToolsforResearchers/Toolkit/InterventionProtocolTemplate.htm)  
+
+
+============================
+#### Clinical Trial Protocol Examples  
+
+[Rimonabant 20mg for reducing cardiovascular events (Phase III)](http://www.stsiweb.org/images/uploads/CRESCENDOfinal.pdf_.pdf)  
+[Modafinil for Cocain Dependence (Phae II)](http://www.med.upenn.edu/ocr/protocol/sample/sample.html)  
+
+[Inclusion and Exclusion Criteria](http://www.unm.edu/~rrobergs/604Lect2.pdf)  
+
+
+
+============================
+#### Other Resources
+
+https://clinicaltrials.gov/
+
+
 
 ------------------------
 ### Licensing
 
-All rights reserved.  Wombat & Co.
+MIT.  Use as you will.

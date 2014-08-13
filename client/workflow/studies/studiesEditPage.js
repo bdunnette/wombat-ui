@@ -100,7 +100,7 @@ Template.studiesEditPage.events({
   'click #findStudySponsorButton':function(){
     var self = this;
     //console.log('this.id', this._id);
-    //if(Wombat.isAdminedBy(Meteor.userId())){
+    //if(ClinicalTrials.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', Meteor.userId());
 
       $('#sponsorSearchModal').modal("show");

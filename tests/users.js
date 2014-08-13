@@ -74,8 +74,8 @@ module.exports = {
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', '2014')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'System Administrator')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'SysAdmin')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'Wombat.com')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'sysadmin@wombat.com')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'clinical-trials.meteor.com')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'sysadmin@clinical-trials.meteor.com')
 
 
       // test searching for 'sysadmin' username
