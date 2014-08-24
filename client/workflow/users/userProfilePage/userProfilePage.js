@@ -5,10 +5,10 @@ Router.map(function(){
     onBeforeAction: function(){
       setPageTitle("Your Profile");
     },
-    waitOn: function(){
-      Meteor.subscribe('settings');
-      return Meteor.subscribe('userProfile');
-    },
+    // waitOn: function(){
+    //   //Meteor.subscribe('settings');
+    //   return Meteor.subscribe('userProfile');
+    // },
     onAfterAction: function() {
       Session.set('isOnListPage', false);
     }
@@ -18,16 +18,18 @@ Router.map(function(){
     template: 'userProfilePage',
     onBeforeAction: function(){
       setPageTitle("User");
+      Session.set('selectedUser', this.params.id);
     },
     waitOn: function(){
-      Meteor.subscribe('settings');
+      //Meteor.subscribe('settings');
+      //return Meteor.subscribe('userProfile', this.params.id);
       return Meteor.subscribe('usersDirectory');
     },
     data: function () {
       return Meteor.users.findOne({_id: this.params.id});
     },
     onAfterAction: function() {
-      Session.set('modalReturnRoute', false);
+      //Session.set('modalReturnRoute', false);
       Session.set('isOnListPage', false);
     }
   });
@@ -36,14 +38,16 @@ Router.map(function(){
 
 Template.userProfilePage.events({
   'click #editProfileButton':function(){
-    Router.go('/edituser/' + this._id);
+    Router.go('/user/edit/' + this._id);
   },
   'click #deleteProfileButton':function(){
-    var userIsSure = confirm("Are you sure you want to delete user " + this._id);
-    if(userIsSure){
-      Meteor.call('removeUser', this._id);
-      Router.go('/users/');
-    }
+    $('#removeUserModal').modal("show");
+
+    // var userIsSure = confirm("Are you sure you want to delete user " + this._id);
+    // if(userIsSure){
+    //   Meteor.call('removeUser', this._id);
+    //   Router.go('/users/');
+    // }
   }
 });
 

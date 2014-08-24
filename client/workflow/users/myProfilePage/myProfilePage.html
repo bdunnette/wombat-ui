@@ -18,7 +18,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <h3 id="profileUserName" class="name">{{ username }}</h3>
-                  <span class="area">User Id: {{_id}}</span><br>
+                  <span id="profileUserIdLabel" class="area">User Id: <span id="profileUserId">{{_id}}</span></span><br>
                 </div>
                 <div class="col-md-4">
                   <a id="editProfileButton" class="btn btn-info pull-right edit">
@@ -27,22 +27,16 @@
                 </div>
               </div>
               <hr>
-              <div class="row profile">
-                <!-- bio, new note & orders column -->
-                <div class="col-md-9 bio">
-                  <div class="profile-box">
-                    <!-- biography -->
-                    <div class="col-md-12 section">
+              <div class="row">
+                <div class="col-md-9">
+
+                    <div class="col-md-12">
                       <h6 id="profileFullNameLabel">Full Name</h6>
                       <p id="profileFullName">{{ profile.name }}</p>
                       <br>
 
                       <h6 id="profileUserRoleLabel">Roles</h6>
-                      <p id="profileUserRole">{{ roles }}</p>
-                      <br>
-
-                      <h6>Biography</h6>
-                      <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
+                      <p id="profileUserRole">{{ profile.roles }}</p>
                       <br>
 
                       <h6 id="profileSelectedStudyLabel">Selected Study</h6>
@@ -60,12 +54,8 @@
                       <h6 id="profileOrganizationIdLabel">Sponsor Id</h6>
                       <p id="profileOrganizationIdText">{{ getSponsorId }}</p>
                       <br>
-
-
                     </div>
 
-
-                  </div>
                 </div>
               </div>
             </div>
@@ -73,7 +63,6 @@
 
         </div>
       </div>
-      <!-- end main container -->
 
     {{/with}}
   </div>

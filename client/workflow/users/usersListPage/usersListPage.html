@@ -18,6 +18,9 @@
             <th id="usersTableUsernameColumn" class="col-md-2 sortable">
               Username
             </th>
+            <th id="usersTableCreatedAtColumn" class="col-md-2 sortable">
+              <span class="line"></span>CreatedAt
+            </th>
             <th id="usersTableFullNameColumn" class="col-md-2 sortable">
               <span class="line"></span>Full Name
             </th>
@@ -25,14 +28,14 @@
               <span class="line"></span>Role
             </th>
             <th id="usersTableCompanyColumn" class="col-md-2 sortable">
-              <span class="line"></span>Company
+              <span class="line"></span>Sponsor
             </th>
             <th id="usersTableEmailColumn" class="col-md-2 sortable align-right">
               <span class="line"></span>Email
             </th>
-            <th id="usersTableCreatedAtColumn" class="col-md-2 sortable">
-              <span class="line"></span>CreatedAt
-            </th>
+            {{#if isAdmin }}
+              <th id="usersStatusColumn" class="centered">Status</th>
+            {{/if}}
           </tr>
           </thead>
           <tbody>
@@ -63,7 +66,11 @@
 
   <tr class="first userListItem">
     <td>
-      <a href="/users/{{ getUserIdString }}" class="name">{{ username }}</a></td>
+      <a href="/users/{{ getUserIdString }}" class="name">{{ username }}</a>
+    </td>
+    <td>
+      {{ getCreatedAt }}
+    </td>
     <td>
       {{ profile.name }}
     </td>
@@ -71,14 +78,19 @@
       {{ profile.roles }}
     </td>
     <td>
-      {{ profile.company }}
+      {{ profile.sponsor }}
     </td>
     <td class="align-right">
       <a href="#">{{ getEmail }}</a>
     </td>
-    <td>
-      {{ getCreatedAt }}
-    </td>
+    {{#if isAdmin}}
+      <td class="centered">
+        <div class="userStatusCell label {{getStatusLabelColor}}">
+          {{getStatusLabelText}}
+        </div>
+      </td>
+    {{/if}}
+
   </tr>
 
 </template>

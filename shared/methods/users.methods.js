@@ -6,9 +6,12 @@ Meteor.methods({
     var result = Accounts.createUser({
       username: input.username,
       email: input.address,
-      password: input.password,
-      profile: input.profile
+      password: input.password
     });
+
+    Meteor.users.update({_id: result}, {$set:{
+      profile: input.profile
+    }})
 
     console.log(result);
     return result;
@@ -25,6 +28,8 @@ Meteor.methods({
       'profile.sponsor': input.profile.sponsor,
       'profile.sponsor_id': input.profile.sponsor_id,
 
+      'profile.roles': input.profile.roles,
+
       'profile.avatar': input.profile.avatar,
       'profile.phone': input.profile.phone,
       'profile.website': input.profile.website,
@@ -33,5 +38,22 @@ Meteor.methods({
       'profile.state': input.profile.state,
       'profile.zip': input.profile.zip
     }});
-  }
+  },
+
+  removeUser: function(userId){
+    console.log('removing user...' + userId);
+
+    var result = Meteor.users.remove({_id: userId });
+
+    console.log(result);
+    return result;
+
+  },
+  setUserRole:function(userId, role){
+    console.log('setUserRole', userId, role);
+    var result = Meteor.users.update(userId,{$set:{
+      'profile.roles': role
+    }});
+    return result;
+  },
 });

@@ -1,4 +1,44 @@
 
+//---------------------------------------------------------
+// RECORD ACTIVE PATTERN
+
+UI.registerHelper('getStatusLabelText',function(){
+  if(this.active || (this.profile && this.profile.active)){
+    return "active";
+  }else{
+    return "Inactive";
+  }
+});
+UI.registerHelper('getStatusLabelColor',function(){
+  if(this.active || (this.profile && this.profile.active)){
+    return "label-success";
+  }else{
+    return "label-default";
+  }
+});
+
+UI.registerHelper('isAdmin', function() {
+  // this is a small security hole that a user can exploit
+  // by setting their role to something else
+  // TODO:  set user role permissions on data publications so it doesnt matter if they spoof it or not
+
+  if(Meteor.user()){
+    if(Meteor.user().profile){
+      // these comparisons should be soft comparisons with == rather than ===
+      // because we're comparing strings to array values, and there is a cast involved
+      if((Meteor.user().profile.roles[0] == "Admin") || (Meteor.user().profile.roles[0] == "SysAdmin")){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }else{
+    return null;
+  }
+});
+
 UI.registerHelper('isRole', function(role) {
   if(Meteor.user()){
     var profileRole = Meteor.user().profile.role;

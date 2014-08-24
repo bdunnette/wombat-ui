@@ -26,31 +26,52 @@ Meteor.methods({
 
     return signupCode === AccountsEntry.settings.signupCode;
   },
-  accountsCreateUser: function(username, email, password) {
-    if (username) {
-      return Accounts.createUser({
-        username: username,
-        email: email,
-        password: password,
-        profile: AccountsEntry.settings.defaultProfile || {}
-      });
-    } else {
-      return Accounts.createUser({
-        email: email,
-        password: password,
-        profile: AccountsEntry.settings.defaultProfile || {}
-      });
-    }
-  }
+  // accountsCreateUser: function(username, email, password) {
+  //   if (username) {
+  //     return Accounts.createUser({
+  //       username: username,
+  //       email: email,
+  //       password: password,
+  //       profile: AccountsEntry.settings.defaultProfile || {}
+  //     });
+  //   } else {
+  //     return Accounts.createUser({
+  //       email: email,
+  //       password: password,
+  //       profile: AccountsEntry.settings.defaultProfile || {}
+  //     });
+  //   }
+  // }
+  // accountsCreateUser: function(username, email, password, profile) {
+  //   if (username) {
+  //     return Accounts.createUser({
+  //       username: username,
+  //       email: email,
+  //       password: password,
+  //       profile: profile
+  //       //profile: AccountsEntry.settings.defaultProfile || {}
+  //     });
+  //   } else {
+  //     return Accounts.createUser({
+  //       email: email,
+  //       password: password,
+  //       profile: profile
+  //       //profile: AccountsEntry.settings.defaultProfile || {}
+  //     });
+  //   }
+  // }
 });
 
 
 Accounts.onCreateUser(function(options, user) {
-  var d6 = function () { return Math.floor(Random.fraction() * 6) + 1; };
-  user.dexterity = d6() + d6() + d6();
   // We still want the default hook's 'profile' behavior.
-  if (options.profile)
+  if (options.profile){
+    // sample profile autogeneration function
+    var d6 = function () { return Math.floor(Random.fraction() * 6) + 1; };
+    options.profile.dexterity = d6() + d6() + d6();
+
     user.profile = options.profile;
+  }
 
   var userId = user._id;
   console.log('Accounts.onCreateUser');
@@ -59,6 +80,8 @@ Accounts.onCreateUser(function(options, user) {
 
   return user;
 });
+
+
 Meteor.startup(function(){
 
   var dataCursor = Meteor.users.find();

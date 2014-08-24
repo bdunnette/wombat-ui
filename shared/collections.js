@@ -108,4 +108,14 @@ if (Meteor.isServer) {
         });
       });
   }
+  if(Sponsors.find().count() === 0){
+    Sponsors.insert({
+      name: "ACME Pharmaceuticals",
+      createdAt: new Date()
+    });
+    Sponsors.insert({
+      name: "Big Pharma, Inc",
+      createdAt: new Date()
+    });
+  }
 }

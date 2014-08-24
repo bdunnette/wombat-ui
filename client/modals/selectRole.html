@@ -4,11 +4,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Select Role</h4>
+          <h4 id="selectRoleModalTitle">Select Role</h4>
         </div>
         <div class="modal-body">
           <input type="text" id="selectRoleModalInput" name="selectRoleModalInput" class="fullwidth form-control" placeholder="search..." value="{{getSearchTerm}}">
-          <ul class="list-group">
+          <ul id="selectRoleModalResults" class="list-group">
             {{#each rolesList}}
               {{>selectRoleModalItem}}
             {{/each}}

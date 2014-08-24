@@ -1,5 +1,5 @@
-Session.setDefault('isDirtyUserRecord', false);
-Session.setDefault('isDirtyPassword', false);
+Session.setDefault('isStaleUserRecord', false);
+Session.setDefault('isStalePassword', false);
 Session.setDefault('modalReturnRoute', false);
 
 Session.setDefault('passwordConfirmed', false);
@@ -7,27 +7,43 @@ Session.setDefault('selectedUser', false);
 Session.setDefault('selectedSponsorId', false);
 Session.setDefault('functionPassing', null);
 
+Session.setDefault('updatePasswordIsSuccessful', false);
+Session.setDefault('defaultUserProfileCard', 'basicInfoCard');
+
+Session.setDefault('selectedSponsor', false);
+Session.setDefault('selectedRole', false);
+
+
+//------------------------------------------------------------------------------
+// ROUTER
+
 Router.map(function(){
   this.route('editProfileRoute', {
-    path: '/edituser/:id',
+    path: '/user/edit/:id',
     template: 'userEditPage',
     onBeforeAction: function(){
       Session.set('selectedUser', this.params.id);
+      //Session.set('defaultUserProfileCard', 'basicInfoCard');
     },
     waitOn: function(){
       Meteor.subscribe('userDirectory');
       return Meteor.subscribe('userProfile');
+    },
+    data: function () {
+      //console.log('this.params.id',this.params.id);
+      return Meteor.users.findOne({_id: this.params.id});
+    },
+    onAfterAction:function(){
+      Session.set('selectedSponsor', false);
+      Session.set('selectedRole', false);
     }
-    // data: function () {
-    //   console.log('this.params.id',this.params.id);
-    //   return Meteor.users.findOne({_id: this.params.id});
-    // }
   });
   this.route('newUserRoute', {
-    path: '/newuser',
+    path: '/user/new',
     template: 'userEditPage',
     onBeforeAction: function(){
       setPageTitle("New User");
+      Session.set('defaultUserProfileCard', 'basicInfoCard');
     },
     waitOn: function(){
       return Meteor.subscribe('userProfile');
@@ -37,233 +53,28 @@ Router.map(function(){
     },
     onAfterAction: function() {
       Session.set('isOnListPage', false);
+      Session.set('selectedSponsor', false);
+      Session.set('selectedRole', false);
     }
   });
 });
 
 
-Template.userEditPage.events({
-  'click #findSponsorButton':function(){
-    var self = this;
-    console.log('this.id', this._id);
-    //if(ClinicalTrials.isAdminedBy(Meteor.userId())){
-      Session.set('selectedUser', this._id);
-
-      $('#sponsorSearchModal').modal("show");
-
-      $('#sponsorSearchModal').on('hidden.bs.modal', function (e) {
-        var employer = Session.get('selectedSponsor');
-
-        if(employer){
-          employer.user_id = self._id;
-          console.log("Employer", employer);
-
-          Meteor.call('setUserSponsor', employer, function(error, result){
-            if(error){
-              console.error('error updating user', error);
-            }
-            if(result){
-              console.log('created user' + result);
-            }
-          });
-        }
-        // setting the record dirty may not be needed, if we want to save things right away
-        // but we set it just to be safe
-        Session.set('isDirtyUserRecord', true);
-        Session.set('selectedSponsor', null);
-      });
-
-    //}else{
-    //  Session.set('promptTitle', 'User Not Assigned to a Sponsor');
-    //  Session.set('promptMessage', 'Please contact your administrator and have them set your employer.');
-    //  $('#promptModal').modal("show");
-
-      // alert('Please contact your administrator to set your employer.');
-    //}
-  },
-  'click #findRoleButton': function(){
-    var self = this;
-
-    Session.set('selectedUser', this._id);
-
-    $('#selectRoleModal').modal("show");
-
-    $('#selectRoleModal').on('hidden.bs.modal', function (e) {
-      var role = Session.get('selectedRole');
-
-      if(role){
-        role.user_id = self._id;
-        console.log("Role", role);
-
-        Meteor.call('setUserRole', role, function(error, result){
-          if(error){
-            console.error(error);
-          }
-          if(result){
-            console.log('updated role :' + result);
-          }
-        });
-      }
-      // setting the record dirty may not be needed, if we want to save things right away
-      // but we set it just to be safe
-      Session.set('isDirtyRecord', true);
-      Session.set('selectedRole', null);
-    });
-
-  },
-  'keydown #profileUsernameInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileEmailInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-//  'keydown #profilePasswordInput':function(){
-//    Session.set('isDirtyUserRecord', true);
-//  },
-//  'keydown #profilePasswordConfirmInput':function(){
-//    Session.set('isDirtyUserRecord', true);
-//  },
-  'keydown #profileNameInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileTitleInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileCompanyInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileAvatarInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profilePhoneInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileWebsiteInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileAddressInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileCityInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileStateInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keydown #profileZipInput':function(){
-    Session.set('isDirtyUserRecord', true);
-  },
-  'keyup #profilePasswordInput':function(){
-    if($('#profilePasswordConfirmInput').val() == $('#profilePasswordInput').val()){
-      if($('#profilePasswordInput').val() !== ""){
-        Session.set('passwordConfirmed', true);
-      }else{
-        Session.set('passwordConfirmed', false);
-      }
-    }else{
-      Session.set('passwordConfirmed', false);
-    }
-  },
-  'keyup #profilePasswordConfirmInput':function(){
-    if($('#profilePasswordConfirmInput').val() == $('#profilePasswordInput').val()){
-      Session.set('passwordConfirmed', true);
-    }else{
-      Session.set('passwordConfirmed', false);
-    }
-  },
-
-  'click #setAsSysAdminButton': function(){
-    if(this._id){
-      var input = {
-        _id: this._id,
-        profile: {role: "SysAdmin"}
-      };
-      Meteor.call('updateUserRole', input);
-    }else{
-      this.profile.role = "SysAdmin";
-    }
-  },
-  'click #setAsAdminButton': function(){
-    if(this._id){
-      var input = {
-        _id: this._id,
-        profile: {role: "Admin"}
-      };
-      Meteor.call('updateUserRole', input);
-    }else{
-      this.profile.role = "Admin";
-    }
-  },
-  'click #setAsUserButton': function(){
-    if(this._id){
-      var input = {
-        _id: this._id,
-        profile: {role: "User"}
-      };
-      Meteor.call('updateUserRole', input);
-    }else{
-      this.profile.role = "User";
-    }
-  },
-  'click #helpTipsVisibleButton':function(){
-    Meteor.users.update(this._id,{$set:{
-      'profile.helpTipsVisible':"visible"
-    }});
-  },
-  'click #helpTipsHiddenButton':function(){
-    Meteor.users.update(this._id,{$set:{
-      'profile.helpTipsVisible':"hidden"
-    }});
-  },
-  'click #tableEntriesTwentyButton':function(){
-    // TODO: refactor profile.tableEntries to profile.tableEntriesLimit
-    Meteor.users.update(this._id,{$set:{
-      'profile.tableEntries': 'twenty'
-    }});
-  },
-  'click #tableEntriesFiftyButton':function(){
-    Meteor.users.update(this._id,{$set:{
-      'profile.tableEntries': 'fifty'
-    }});
-  },
-  'click #tableEntriesHundredButton':function(){
-    Meteor.users.update(this._id,{$set:{
-      'profile.tableEntries': 'hundred'
-    }});
-  },
-  'click #updatePasswordButton':function(event){
-    if($('#profilePasswordInput').val() == $('#profilePasswordConfirmInput').val()){
-      Meteor.call('setUserPassword',{id: this._id, password: $('#profilePasswordInput').val() },function(error,result){
-        if(error){
-          console.error(error);
-        }
-        if(result){
-          Session.set('passwordConfirmed', false);
-          $('#profilePasswordConfirmInput').val('');
-          $('#profilePasswordInput').val('');
-          console.log(result);
-        }
-      });
-    }
-    event.preventDefault();
+UI.registerHelper('isStaleUserRecord', function(){
+  if(Session.get('isStaleUserRecord')){
+    return "visible";
+  }else{
+    return "hidden";
   }
 });
 
--
-
-// 'this' refers to the local data context defined by the router
-// it should refer to a record corresponding to the url/:id parameter
-// if it doesn't exist, we give an empty object
-// so the template can render anyway
+//-------------------------------------------------------------
+// USER EDIT PAGE
 
 Template.userEditPage.helpers({
   user: function(){
-    console.log('Template.userEditPage.user', this);
-
-    var user = Meteor.users.findOne({_id: Session.get('selectedUser')});
-
-    if(user){
-      return user;
+    if(this){
+      return this;
     }else{
       return {
         profile:{
@@ -272,26 +83,60 @@ Template.userEditPage.helpers({
       };
     }
   },
-  passwordIsValid: function(){
-    return Session.get('passwordConfirmed');
-  },
-  isValidated: function(){
-    if($("#profilePasswordInput").val() === ""){
-      return "";
-    }else{
-      if(Session.get('passwordConfirmed')){
-        return "has-success";
-      }else{
-        return "has-error";
-      }
-    }
-  },
   newOrEditUser: function(){
-    console.log('newOrEditUser', this);
     if(this._id){
       return "Edit User";
     }else{
       return "New User";
+    }
+  },
+  showBasicInfoCard:function(){
+    if(Session.get('defaultUserProfileCard') === 'basicInfoCard'){
+      return true;
+    }else{
+      return false;
+    }
+  },
+  showSecurityCard:function(){
+    if(Session.get('defaultUserProfileCard') === 'securityCard'){
+      Session.set('updatePasswordIsSuccessful', false);
+      return true;
+    }else{
+      return false;
+    }
+  },
+  showPreferencesCard:function(){
+    if(Session.get('defaultUserProfileCard') === 'preferencesCard'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+});
+
+Template.userEditPage.events({
+  'click #showBasicInfoCard':function(){
+    Session.set('defaultUserProfileCard', 'basicInfoCard');
+  },
+  'click #showSecurityCard':function(){
+    Session.set('defaultUserProfileCard', 'securityCard');
+  },
+  'click #showPreferencesCard':function(){
+    Session.set('defaultUserProfileCard', 'preferencesCard');
+  }
+});
+
+
+
+//-------------------------------------------------------------
+// CARDS - BASIC INFO
+
+Template.userBasicInfoCard.helpers({
+  isStaleUserRecord: function(){
+    if(Session.get('isStaleUserRecord')){
+      return "visible";
+    }else{
+      return "hidden";
     }
   },
   createOrSaveText: function(){
@@ -301,39 +146,6 @@ Template.userEditPage.helpers({
       return "Create User";
     }
   },
-  sysAdminButtonSelected: function(){
-    if(this.profile){
-      if(this.profile.role === "SysAdmin"){
-        return "active";
-      }
-    }
-  },
-  adminButtonSelected: function(){
-    if(this.profile){
-      if(this.profile.role === "Admin"){
-        return "active";
-      }
-    }
-  },
-  userButtonSelected: function(){
-    if(this.profile){
-      if(this.profile.role === "User"){
-        return "active";
-      }
-    }
-  }
-});
-
-
-
-
-
-
-
-//-------------------------------------------------------------
-// FORM GETTERS
-
-Template.userEditPage.helpers({
   getUsername: function(){
     if(this.username){
       return this.username;
@@ -362,51 +174,41 @@ Template.userEditPage.helpers({
       return "";
     }
   },
-  getSponsor: function(){
-    console.log("Template.userEditPage.getSponsor");
-    if(this.profile){
-      if(this.profile.sponsor){
-        console.log("this.profile.sponsor: " + this.profile.sponsor);
-        return this.profile.sponsor;
-      }else{
-        return "No sponsor set in profile.";
-      }
-    }else{
-      return Session.get('selectedSponsor').name;
-    }
-  },
-  getRole: function(){
-    console.log("Template.userEditPage.getRole");
-    if(this.profile){
-      if(this.profile.roles){
-        console.log("this.profile.role", this.profile.roles);
-        return this.profile.roles;
+  getRoles: function(){
+    console.log("Template.userEditPage.getRoles");
+
+    var user = Meteor.users.findOne({_id: Session.get('selectedUser')});
+    if(user && user.profile){
+      if(user.profile.roles){
+        //console.log("this.profile.role", user.profile.roles);
+        return user.profile.roles;
       }else{
         return "No role set.";
       }
     }else{
-      return Session.get('selectedUserRole').name;
-    }
-  },
-  getEmployer: function(){
-    if(Session.get('selectedSponsorId')){
-      return Session.get('selectedSponsorId').name;
-    }else{
-      if(this.profile){
-        return this.profile.employer;
+      if(Session.get('selectedRole') && Session.get('selectedRole').name && (Session.get('selectedRole').name !== "---")){
+        return Session.get('selectedRole').name;
       }else{
-        return "No employer in profile.";
+        return "Please select a user role.";
       }
     }
   },
-  getEmployerId: function(){
-    if(Session.get('selectedSponsorId')){
-      return Session.get('selectedSponsorId')._id;
-    }else{
-      if(this.profile){
-        return this.profile.employer_id;
+  getSponsor: function(){
+
+    var user = Meteor.users.findOne({_id: Session.get('selectedUser')});
+    if(user && user.profile){
+      if(user.profile.sponsor){
+        console.log("this.profile.sponsor: " + user.profile.sponsor);
+        return user.profile.sponsor;
       }else{
-        return "---";
+        return "No sponsor organization defined in profile.";
+      }
+    }else{
+      console.log('selectedSponsor', Session.get('selectedSponsor'));
+      if(Session.get('selectedSponsor') && (Session.get('selectedSponsor').name !== "---")){
+        return Session.get('selectedSponsor').name;
+      }else{
+        return "Please select a sponsor to be associated with.";
       }
     }
   },
@@ -423,54 +225,24 @@ Template.userEditPage.helpers({
     }else{
       return "";
     }
-  },
-  getHelpTipsVisible:function(value){
-    if(this.profile){
-      if(this.profile.helpTipsVisible === value){
-        return "btn-info";
-      }else{
-        return "btn-default";
-      }
-    }else{
-      return "btn-default";
-    }
-  },
-  getTableEntriesVisible:function(value){
-    if(this.profile){
-      if(this.profile.tableEntries === value){
-        return "btn-info";
-      }else{
-        return "btn-default";
-      }
-    }else{
-      return "btn-default";
-    }
   }
-});
+})
 
 
-
-
-
-//-------------------------------------------------------------
-
-Template.dirtyUserSave.events({
-  'click #submitProfileInfoButton':function(){
+Template.userBasicInfoCard.events({
+  'click #saveBasicInfoButton':function(){
 
     var input = {
       _id: this._id,
       username: $('#profileUsernameInput').val(),
       address: $('#profileEmailInput').val(),
-      password: $('#profilePasswordInput').val(),
+      password: Math.random().toString(36).slice(2,9),
+      //password: $('#profilePasswordInput').val(),
       profile:{
         name: $('#profileNameInput').val(),
         title: $('#profileTitleInput').val(),
-        company: $('#findCompanyButton').html(),
         avatar: $('#profileAvatarInput').val(),
-
-        employer: $('#profileEmployerInput').val(),
-        employer_id: $('#profileEmployerIdInput').val(),
-
+        roles: [],
         phone: $('#profilePhoneInput').val(),
         website: $('#profileWebsiteInput').val(),
         address: $('#profileAddressInput').val(),
@@ -480,44 +252,239 @@ Template.dirtyUserSave.events({
       }
     };
 
+
+    console.log('selectedSponsor', Session.get('selectedSponsor'));
+    if(Session.get('selectedSponsor')){
+      input.profile.sponsor = Session.get('selectedSponsor').name;
+      input.profile.sponsor_id = Session.get('selectedSponsor')._id;
+    }else{
+      input.profile.sponsor = this.employer;
+      input.profile.sponsor_id =  this.employer_id;
+    }
+
+    console.log('selectedRole', Session.get('selectedRole'));
+    if(Session.get('selectedRole') && (Session.get('selectedRole').name !== "---")){
+      input.profile.roles.push(Session.get('selectedRole').name);
+    }else{
+      input.profile.roles.push('Data Entry');
+    }
+
     if(this._id){
       Meteor.call('updateUser', input, function(error, result){
         if(error){
-          console.error('error updating user', error);
+          console.error(error);
         }
         if(result){
-          console.log('created user :' + result);
+          console.log('updated user:' + result);
+          Session.set('isStaleUserRecord', false);
         }
       });
     }else{
       Meteor.call('createNewUser', input, function(error, result){
         if(error){
-          console.error('error creating new user', error);
+          console.error(error);
         }
         if(result){
           console.log('created user :' + result);
-          Router.go('/users/');
+          Session.set('defaultUserProfileCard', 'securityCard');
+          Router.go('/user/edit/' + result);
         }
       });
     }
-    Session.set('isDirtyUserRecord', false);
+    Session.set('isStaleUserRecord', false);
+  },
+  'click #findSponsorButton':function(){
+    // we're going to have some funky scoping
+    // so grab the data context so 'this' can be reused
+    var self = this;
+
+    Session.set('selectedUser', this._id);
+    Session.set('showEmptyRecord', true);
+
+    $('#sponsorSearchModal').modal("show");
+
+    $('#sponsorSearchModal').on('hidden.bs.modal', function (e) {
+      var sponsor = Session.get('selectedSponsor');
+
+      if(sponsor){
+        if(self._id){
+          sponsor.user_id = self._id;
+          console.log("Sponsor", sponsor);
+
+          Meteor.call('setUserSponsor', sponsor, function(error, result){
+            if(error){
+              console.error(error);
+            }
+            if(result){
+              console.log('updated user employer:' + result);
+              Session.set('selectedSponsor', null);
+              //Session.set('isStaleUserRecord', true);
+            }
+          });
+        }else{
+          // if this is a new user, we want to update the DOM form element
+          $('#findSponsorButton').html(Session.get('selectedSponsor').name);
+          Session.set('isStaleUserRecord', true);
+        }
+
+      }
+      // setting the record dirty may not be needed, if we want to save things right away
+      // but we set it just to be safe
+      Session.set('isDirtyRecord', true);
+    });
+
+  },
+  'click #findRoleButton': function(){
+    // we're going to have some funky scoping
+    // so grab the data context so 'this' can be reused
+    var self = this;
+
+    // trigger our modal dialog
+    $('#selectRoleModal').modal("show");
+
+    // this is stuff we do when the modal closes
+    $('#selectRoleModal').on('hidden.bs.modal', function (e) {
+
+      // we only do the following if they actually selected a role
+      // and didn't cancel
+      var role = Session.get('selectedRole');
+      console.log('selectedRole', role);
+
+      if(role){
+        // if this is editing an existing user
+        if(self._id){
+
+          //we call a server side method to update the record for us
+          Meteor.call('setUserRole', self._id, role.name, function(error, result){
+            if(error){
+              console.error(error);
+            }
+            if(result){
+              console.log('updated role :' + result);
+            }
+          });
+        }else{
+          // if this is a new user, we want to update the DOM form element
+          $('#findRoleButton').html(Session.get('selectedRole').name);
+          Session.set('isStaleUserRecord', true);
+        }
+      }
+
+      // regardless of whether they selected a role or canceled
+      // we now want to reset variables and clean up after ourselves
+      //Session.set('isStaleUserRecord', true);
+      //Session.set('selectedRole', null);
+    });
+
+  },
+  'keydown #profileUsernameInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileEmailInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileNameInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileTitleInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileCompanyInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileAvatarInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profilePhoneInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileWebsiteInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileAddressInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileCityInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileStateInput':function(){
+    Session.set('isStaleUserRecord', true);
+  },
+  'keydown #profileZipInput':function(){
+    Session.set('isStaleUserRecord', true);
   }
 });
 
 
-Template.dirtyUserSave.helpers({
-  createOrSaveText: function(){
-    if(this._id){
-      return "Save Changes";
+
+//-------------------------------------------------------------
+// CARDS - SECURITY
+
+Template.userSecurityCard.helpers({
+  passwordIsValid: function(){
+    return Session.get('passwordConfirmed');
+  },
+  isValidated: function(){
+    if($("#profilePasswordInput").val() === ""){
+      return "";
     }else{
-      return "Create User";
+      if(Session.get('passwordConfirmed')){
+        return "has-success";
+      }else{
+        return "has-error";
+      }
     }
   },
-  isDirtyUserRecord: function(){
-    if(Session.get('isDirtyUserRecord')){
-      return "visible";
+  showSuccessMessage: function(){
+    return Session.get('updatePasswordIsSuccessful');
+  }
+});
+
+Template.userSecurityCard.events({
+  'keyup #profilePasswordInput':function(){
+    if($('#newPasswordInput').val() === $('#confirmPasswordInput').val()){
+      if($('#newPasswordInput').val() !== ""){
+        Session.set('passwordConfirmed', true);
+      }else{
+        Session.set('passwordConfirmed', false);
+      }
     }else{
-      return "hidden";
+      Session.set('passwordConfirmed', false);
     }
+  },
+  'keyup #profilePasswordConfirmInput':function(){
+    if($('#newPasswordInput').val() === $('#confirmPasswordInput').val()){
+      Session.set('passwordConfirmed', true);
+    }else{
+      Session.set('passwordConfirmed', false);
+    }
+  },
+  'keydown #profilePasswordInput':function(){
+    Session.set('isStalePassword', true);
+  },
+  'keydown #profilePasswordConfirmInput':function(){
+    Session.set('isStalePassword', true);
+  },
+  'click #updatePasswordButton':function(event){
+    if($('#newPasswordInput').val() === $('#confirmPasswordInput').val()){
+      console.log('settingUserPassword...');
+      Meteor.call('setUserPassword',{_id: this._id, password: $('#newPasswordInput').val() },function(error,result){
+        if(error){
+          Session.get('updatePasswordIsSuccessful', false);
+          Session.set('errorMessage', error);
+          Session.set('showErrorMessage', true);
+
+          console.error(error);
+        }
+        if(result){
+          Session.set('updatePasswordIsSuccessful', true);
+          Session.set('passwordConfirmed', false);
+          $('#profilePasswordConfirmInput').val('');
+          $('#profilePasswordInput').val('');
+          console.log(result);
+        }
+      });
+    }
+    event.preventDefault();
   }
 });

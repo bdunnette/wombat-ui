@@ -68,12 +68,26 @@ Template.usersListPage.events({
   },
   'keyup #usersSearchInput':function(){
     Session.set('usersListSearchFilter', $('#usersSearchInput').val());
+  },
+  'click #newUserButton':function(){
+    Router.go('/user/new');
   }
 });
 
 
 //-------------------------------------------------------------
+// USER LIST ITEM
 
+Template.userListItem.events({
+  'click .label':function(event){
+    if(this.profile.active){
+      Meteor.users.update({_id: this._id},{$set:{'profile.active': false }});
+    }else{
+      Meteor.users.update({_id: this._id},{$set:{'profile.active': true }});
+    }
+    event.stopPropagation();
+  }
+});
 Template.userListItem.helpers({
   getEmail: function(){
     if(this.emails){

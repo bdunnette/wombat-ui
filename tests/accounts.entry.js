@@ -6,10 +6,20 @@ module.exports = {
     client
       .url("http://localhost:3000")
 
+      //========================================================================
+      // LANDING PAGE
+
       .waitForElementVisible("body", 1000)
       .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+
+      .click("#signInLink").pause(200)
+      .pause(1000)
 
       .click("#signInLink")
+
+      //========================================================================
+      // SIGN IN PAGE
 
       .waitForElementVisible("#entrySignInPage", 1000)
       .waitForElementVisible("#emailInput", 1000)

@@ -49,9 +49,6 @@
 //     user.profile.name = user.username;
 //   }
 //
-//   if(!user.access_token){
-//     user.access_token = Insights.randomString(25);
-//   }
 //
 //   console.log(JSON.stringify(user));
 //   console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
@@ -61,15 +58,15 @@
 
 
 Meteor.methods({
-  setUserEmployer:function(employer){
-    console.log('setUserEmployer');
-    console.log(employer);
-    var result = Meteor.users.update(employer.user_id,{$set:{
-      'profile.company': employer.name,
-      'profile.employer': employer.name,
-      'profile.employer_id': employer._id
+  setUserSponsor:function(sponsor){
+    console.log('setUserSponsor');
+    console.log(sponsor);
+
+    return Meteor.users.update(sponsor.user_id,{$set:{
+      'profile.company': sponsor.name,
+      'profile.sponsor': sponsor.name,
+      'profile.sponsor_id': sponsor._id
     }});
-    return result;
   },
   setUserPassword: function(options){
     console.log('setUserPassword');
@@ -83,22 +80,6 @@ Meteor.methods({
       console.log('Error changing password. Access denied.');
       return 'Error changing password. Access denied.';
     }
-  },
-  createAccessToken: function(){
-    console.log('createAccessToken for user ' + Meteor.userId());
-
-    var access_token = Insights.randomString(25);
-    try{
-      console.log(access_token);
-      Meteor.users.update({_id: Meteor.userId()},{$set:{
-        access_token: access_token
-      }});
-      console.log(Meteor.user());
-      return access_token;
-    }catch(message){
-      console.error(message);
-    }
-    return access_token;
   },
 
   updateUserRole: function(input){
@@ -124,21 +105,12 @@ Meteor.methods({
     console.log(result);
     return result;
   },
-  removeUser: function(userId){
-    console.log('removing user...' + userId);
 
-    var result = Meteor.users.remove({_id: userId });
-
-    console.log(result);
-    return result;
-
-  },
   isAdmin: function (userId) {
     check(userId, String);
-    console.log('checking if user ' + userId + ' is an Admin...');
+
     var user = Meteor.users.findOne(userId);
-    console.log(user.profile.role);
-    if(user.profile.role == "Admin"){
+    if((user.profile.role[0] === "Admin") || (user.profile.role[0] === "SysAdmin")){
       return true;
     }else{
       return false;
@@ -147,32 +119,20 @@ Meteor.methods({
   isModerator: function (userId) {
     check(userId, String);
 
-    try{
-      console.log('checking if user ' + userId + ' is a Moderator...');
-      var user = Meteor.users.findOne(userId);
-      if(user.profile.role == "Moderator"){
-        return true;
-      }else{
-        return false;
-      }
-    }catch(error){
-      console.log(error);
+    var user = Meteor.users.findOne(userId);
+    if(user.profile.role == "Moderator"){
+      return true;
+    }else{
       return false;
     }
   },
   isEditor: function (userId) {
     check(userId, String);
 
-    try{
-      console.log('checking if user ' + userId + ' is an Editor...');
-      var user = Meteor.users.findOne(userId);
-      if(user.profile.role == "Editor"){
-        return true;
-      }else{
-        return false;
-      }
-    }catch(error){
-      console.log(error);
+    var user = Meteor.users.findOne(userId);
+    if(user.profile.role === "Editor"){
+      return true;
+    }else{
       return false;
     }
   }

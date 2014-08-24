@@ -109,6 +109,13 @@ Template.navbarFooter.helpers({
 
 
 Template.navbarFooter.events({
+  'click #deleteUserRecordLink':function(){
+    Meteor.call('removeUser', Session.get('selectedUser'), function(error, result){
+      if(result){
+        Meteor.go('/users');
+      }
+    });
+  },
   'click #logOutLink':function(){
     Router.go('/sign-out');
   },

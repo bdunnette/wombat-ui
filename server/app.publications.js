@@ -23,6 +23,9 @@ Meteor.publish('comments', function(){
 Meteor.publish('usersDirectory', function(){
   return Meteor.users.find();
 });
+Meteor.publish('userProfile', function(userId){
+  return Meteor.users.find({_id: userId});
+});
 
 
 Meteor.publish(null, function (){

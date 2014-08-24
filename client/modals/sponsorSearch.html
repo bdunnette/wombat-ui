@@ -4,11 +4,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Select Sponsor</h4>
+          <h4 id="sponsorSearchModalTitle">Select Sponsor</h4>
         </div>
         <div class="modal-body">
           <input type="text" id="sponsorSearchModalInput" name="sponsorSearchModalInput" class="fullwidth form-control" placeholder="search..." value="{{getSearchTerm}}">
-          <ul class="list-group">
+          <ul id="sponsorSearchModalResults" class="list-group">
             {{#each sponsorList}}
               {{>sponsorSearchModalItem}}
             {{/each}}
