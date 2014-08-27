@@ -18,12 +18,20 @@
               <div class="row">
                 <div class="col-md-8">
                   <h3 id="profileUserName" class="name">{{ username }}</h3>
-                  <span id="profileUserIdLabel" class="area">User Id: <span id="profileUserId">{{_id}}</span></span><br>
+                  <span id="profileUserIdLabel" class="area">User ID:</span><span id="profileUserId">{{_id}}</span><br>
                 </div>
                 <div class="col-md-4">
-                  <a id="editProfileButton" class="btn btn-info pull-right edit">
+                  <!-- <a id="editProfileButton" class="btn btn-info pull-right edit">
                     Edit Profile
-                  </a>
+                  </a> -->
+                  {{#if isAdmin}}
+                    <div class="btn-group pull-right">
+                      <button id="editProfileButton" class="medium btn btn-warning">Edit Profile</button>
+                      <button id="deleteProfileButton" class="medium btn btn-danger">Delete</button>
+                    </div>
+                  {{else}}
+                    <button id="editProfileButton" class="medium btn btn-warning">Edit</button>
+                  {{/if}}
                 </div>
               </div>
               <hr>
@@ -31,29 +39,44 @@
                 <div class="col-md-9">
 
                     <div class="col-md-12">
-                      <h6 id="profileFullNameLabel">Full Name</h6>
+
+                      <label id="profileUsernameLabel">Username</label>
+                      <p id="profileUsername">{{username}}</p>
+                      <br>
+
+                      <!-- <label id="profileUserIdLabel">User ID</label>
+                      <p id="profileUserId">{{_id}}</p>
+                      <br> -->
+
+                      <label id="profileFullNameLabel">Full Name</label>
                       <p id="profileFullName">{{ profile.name }}</p>
                       <br>
 
-                      <h6 id="profileUserRoleLabel">Roles</h6>
+                      <label id="profileUserRoleLabel">Roles</label>
                       <p id="profileUserRole">{{ profile.roles }}</p>
                       <br>
 
-                      <h6 id="profileSelectedStudyLabel">Selected Study</h6>
-                      <p id="profileSelectedStudyText">{{getSelectedStudyName}}</p>
+                      <label id="profileUsernameLabel">Username</label>
+                      <p id="profileUsername">{{ username}}</p>
                       <br>
 
-                      <h6 id="profileSelectedStudyIdLabel">Selected Study Id</h6>
-                      <p id="profileSelectedStudyIdText">{{getSelectedStudyId}}</p>
+
+                      <label id="profileSponsorLabel">Sponsor</label>
+                      <p id="profileSponsor">{{ profile.sponsor }}</p>
                       <br>
 
-                      <h6 id="profileOrganizationLabel">Sponsor Name</h6>
-                      <p id="profileOrganizationText">{{ getSponsorName }}</p>
+                      <label id="profileSponsorIdLabel">Sponsor ID</label>
+                      <p id="profileSponsorId">{{ profile.sponsor_id}}</p>
                       <br>
 
-                      <h6 id="profileOrganizationIdLabel">Sponsor Id</h6>
-                      <p id="profileOrganizationIdText">{{ getSponsorId }}</p>
+                      <label id="profileBiographyLabel">Biography</label>
+                      <p id="profileBiography">{{profile.biography}}</p>
                       <br>
+
+
+
+
+
                     </div>
 
                 </div>

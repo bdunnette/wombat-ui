@@ -23,11 +23,10 @@ Router.map(function(){
     template: 'userEditPage',
     onBeforeAction: function(){
       Session.set('selectedUser', this.params.id);
-      //Session.set('defaultUserProfileCard', 'basicInfoCard');
     },
     waitOn: function(){
-      Meteor.subscribe('userDirectory');
-      return Meteor.subscribe('userProfile');
+      return Meteor.subscribe('userDirectory');
+      //return Meteor.subscribe('userProfile');
     },
     data: function () {
       //console.log('this.params.id',this.params.id);
@@ -46,7 +45,7 @@ Router.map(function(){
       Session.set('defaultUserProfileCard', 'basicInfoCard');
     },
     waitOn: function(){
-      return Meteor.subscribe('userProfile');
+      return Meteor.subscribe('userDirectory');
     },
     data: function () {
       return {};
@@ -89,29 +88,23 @@ Template.userEditPage.helpers({
     }else{
       return "New User";
     }
-  },
-  showBasicInfoCard:function(){
-    if(Session.get('defaultUserProfileCard') === 'basicInfoCard'){
-      return true;
-    }else{
-      return false;
-    }
-  },
-  showSecurityCard:function(){
-    if(Session.get('defaultUserProfileCard') === 'securityCard'){
-      Session.set('updatePasswordIsSuccessful', false);
-      return true;
-    }else{
-      return false;
-    }
-  },
-  showPreferencesCard:function(){
-    if(Session.get('defaultUserProfileCard') === 'preferencesCard'){
-      return true;
-    }else{
-      return false;
-    }
   }
+
+  // showSecurityCard:function(){
+  //   if(Session.get('defaultUserProfileCard') === 'securityCard'){
+  //     Session.set('updatePasswordIsSuccessful', false);
+  //     return true;
+  //   }else{
+  //     return false;
+  //   }
+  // },
+  // showPreferencesCard:function(){
+  //   if(Session.get('defaultUserProfileCard') === 'preferencesCard'){
+  //     return true;
+  //   }else{
+  //     return false;
+  //   }
+  // }
 });
 
 Template.userEditPage.events({
@@ -132,6 +125,13 @@ Template.userEditPage.events({
 // CARDS - BASIC INFO
 
 Template.userBasicInfoCard.helpers({
+  basicInfoCardVisible:function(){
+    if(Session.get('defaultUserProfileCard') === 'basicInfoCard'){
+      return "visible";
+    }else{
+      return "hidden";
+    }
+  },
   isStaleUserRecord: function(){
     if(Session.get('isStaleUserRecord')){
       return "visible";
@@ -421,19 +421,26 @@ Template.userBasicInfoCard.events({
 // CARDS - SECURITY
 
 Template.userSecurityCard.helpers({
-  passwordIsValid: function(){
-    return Session.get('passwordConfirmed');
-  },
-  isValidated: function(){
-    if($("#profilePasswordInput").val() === ""){
-      return "";
+  securityCardVisible:function(){
+    if(Session.get('defaultUserProfileCard') === 'securityCard'){
+      return "visible";
     }else{
+      return "hidden";
+    }
+  },
+  // passwordIsValid: function(){
+  //   return Session.get('passwordConfirmed');
+  // },
+  isValidated: function(){
+    //if($("#newPasswordInput").val() === ""){
+    //  return "";
+    //}else{
       if(Session.get('passwordConfirmed')){
         return "has-success";
       }else{
         return "has-error";
       }
-    }
+    //}
   },
   showSuccessMessage: function(){
     return Session.get('updatePasswordIsSuccessful');
@@ -451,6 +458,7 @@ Template.userSecurityCard.events({
     }else{
       Session.set('passwordConfirmed', false);
     }
+    console.log('passwordConfirmed', Session.get('passwordConfirmed'));
   },
   'keyup #profilePasswordConfirmInput':function(){
     if($('#newPasswordInput').val() === $('#confirmPasswordInput').val()){
@@ -459,32 +467,45 @@ Template.userSecurityCard.events({
       Session.set('passwordConfirmed', false);
     }
   },
-  'keydown #profilePasswordInput':function(){
-    Session.set('isStalePassword', true);
-  },
-  'keydown #profilePasswordConfirmInput':function(){
-    Session.set('isStalePassword', true);
-  },
-  'click #updatePasswordButton':function(event){
+  // 'keydown #profilePasswordInput':function(){
+  //   Session.set('isStalePassword', true);
+  // },
+  // 'keydown #profilePasswordConfirmInput':function(){
+  //   Session.set('isStalePassword', true);
+  // },
+  'click #updatePasswordButton':function(){
     if($('#newPasswordInput').val() === $('#confirmPasswordInput').val()){
       console.log('settingUserPassword...');
-      Meteor.call('setUserPassword',{_id: this._id, password: $('#newPasswordInput').val() },function(error,result){
+      return foo = Meteor.call('setUserPassword',{_id: this._id, password: $('#newPasswordInput').val() },function(error,result){
         if(error){
-          Session.get('updatePasswordIsSuccessful', false);
+          Session.set('updatePasswordIsSuccessful', false);
           Session.set('errorMessage', error);
           Session.set('showErrorMessage', true);
-
           console.error(error);
         }
         if(result){
-          Session.set('updatePasswordIsSuccessful', true);
           Session.set('passwordConfirmed', false);
-          $('#profilePasswordConfirmInput').val('');
-          $('#profilePasswordInput').val('');
+          Session.set('updatePasswordIsSuccessful', true);
+          console.log('updatePasswordIsSuccessfulInner', Session.get('updatePasswordIsSuccessful'));
+          $('#newPasswordInput').val('');
+          $('#confirmPasswordInput').val('');
           console.log(result);
         }
       });
     }
-    event.preventDefault();
+    console.log('updatePasswordIsSuccessfulOuter', Session.get('updatePasswordIsSuccessful'));
+    //event.preventDefault();
+  }
+});
+
+
+//-----------------------------------------
+Template.userPreferencesCard.helpers({
+  preferencesCardVisible:function(){
+    if(Session.get('preferencesCardVisible') === 'preferencesCard'){
+      return "visible";
+    }else{
+      return "hidden";
+    }
   }
 });

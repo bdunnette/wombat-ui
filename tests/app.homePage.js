@@ -82,17 +82,14 @@ module.exports = {
       // saveFormsTile
       .verify.elementPresent('#savedFormsTile')
       .verify.elementPresent('#savedFormsTileImage')
-      .verify.elementPresent('#savedFormsTileLink')
 
       // collectedDataTile
       .verify.elementPresent('#collectedDataTile')
       .verify.elementPresent('#collectedDataTileImage')
-      .verify.elementPresent('#collectedDataTileLink')
 
       // formBuilderTile
       .verify.elementPresent('#formBuilderTile')
       .verify.elementPresent('#formBuilderTileImage')
-      .verify.elementPresent('#formBuilderTileLink')
 
 
       .verify.elementPresent('#zoomInstructions')

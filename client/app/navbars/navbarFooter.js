@@ -156,6 +156,7 @@ Template.navbarFooter.events({
   // TODO refactor #clearFormLink to #clearBuilderLink
   'click #clearFormLink':function(){
     Meteor.call('dropForm');
+    Session.set('selectedBuilderTab','addNewFieldTab');
   },
 
 

@@ -28,36 +28,34 @@ module.exports = {
 
 
       // studies
-      .click("#studiesLink")
-      .pause(500)
+      .click("#studiesTile").pause(500)
       .verify.elementPresent("#studiesListPage")
+      .click('#navbarBrandLink').pause(500)
 
       // forms
-      .click("#savedFormLink")
-      .pause(500)
+      .click("#savedFormsTile").pause(500)
       .verify.elementPresent("#formsListPage")
+      .click('#navbarBrandLink').pause(500)
 
       // data
-      .click("#collectedDataLink")
-      .pause(500)
+      .click("#collectedDataTile").pause(500)
       .verify.elementPresent("#dataListPage")
+      .click('#navbarBrandLink').pause(500)
 
       // design
-      .click("#newFormLink")
-      .pause(500)
+      .click("#formBuilderTile").pause(500)
       .verify.elementPresent("#builderPage")
+      .click('#navbarBrandLink').pause(500)
 
       // clients
-      .click("#sponsorsLink")
-      .pause(500)
+      .click("#sponsorsTile").pause(500)
       .verify.elementPresent("#sponsorsListPage")
+      .click('#navbarBrandLink').pause(500)
 
       // users
-      .click("#usersLink")
-      .pause(500)
+      .click("#usersTile").pause(500)
       .verify.elementPresent("#usersListPage")
-
-
+      .click('#navbarBrandLink').pause(500)
 
       // click glossary
       .click("#northeastDropDownLink")

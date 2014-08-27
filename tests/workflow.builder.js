@@ -3,6 +3,9 @@
 
 module.exports = {
   "Form Builder" : function (client) {
+
+    var formName = "Test Form - " + Math.random().toString(10).slice(2,6);
+
     client
       .url("http://localhost:3000")
 
@@ -25,110 +28,105 @@ module.exports = {
 
       .waitForElementVisible("#homePage", 1000)
 
+      .verify.elementPresent("#activeStudiesTile")
+      .verify.elementPresent("#formBuilderTile")
+      .verify.elementPresent("#savedFormsTile")
+      .verify.elementPresent("#collectedDataTile")
+      .verify.elementPresent("#studiesTile")
+      .verify.elementPresent("#sponsorsTile")
+      .verify.elementPresent("#usersTile")
+      .verify.elementPresent("#subjectsTile")
+      .verify.elementPresent("#commentsTile")
+      .verify.elementPresent("#auditTile")
 
-      // navigate to the form builder
-      .click("#newFormLink").pause(500)
-      .verify.elementPresent("#builderPage")
-      .verify.elementPresent('#sortableListPanel')
-      .verify.elementPresent('#list')
-
-      // confirm footer elements; sidebar elements
-      .verify.elementPresent('#clearFormLink')
-      .verify.elementPresent('#saveFormLink')
-
-      .verify.elementPresent('#westPanel')
-      .verify.elementPresent('#addNewFieldTab')
-      .verify.elementPresent('#editFieldTab')
-
-      .verify.elementPresent('#addNewFieldPanel')
-      .verify.elementPresent('#textInputBlock')
-      .verify.elementPresent('#textareaInputBlock')
-      .verify.elementPresent('#numericInputBlock')
-      .verify.elementPresent('#spacerBlock')
-      .verify.elementPresent('#sectionTitleBlock')
-      .verify.elementPresent('#yesNoInputBlock')
-
-      .verify.visible('#addNewFieldTab')
-
-      // clear all elements in the form
-      .click('#clearFormLink')
-      .verify.elementNotPresent('#list .item:first-child')
-
-      // the edit tab shouldn't work until a item is selected
-      .click('#editFieldTab').pause(200)
-      .verify.elementNotPresent('#editFieldPanel')
-
-      //----------------------------------------------------------------------
-      // TEXTBOX
-
-      // clicking textbox control in the sidebar should create a textbox
-      .click('#textInputBlock').pause(200)
-      .verify.elementPresent('#list .item:first-child')
-      .verify.cssClassPresent('#list .item:first-child', 'selected')
-
-      // edit the textblock item, make sure it updates in the list
-      .verify.visible('#editFieldTab')
-      .verify.elementPresent('#questionInput')
-      .verify.elementPresent('#defaultValueInput')
-      .clearValue('#questionInput')
-      .clearValue('#defaultValueInput')
-      .setValue('#questionInput', "Full Name")
-
-      .click('#saveFormBlockParamsButton').pause(100)
-      .verify.elementPresent('#list .item:first-child')
-      .verify.cssClassPresent('#list .item:first-child', 'selected')
-      .verify.elementPresent('#list .item:first-child .blockLabel')
-      .verify.containsText('#list .item:first-child .blockLabel', 'Full Name')
-
-      .click('#addNewFieldTab').pause(200)
-      .verify.elementPresent('#addNewFieldPanel')
+      .click('#formBuilderTile').pause(500)
 
 
-      //----------------------------------------------------------------------
-      // YESNO BLOCK
+      //========================================================================
+      // FORM BUILDER
 
-      // clicking yesno control in the sidebar should create a yesno block
-      .click('#yesNoInputBlock').pause(200)
-      .verify.elementPresent('#list .item:nth-child(2)')
-      .verify.cssClassPresent('#list .item:nth-child(2)', 'selected')
-      .clearValue('#questionInput')
-      .clearValue('#defaultValueInput')
-      .setValue('#questionInput', "Are you alergic to asprin?")
+        // navigate to the form builder
+        .verify.elementPresent("#builderPage")
+        .verify.elementPresent('#sortableListPanel')
+        .verify.elementPresent('#list')
 
-      .click('#saveFormBlockParamsButton').pause(100)
-      .verify.elementPresent('#list .item:nth-child(2)')
-      .verify.cssClassPresent('#list .item:nth-child(2)', 'selected')
-      .verify.elementPresent('#list .item:nth-child(2) .yesNoText')
-      .verify.containsText('#list .item:nth-child(2) .yesNoText', 'Are you alergic to asprin?')
+        // confirm footer elements; sidebar elements
+        .verify.elementPresent('#clearFormLink')
+        .verify.elementPresent('#saveFormLink')
 
-      .click('#addNewFieldTab').pause(200)
-      .verify.elementPresent('#addNewFieldPanel')
+        .verify.elementPresent('#westPanel')
+        .verify.elementPresent('#addNewFieldTab')
+        .verify.elementPresent('#editFieldTab')
 
-      //----------------------------------------------------------------------
-      // DATETIME BLOCK
+        .verify.elementPresent('#addNewFieldPanel')
+        .verify.elementPresent('#textInputBlock')
+        .verify.elementPresent('#textareaInputBlock')
+        .verify.elementPresent('#numericInputBlock')
+        .verify.elementPresent('#spacerBlock')
+        .verify.elementPresent('#sectionTitleBlock')
+        .verify.elementPresent('#yesNoInputBlock')
 
-      // clicking yesno control in the sidebar should create a yesno block
-      .click('#dateTimeInputBlock').pause(200)
-      .verify.elementPresent('#list .item:nth-child(3)')
-      .verify.cssClassPresent('#list .item:nth-child(3)', 'selected')
-      .clearValue('#questionInput')
-      .clearValue('#defaultValueInput')
-      .setValue('#questionInput', "What day was your first adverse reaction?")
-
-      .click('#saveFormBlockParamsButton').pause(100)
-      .verify.elementPresent('#list .item:nth-child(3)')
-      .verify.cssClassPresent('#list .item:nth-child(3)', 'selected')
-      .verify.elementPresent('#list .item:nth-child(3) .dateTimeText')
-      .verify.containsText('#list .item:nth-child(3) .dateTimeText', 'What day was your first adverse reaction?')
+        .verify.visible('#addNewFieldTab')
 
 
-      // click glossary
-      .click("#northeastDropDownLink")
-      .pause(500)
-      .verify.elementPresent("#northeastDropDownMenu")
-      .click("#signOutLink")
-      .pause(2000)
-      .waitForElementVisible("#landingPage", 1000)
+        // clear all elements in the form
+        .click('#clearFormLink')
+        .verify.elementNotPresent('#list .item:first-child')
+
+        // the edit tab shouldn't work until a item is selected
+        .click('#editFieldTab').pause(200)
+        .verify.elementNotPresent('#editFieldPanel')
+
+        //----------------------------------------------------------------------
+        // TEXTBOX
+
+        // clicking textbox control in the sidebar should create a textbox
+        .click('#textInputBlock').pause(200)
+        .verify.elementPresent('#list .item:first-child')
+        .verify.cssClassPresent('#list .item:first-child', 'selected')
+
+        // edit the textblock item, make sure it updates in the list
+        .verify.visible('#editFieldTab')
+        .verify.elementPresent('#questionInput')
+        .verify.elementPresent('#defaultValueInput')
+        .verify.elementPresent('#orderInput')
+        .clearValue('#questionInput')
+        .clearValue('#defaultValueInput')
+        .setValue('#questionInput', "Full Name")
+        .verify.attributeEquals('#orderInput', 'value', '1')
+
+        .click('#saveFormBlockParamsButton').pause(100)
+        .verify.elementPresent('#list .item:first-child')
+        .verify.cssClassPresent('#list .item:first-child', 'selected')
+        .verify.elementPresent('#list .item:first-child .blockLabel')
+        .verify.containsText('#list .item:first-child .blockLabel', 'Full Name')
+
+        .click('#addNewFieldTab').pause(200)
+        .verify.elementPresent('#addNewFieldPanel')
+
+
+        //----------------------------------------------------------------------
+        // YESNO BLOCK
+
+        // clicking yesno control in the sidebar should create a yesno block
+        .click('#yesNoInputBlock').pause(200)
+        .verify.elementPresent('#list .item:nth-child(2)')
+        .verify.cssClassPresent('#list .item:nth-child(2)', 'selected')
+        .clearValue('#questionInput')
+        .clearValue('#defaultValueInput')
+        .setValue('#questionInput', "Are you alergic to asprin?")
+        .verify.attributeEquals('#orderInput', 'value', '2')
+
+        .click('#saveFormBlockParamsButton').pause(100)
+        .verify.elementPresent('#list .item:nth-child(2)')
+        .verify.cssClassPresent('#list .item:nth-child(2)', 'selected')
+        .verify.elementPresent('#list .item:nth-child(2) .yesNoText')
+        .verify.containsText('#list .item:nth-child(2) .yesNoText', 'Are you alergic to asprin?')
+
+        .clearValue('#formTitleInput')
+        .setValue('#formTitleInput', formName)
+
+
       .end();
   }
 };

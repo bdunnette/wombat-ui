@@ -3,169 +3,92 @@
 
 
 module.exports = {
-  "Users Workflow" : function (client) {
+  "Password Workflow" : function (client) {
 
-    var date = new Date();
-    var currentYear = date.getFullYear();
-    var currentHour = date.getHours();
-    var currentMinutes = date.getMinutes();
-    if(currentHour > 12){
-      currentHour = currentHour - 12;
-    }
-
+    var username = "fozzybear";
+    var userFullName = "Fozzy Bear";
+    var userEmail = "fozzy@clinical-trials.lifesupport.io";
+    var originalPassword = "RubberChicken";
+    var newPassword = "KnockKnock";
+    var newNewPassword = "WockaWockaWocka";
+    var userUrl = "http://en.wikipedia.org/wiki/Fozzie_Bear";
+    var userAvatar = "http://img2.wikia.nocookie.net/__cb20120410231906/muppet/images/thumb/b/b5/Fozzie2.jpg/300px-Fozzie2.jpg";
+    var userRole = "Reviewer";
+    var userSponsor = "ACME Pharmaceuticals";
+    var currentYear = "2014";
+    var userTitle = "Comedian";
+    var userPhone = "888-555-1234";
+    var userAddress = "123 Joke Street";
+    var userCity = "Laughsville";
+    var userState = "AL";
+    var userZip = "72138";
 
     client.url("http://localhost:3000")
 
+    //========================================================================
+    // LANDING PAGE
+
+    .waitForElementVisible("body", 1000)
+    .verify.elementPresent('#landingPage')
+    .verify.elementPresent('#signInLink')
+
+    .click("#signInLink").pause(200)
+    .pause(1000)
+
+
+    //========================================================================
+    // SIGN IN PAGE
+
+    .waitForElementVisible("#entrySignInPage", 1000)
+      .verify.elementPresent("#emailInput")
+      .verify.elementPresent("#passwordInput")
+      .verify.elementPresent("#entrySignInButton")
+    .setValue("#emailInput", "sysadmin")
+    .setValue("#passwordInput", "sysadmin321$")
+    .click("#entrySignInButton")
+    .pause(1000)
 
       //========================================================================
-      // LANDING PAGE
+      // A. INTRO/HOME PAGE (SYSADMIN)
 
-      .waitForElementVisible("body", 1000)
-      .verify.elementPresent('#landingPage')
-      .verify.elementPresent('#signInLink')
+      .verify.elementPresent('#homePage', "================================================")
+      .verify.elementPresent('#homePage', "== A. INTRO/HOME PAGE (SYSADMIN)")
 
-      .click("#signInLink").pause(200)
-      .pause(1000)
 
-      //========================================================================
-      // SIGN IN PAGE
+      .verify.elementPresent("#activeStudiesTile")
+      .verify.elementPresent("#formBuilderTile")
+      .verify.elementPresent("#savedFormsTile")
+      .verify.elementPresent("#collectedDataTile")
+      .verify.elementPresent("#studiesTile")
+      .verify.elementPresent("#sponsorsTile")
+      .verify.elementPresent("#usersTile")
+      .verify.elementPresent("#subjectsTile")
+      .verify.elementPresent("#commentsTile")
+      .verify.elementPresent("#auditTile")
 
-      .waitForElementVisible("#entrySignInPage", 1000)
-        .verify.elementPresent("#emailInput")
-        .verify.elementPresent("#passwordInput")
-        .verify.elementPresent("#entrySignInButton")
-      .setValue("#emailInput", "sysadmin")
-      .setValue("#passwordInput", "sysadmin321$")
-      .click("#entrySignInButton")
-      .pause(1000)
-
+      .click('#usersTile')
 
       //========================================================================
-      // INTRO/HOME PAGE
-
-      // click the ThinAire logo, and open the sidebar
-      .click("#navbarBrandLink")
-      .pause(1000)
-
-      .waitForElementVisible("#sidebarTemplate", 1000)
-        .verify.elementPresent('#sidebarNav')
-        .verify.elementPresent('#sidebarMenu')
-        .verify.elementPresent('#sidebarMenuHomeItem')
-        .verify.elementPresent('#sidebarMenuHomeLink')
-        .verify.elementPresent('#sidebarMenuCampaignsItem')
-        .verify.elementPresent('#sidebarMenuCampaignsLink')
-        .verify.elementPresent('#sidebarMenuUsersItem')
-        .verify.elementPresent('#sidebarMenuUsersLink')
-        .verify.elementPresent('#sidebarMenuClientsItem')
-        .verify.elementPresent('#sidebarMenuClientsLink')
-
-      .click("#sidebarMenuUsersLink")
-      .pause(1000)
-
-      //========================================================================
-      // USERS LIST PAGE
+      // B. USERS LIST PAGE (SYSADMIN)
 
       // test that the page contains search and control elements
       .waitForElementVisible("#usersListPage", 1000)
-        .verify.elementPresent('#usersListPageTitle')
-        .verify.containsText("#usersListPageTitle", "Users")
 
-        .verify.elementPresent('.searchColumn')
-        .verify.elementPresent('#usersSearchInput')
-        .verify.containsText("#usersSearchInput", "")
-
-        .verify.elementPresent('.newRecordColumn')
-        .verify.elementPresent('#newUserButton')
-        .verify.containsText("#newUserButton", "NEW USER")
-
-      // test the table
-      .verify.elementPresent('#usersTable')
-        .verify.elementPresent('#usersTableUsernameColumn')
-        .verify.containsText("#usersTableUsernameColumn", "Username")
-        .verify.elementPresent('#usersTableCreatedAtColumn')
-        .verify.containsText("#usersTableCreatedAtColumn", "CreatedAt")
-        .verify.elementPresent('#usersTableLastLoginColumn')
-        .verify.containsText("#usersTableLastLoginColumn", "Last Login")
-        .verify.elementPresent('#usersTableLastLoginColumn')
-        .verify.containsText("#usersTableFullNameColumn", "Full Name")
-        .verify.elementPresent('#usersTableRoleColumn')
-        .verify.containsText("#usersTableRoleColumn", "Role")
-        .verify.elementPresent('#usersTableCompanyColumn')
-        .verify.containsText("#usersTableCompanyColumn", "Company")
-        .verify.elementPresent('#usersTableEmailColumn')
-        .verify.containsText("#usersTableEmailColumn", "Email")
+      .verify.elementPresent('#usersListPage', "================================================")
+      .verify.elementPresent('#usersListPage', "== B. USERS LIST PAGE (SYSADMIN)")
 
 
       // test searching for 'sysadmin' username
-      .setValue("#usersSearchInput", "sysadmin")
-
-      .verify.elementPresent('#usersTable .userListItem:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
-        .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', 'http://localhost:3000/images/icons/AdminClouds.jpg')
-
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(1)')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(2)')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(3)')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(4)')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(5)')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(6)')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(7)')
-
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'sysadmin')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentHour)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentMinutes)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'System Administrator')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'SysAdmin')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'Thinaire')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(7)', 'sysadmin@thinaire.net')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(8)', 'active')
-
-        .click('#usersTable .userListItem:first-child td:nth-child(8) .label').pause(300)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(8)', 'Inactive')
-
-      // test searching for 'johndoe' user
       .clearValue('#usersSearchInput')
-      .setValue("#usersSearchInput", "johndoe")
-      .pause(50)
+      .setValue("#usersSearchInput", userFullName)
 
-      .verify.elementPresent('#usersTable .userListItem:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'johndoe')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentHour)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentMinutes)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'John Doe')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'User')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'ACME, Inc')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(7)', 'johndoe@acme.com')
-
-      // test searching for 'janedoe' user
-      .clearValue('#usersSearchInput')
-      .setValue("#usersSearchInput", "janedoe")
-      .pause(50)
-
-      .verify.elementPresent('#usersTable .userListItem:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'janedoe')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentHour)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentMinutes)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'Jane Doe')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'User')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'Thinaire')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(7)', 'janedoe@thinaire.net')
+      .verify.elementNotPresent('#usersTable .userListItem:first-child')
 
       .click("#newUserButton")
       .pause(1000)
 
       //========================================================================
-      // NEW USER PAGE
+      // C. NEW USER PAGE (SYSADMIN CREATING FOZZY)
 
       .waitForElementVisible("#userEditPage", 1000)
       .pause(100)
@@ -184,7 +107,7 @@ module.exports = {
       .verify.visible('#profileEmailLabel')
       .verify.visible('#profileNameLabel')
       .verify.visible('#profileTitleLabel')
-      .verify.visible('#findCompanyButton')
+      .verify.visible('#findSponsorButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarLabel')
       .verify.visible('#profilePhoneLabel')
@@ -198,7 +121,7 @@ module.exports = {
       .verify.visible('#profileEmailInput')
       .verify.visible('#profileNameInput')
       .verify.visible('#profileTitleInput')
-      .verify.visible('#findCompanyButton')
+      .verify.visible('#findSponsorButton')
       .verify.visible('#findRoleButton')
       .verify.visible('#profileAvatarInput')
       .verify.visible('#profilePhoneInput')
@@ -206,13 +129,13 @@ module.exports = {
       .verify.visible('#profileAddressInput')
       .verify.visible('#profileCityInput')
       .verify.visible('#profileStateInput')
-      .verify.visible('#profileZipInput')
+      .verify.visible('#profileZipInput').pause(100)
 
       .verify.containsText('#profileUsernameInput', "")
       .verify.containsText('#profileEmailInput', "")
       .verify.containsText('#profileNameInput', "")
       .verify.containsText('#profileTitleInput', "")
-      .verify.attributeEquals('#findCompanyButton', "value", "Please select a company/employer.")
+      .verify.attributeEquals('#findSponsorButton', "value", "Please select a sponsor to be associated with.")
       .verify.attributeEquals('#findRoleButton', "value", "Please select a user role.")
       .verify.attributeEquals('#userAvatarImage', 'src', 'http://localhost:3000/images/icons/Default_User.png')
       .verify.containsText('#profilePhoneInput', "")
@@ -223,53 +146,77 @@ module.exports = {
       .verify.containsText('#profileZipInput', "")
 
 
-      .setValue('#profileUsernameInput', "kermitfrog")
-      .setValue('#profileEmailInput', "kermit@thinaire.net")
-      .setValue('#profileNameInput', "Kermit T. Frog")
-      .setValue('#profileTitleInput', "Frog")
-      .setValue('#profilePhoneInput', "888-555-1234")
+      // .setValue('#profileUsernameInput', "kermitfrog")
+      // .setValue('#profileEmailInput', "kermit@thinaire.net")
+      // .setValue('#profileNameInput', "Kermit T. Frog")
+      // .setValue('#profileTitleInput', "Frog")
+      // .setValue('#profilePhoneInput', "888-555-1234")
+      // .clearValue('#profileWebsiteInput')
+      // .setValue('#profileWebsiteInput', "http://en.wikipedia.org/wiki/Kermit_the_Frog")
+      // .clearValue('#profileAvatarInput')
+      // .setValue('#profileAvatarInput', "http://upload.wikimedia.org/wikipedia/en/6/62/Kermit_the_Frog.jpg")
+      // .setValue('#profileAddressInput', "123 Pond Lane")
+      // .setValue('#profileCityInput', "Swampville")
+      // .setValue('#profileStateInput', "Louisiana")
+      // .setValue('#profileZipInput', "71432")
+
+      .setValue('#profileUsernameInput', username)
+      .setValue('#profileEmailInput', userEmail)
+      .setValue('#profileNameInput', userFullName)
+      .setValue('#profileTitleInput', userTitle)
+      .setValue('#profilePhoneInput', userPhone)
       .clearValue('#profileWebsiteInput')
-      .setValue('#profileWebsiteInput', "http://en.wikipedia.org/wiki/Kermit_the_Frog")
+      .setValue('#profileWebsiteInput', userUrl)
       .clearValue('#profileAvatarInput')
-      .setValue('#profileAvatarInput', "http://upload.wikimedia.org/wikipedia/en/6/62/Kermit_the_Frog.jpg")
-      .setValue('#profileAddressInput', "123 Pond Lane")
-      .setValue('#profileCityInput', "Swampville")
-      .setValue('#profileStateInput', "Louisiana")
-      .setValue('#profileZipInput', "71432")
+      .setValue('#profileAvatarInput', userAvatar)
+      .setValue('#profileAddressInput', userAddress)
+      .setValue('#profileCityInput', userCity)
+      .setValue('#profileStateInput', userState)
+      .setValue('#profileZipInput', userZip)
+
 
         //-----------------------------------------------------------
-        // CLIENT SEARCH MODAL
+        // SPONSOR SEARCH MODAL
 
-        .click("#findCompanyButton").pause(500)
-        //.waitForElementVisible('#clientSearchModal', 1000)
-        .verify.elementPresent('#clientSearchModalTitle')
-        .verify.elementPresent('#clientSearchModalInput')
-        .verify.elementPresent('#clientSearchModalResults')
+        .click("#findSponsorButton").pause(500)
+        .waitForElementVisible('#sponsorSearchModal', 1000)
+        .verify.elementPresent('#sponsorSearchModalTitle')
+        .verify.elementPresent('#sponsorSearchModalInput')
+        .verify.elementPresent('#sponsorSearchModalResults')
         .verify.elementPresent('#modalOkButton')
-        .clearValue('#clientSearchModalInput')
-        .setValue('#clientSearchModalInput', "ACME")
-        .click("#clientSearchModalResults .list-group-item:nth-child(2)").pause(500)
-        .verify.attributeEquals('#findCompanyButton', "value", "ACME, Inc.")
+        .clearValue('#sponsorSearchModalInput')
+        .setValue('#sponsorSearchModalInput', "ACME")
+        .click("#sponsorSearchModalResults .list-group-item:nth-child(1)").pause(500)
+        .verify.attributeEquals('#findSponsorButton', "value", "ACME Pharmaceuticals")
 
         //-----------------------------------------------------------
         // SELECT ROLE MODAL
 
-        .click("#findRoleButton").pause(300)
+        .click("#findRoleButton").pause(500)
         //.waitForElementVisible('#clientSearchModal', 1000)
         .verify.elementPresent('#selectRoleModalTitle')
         .verify.elementPresent('#selectRoleModalInput')
-        .verify.elementPresent('#selectRoleModalResults')
+        .waitForElementVisible('#selectRoleModalResults', 1000).pause(500)
         .verify.elementPresent('#modalOkButton')
-        .setValue('#selectRoleModalInput', "User")
+        .clearValue('#selectRoleModalInput')
+        .setValue('#selectRoleModalInput', "Reviewer")
         .click("#selectRoleModalResults .list-group-item:first-child").pause(500)
-        .verify.attributeEquals('#findRoleButton', "value", "User")
+        .verify.attributeEquals('#findRoleButton', "value", "Reviewer")
 
-      .verify.elementPresent('#saveBasicInfoButton')
-      .click("#saveBasicInfoButton").pause(500)
-      //.click("#submitProfileInfoButton").pause(500)
+      .click("#saveBasicInfoButton").pause(3000)
 
-      //========================================================================
-      // SET PASSWORD
+      //-----------------------------------------------------------
+      // D. SET PASSWORD
+
+      // .verify.elementPresent('#showBasicInfoCard')
+      //
+      // .verify.elementPresent('#showBasicInfoCard', "================================================")
+      // .verify.elementPresent('#showBasicInfoCard', "== D. SET PASSWORD")
+      //
+      // .verify.elementPresent('#showSecurityCard')
+      // .verify.elementPresent('#showPreferencesCard')
+      //
+      // .click("#showSecurityCard").pause(300)
 
       .verify.elementPresent('#userSecurityCard')
 
@@ -283,8 +230,8 @@ module.exports = {
 
         .verify.elementPresent('#updatePasswordButton')
 
-        .setValue('#newPasswordInput', 'FrogsRule')
-        .setValue('#confirmPasswordInput', 'FrogsRule')
+        .setValue('#newPasswordInput', originalPassword)
+        .setValue('#confirmPasswordInput', originalPassword)
 
         .click('#updatePasswordButton').pause(1000)
 
@@ -292,32 +239,43 @@ module.exports = {
       .verify.elementPresent('#resetPasswordSuccessfulMessage')
       .verify.containsText('#resetPasswordSuccessfulMessage', "Success!")
 
-      .waitForElementVisible("#sidebarTemplate", 1000)
-        .verify.elementPresent('#sidebarNav')
-        .verify.elementPresent('#sidebarMenu')
-        .verify.elementPresent('#sidebarMenuUsersLink')
-      .click("#sidebarMenuUsersLink")
-      .pause(1000)
+      .click('#navbarBrandLink')
+      .waitForElementVisible('#usersTile', 1000)
+      .click('#usersTile')
 
 
       //========================================================================
-      // USERS LIST PAGE
+      // E. USERS LIST PAGE (SYSADMIN)
 
       // test that the page contains search and control elements
       .verify.elementPresent("#usersListPage")
+      .verify.elementPresent('#usersListPage', "================================================")
+      .verify.elementPresent('#usersListPage', "== E. USERS LIST PAGE (SYSADMIN)")
+
       .waitForElementVisible("#usersTable", 1000)
 
       // test searching for 'kermitfrog' username
       .clearValue('#usersSearchInput')
-      .setValue("#usersSearchInput", "kermitfrog")
+      .setValue("#usersSearchInput", username)
+      .pause(500)
+      //.verify.attributeEquals()
 
-      .verify.elementPresent('#usersTable .userListItem:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
-        .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
-        .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', 'http://upload.wikimedia.org/wikipedia/en/6/62/Kermit_the_Frog.jpg')
+      // .verify.elementPresent('#usersTable .userListItem:first-child')
+      //   .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
+      //   .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
+      //   .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
+      //   .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
+      //   .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
+      //   .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', userAvatar)
+      //
+      //   .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', username)
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', '2014')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', userFullName)
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'User')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'ACME, Inc.')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(7)', userEmail)
+
 
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(1)')
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(2)')
@@ -327,87 +285,480 @@ module.exports = {
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(6)')
 
         .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'kermitfrog')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', username)
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', "---")
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'Kermit T. Frog')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'User')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', 'ACME, Inc.')
-        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(7)', 'kermit@thinaire.net')
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', userFullName)
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', userRole)
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', userSponsor)
+        .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', userEmail)
+
 
       .click('#usersTable .userListItem:first-child')
 
-      //========================================================================
-      // USERS PROFILE PAGE
-
-      .waitForElementVisible("#userProfilePage", 1000)
-
-
-        .verify.visible('#profileUsername')
-        .verify.visible('#profileUserIdLabel')
-        .verify.visible('#profileUserId')
-        .verify.visible('#profileBiographyLabel')
-        .verify.visible('#profileBiography')
-        .verify.visible('#profileSelectedCampaignLabel')
-        .verify.visible('#profileSelectedCampaign')
-        .verify.visible('#profileSelectedCampaignIdLabel')
-        .verify.visible('#profileSelectedCampaignId')
-        .verify.visible('#profileEmployerLabel')
-        .verify.visible('#profileEmployer')
-        .verify.visible('#profileEmployerIdLabel')
-        .verify.visible('#profileEmployerId')
-        .verify.visible('#profileAvatar')
-        .verify.visible('#editProfileButton')
-        .verify.visible('#deleteProfileButton')
-
-        .verify.containsText('#profileUserIdLabel', "User Id:")
-        .verify.containsText('#profileFullNameLabel', "Full Name")
-        .verify.containsText('#profileBiographyLabel', "Biography")
-        .verify.containsText('#profileSelectedCampaignLabel', "Selected Campaign")
-        .verify.containsText('#profileSelectedCampaignIdLabel', "Selected Campaign Id")
-        .verify.containsText('#profileEmployerLabel', "Employer Name")
-        .verify.containsText('#profileEmployerIdLabel', "Employer Id")
-
-        .verify.containsText('#profileUsername', "kermitfrog")
-        //.verify.containsText('#profileUserId', "")
-        .verify.containsText('#profileFullName', "Kermit T. Frog")
-        .verify.containsText('#profileBiography', "")
-        .verify.containsText('#profileSelectedCampaign', "")
-        .verify.containsText('#profileEmployer', "ACME, Inc.")
-        //.verify.containsText('#profileEmployerId', "")
-        .verify.attributeEquals('#profileAvatar', "src", "http://upload.wikimedia.org/wikipedia/en/6/62/Kermit_the_Frog.jpg")
-
-        .verify.containsText('#editProfileButton', "Edit Profile")
-        .verify.containsText('#deleteProfileButton', "Delete")
-
-        .click('#deleteProfileButton')
-
-      .waitForElementVisible('#deleteUserModal', 1000)
-        .verify.visible('#deleteUserModal')
-        .verify.visible('#deleteUserModalTitle')
-        .verify.visible('#deleteUserModalMessage')
-        .verify.visible('#deleteUserModalInput')
-        .verify.visible('#confirmDeleteUserButton')
-        .verify.visible('#cancelDeleteUserButton')
-
-      .click('#cancelDeleteUserButton').pause(300)
-      .waitForElementNotVisible('#deleteUserModal', 500)
-
-      .click('#deleteProfileButton')
-      .waitForElementVisible('#deleteUserModal', 1000)
-
-      .clearValue('#deleteUserModalInput')
-      .setValue('#deleteUserModalInput', "kermitfrog")
-      .click('#confirmDeleteUserButton').pause(300)
-
-      .waitForElementNotVisible('#deleteUserModal', 1000).pause(500)
 
       //========================================================================
-      // USERS LIST PAGE
+      // F. SIGN-OUT (SYSADMIN)
+
+      // click glossary
+      .click("#northeastDropDownLink")
+      .pause(500)
+      .verify.elementPresent("#northeastDropDownMenu")
+      .click("#signOutLink")
+      .pause(2000)
+
+      //========================================================================
+      // G. SIGN IN PAGE (FOZZY)
+
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+      .click("#signInLink")
+      .pause(1000)
+
+      .waitForElementVisible("#entrySignInPage", 1000)
+        .verify.elementPresent('#entrySignInPage', "================================================")
+        .verify.elementPresent('#entrySignInPage', "== G. SIGN IN PAGE (FOZZY)")
+
+        .verify.elementPresent("#emailInput")
+        .verify.elementPresent("#passwordInput")
+        .verify.elementPresent("#entrySignInButton")
+
+      .clearValue("#emailInput")
+      .clearValue("#passwordInput")
+      .setValue("#emailInput", username)
+      .setValue("#passwordInput", originalPassword)
+      .click("#entrySignInButton")
+      .pause(1000)
+
+      //========================================================================
+      // H. INTRO/HOME PAGE (FOZZY)
+
+      .waitForElementVisible("#homePage", 10000)
+      .verify.elementPresent('#homePage', "================================================")
+      .verify.elementPresent('#homePage', "== H. INTRO/HOME PAGE (FOZZY)")
+
+
+      // open the menu
+      .waitForElementVisible("#northeastDropDownLink", 1000)
+      .click("#northeastDropDownLink")
+      .waitForElementVisible("#northeastDropDownMenu", 2000)
+
+      .verify.elementPresent('#userProfileLink')
+      .verify.containsText("#userProfileLink", "Profile")
+
+      // click user profile link
+      .click("#userProfileLink")
+      .pause(200)
+      .waitForElementVisible("#myProfilePage", 1000)
+      .verify.elementPresent('#myProfilePage', "================================================")
+      .verify.elementPresent('#myProfilePage', "== I. USERS PROFILE PAGE (FOZZY)")
+
+      .verify.elementPresent('#editProfileButton')
+
+      // click terms of service
+      .click("#editProfileButton")
+      .pause(200)
+      .waitForElementVisible("#userEditPage", 1000)
+
+
+      // //========================================================================
+      // // I. USERS LIST PAGE (FOZZY)
+      //
+      // // test that the page contains search and control elements
+      // .waitForElementVisible("#usersListPage", 1000)
+      //
+      // // test searching for 'sysadmin' username
+      // .setValue("#usersSearchInput", userFullName)
+      //
+      // .verify.elementNotPresent('#usersTable .userListItem:first-child')
+      //   .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', userFullName)
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', '2014')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'System Administrator')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'SysAdmin')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'Thinaire')
+      //   .verify.containsText('#usersTable .userListItem:first-child td:nth-child(6)', userEmail)
+      //
+      // .click("#usersTable .userListItem:first-child")
+      // .pause(1000)
+
+
+
+      //========================================================================
+      // J. EDIT USER PAGE (FOZZY)
+
+      .waitForElementVisible("#userEditPage", 1000)
+      .verify.elementPresent('#userEditPage', "================================================")
+      .verify.elementPresent('#userEditPage', "== J. EDIT USER PAGE (FOZZY)")
+
+      .pause(100)
+      .verify.visible('#userBasicInfoCard')
+      .verify.visible('#userEditPageTitle')
+      .verify.visible('#userEditForm')
+
+      .waitForElementVisible("#profileUsernameInput", 1000)
+      .waitForElementVisible("#profileEmailInput", 1000)
+      .waitForElementVisible("#profileNameInput", 1000)
+      .waitForElementVisible("#profileTitleInput", 1000)
+      .waitForElementVisible("#findSponsorButton", 1000)
+      .waitForElementVisible("#findRoleButton", 1000)
+      .waitForElementVisible("#userAvatarImage", 1000)
+      .waitForElementVisible("#profilePhoneInput", 1000)
+      .waitForElementVisible("#profileWebsiteInput", 1000)
+      .waitForElementVisible("#profileAddressInput", 1000)
+      .waitForElementVisible("#profileCityInput", 1000)
+      .waitForElementVisible("#profileStateInput", 1000)
+      .waitForElementVisible("#profileZipInput", 1000)
+
+      .verify.attributeEquals('#profileUsernameInput', "value", username)
+      .verify.attributeEquals('#profileEmailInput', "value", userEmail)
+      .verify.attributeEquals('#profileNameInput', "value", userFullName)
+      .verify.attributeEquals('#profileTitleInput', "value", userTitle)
+      .verify.attributeEquals('#findSponsorButton', "value", userSponsor)
+      .verify.attributeEquals('#findRoleButton', "value", userRole)
+      .verify.attributeEquals('#userAvatarImage', 'src', userAvatar)
+      .verify.attributeEquals('#profilePhoneInput', "value", userPhone)
+      .verify.attributeEquals('#profileWebsiteInput', "value", userUrl)
+      .verify.attributeEquals('#profileAddressInput', "value", userAddress)
+      .verify.attributeEquals('#profileCityInput', "value", userCity)
+      .verify.attributeEquals('#profileStateInput', "value", userState)
+      .verify.attributeEquals('#profileZipInput', "value", userZip)
+
+      //-----------------------------------------------------------
+      // K. SET PASSWORD (FOZZY)
+
+      .verify.elementPresent('#showSecurityCard')
+      .verify.elementPresent('#showSecurityCard', "================================================")
+      .verify.elementPresent('#showSecurityCard', "== K. SET PASSWORD (FOZZY)")
+
+      .click("#showSecurityCard").pause(300)
+      .verify.elementPresent('#userSecurityCard')
+
+        .verify.elementPresent('#resetPasswordTitle')
+        .verify.elementPresent('#resetPasswordMessage')
+
+        .verify.elementPresent('#newPasswordLabel')
+        .verify.elementPresent('#confirmPasswordLabel')
+        .verify.elementPresent('#newPasswordInput')
+        .verify.elementPresent('#confirmPasswordInput')
+
+        .verify.elementPresent('#updatePasswordButton')
+
+        .clearValue('#newPasswordInput')
+        .clearValue('#confirmPasswordInput')
+        .setValue('#newPasswordInput', newPassword)
+        .setValue('#confirmPasswordInput', newPassword)
+
+      .click("#updatePasswordButton").pause(300)
+
+      .verify.elementPresent('#resetPasswordSuccessfulMessage')
+      .verify.containsText('#resetPasswordSuccessfulMessage', "Success!")
+
+
+      //========================================================================
+      // L. SIGN-OUT (FOZZY)
+
+      // click glossary
+      .click("#northeastDropDownLink")
+      .pause(500)
+      .verify.elementPresent("#northeastDropDownMenu")
+      .click("#signOutLink")
+      .pause(2000)
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+
+      .click("#signInLink").pause(200)
+      .pause(1000)
+      .waitForElementVisible("#entrySignInPage", 1000)
+
+
+      //========================================================================
+      // M. SIGN IN PAGE (FOZZY)
+
+
+      .waitForElementVisible("#entrySignInPage", 1000)
+
+        .verify.elementPresent('#entrySignInPage', "================================================")
+        .verify.elementPresent('#entrySignInPage', "== M. SIGN IN PAGE (FOZZY)")
+
+        .verify.elementPresent("#emailInput")
+        .verify.elementPresent("#passwordInput")
+        .verify.elementPresent("#entrySignInButton")
+
+      .clearValue('#emailInput')
+      .clearValue('#passwordInput')
+      .setValue("#emailInput", username)
+      .setValue("#passwordInput", originalPassword)
+      .click("#entrySignInButton")
+      .pause(1000)
+
+      .waitForElementVisible('#entryError', 500)
+      .verify.elementPresent('#entryError')
+      .verify.containsText('#entryError', "Incorrect password")
+
+      .clearValue('#emailInput')
+      .clearValue('#passwordInput')
+      .setValue("#emailInput", username)
+      .setValue("#passwordInput", newPassword)
+      .click("#entrySignInButton")
+      .pause(1000)
+
+
+      //========================================================================
+      // N. SIGN-OUT (FOZZY)
+
+      // click glossary
+      .click("#northeastDropDownLink")
+      .pause(500)
+      .verify.elementPresent("#northeastDropDownMenu")
+      .click("#signOutLink")
+      .pause(2000)
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+      .click('#signInLink')
+      .pause(2000)
+      .waitForElementVisible("#entrySignInPage", 1000)
+
+
+      //========================================================================
+      // O. SIGN IN PAGE (SYSADMIN)
+
+      .waitForElementVisible("#entrySignInPage", 1000)
+        .verify.elementPresent('#entrySignInPage', "================================================")
+        .verify.elementPresent('#entrySignInPage', "== O. SIGN IN PAGE (SYSADMIN)")
+
+        .verify.elementPresent("#emailInput")
+        .verify.elementPresent("#passwordInput")
+        .verify.elementPresent("#entrySignInButton")
+
+      .clearValue('#emailInput')
+      .clearValue('#passwordInput')
+      .setValue("#emailInput", "sysadmin")
+      .setValue("#passwordInput", "sysadmin321$")
+      .click("#entrySignInButton")
+      .pause(1000)
+
+      //========================================================================
+      // P. INTRO/HOME PAGE (SYSADMIN)
+
+      .verify.elementPresent('#homePage', "================================================")
+      .verify.elementPresent('#homePage', "== P. INTRO/HOME PAGE (SYSADMIN)")
+      .verify.elementPresent("#usersTile")
+
+      .click('#usersTile')
+
+
+      //========================================================================
+      // Q. USERS LIST PAGE (SYSADMIN)
+
+      // test that the page contains search and control elements
+      .waitForElementVisible("#usersListPage", 1000)
+      .verify.elementPresent('#usersListPage', "================================================")
+      .verify.elementPresent('#usersListPage', "== Q. USERS LIST PAGE (SYSADMIN)")
+
+      .clearValue('#usersSearchInput')
+      .setValue("#usersSearchInput", username)
+      .verify.elementPresent('#usersTable .userListItem:first-child')
+      .click("#usersTable .userListItem:first-child")
+      .pause(1000)
+
+
+      //========================================================================
+      // R. USER PROFILE PAGE (SYSADMIN VIEWING FOZZY)
+
+      .verify.elementPresent("#userProfilePage")
+      .verify.elementPresent('#userProfilePage', "================================================")
+      .verify.elementPresent('#userProfilePage', "== R. USERS LIST PAGE (SYSADMIN)")
+
+      .verify.elementPresent("#editProfileButton")
+      .click('#editProfileButton')
+
+      //========================================================================
+      // S. EDIT USER PAGE (SYSADMIN)
+
+      .verify.elementPresent("#userEditPage")
+      .verify.elementPresent('#userEditPage', "================================================")
+      .verify.elementPresent('#userEditPage', "== S. EDIT USER PAGE (SYSADMIN)")
+
+      .pause(100)
+      .verify.visible('#userBasicInfoCard')
+      .verify.visible('#userEditPageTitle')
+      .verify.visible('#userEditForm')
+
+      .verify.attributeEquals('#profileUsernameInput', "value", username)
+      .verify.attributeEquals('#profileEmailInput', "value", userEmail)
+      .verify.attributeEquals('#profileNameInput', "value", userFullName)
+      .verify.attributeEquals('#profileTitleInput', "value", userTitle)
+      .verify.attributeEquals('#findSponsorButton', "value", userSponsor)
+      .verify.attributeEquals('#findRoleButton', "value", userRole)
+      .verify.attributeEquals('#userAvatarImage', 'src', userAvatar)
+      .verify.attributeEquals('#profilePhoneInput', "value", userPhone)
+      .verify.attributeEquals('#profileWebsiteInput', "value", userUrl)
+      .verify.attributeEquals('#profileAddressInput', "value", userAddress)
+      .verify.attributeEquals('#profileCityInput', "value", userCity)
+      .verify.attributeEquals('#profileStateInput', "value", userState)
+      .verify.attributeEquals('#profileZipInput', "value", userZip)
+
+
+      //-----------------------------------------------------------
+      // T. SET PASSWORD (SYSADMIN)
+
+      .verify.elementPresent('#showSecurityCard')
+      .verify.elementPresent('#showSecurityCard', "================================================")
+      .verify.elementPresent('#showSecurityCard', "== T. SET PASSWORD (SYSADMIN)")
+
+
+      .click("#showSecurityCard").pause(300)
+      .verify.elementPresent('#userSecurityCard')
+
+        .verify.elementPresent('#resetPasswordTitle')
+        .verify.elementPresent('#resetPasswordMessage')
+
+        .verify.elementPresent('#newPasswordLabel')
+        .verify.elementPresent('#confirmPasswordLabel')
+        .verify.elementPresent('#newPasswordInput')
+        .verify.elementPresent('#confirmPasswordInput')
+
+        .verify.elementPresent('#updatePasswordButton')
+
+        .clearValue('#newPasswordInput')
+        .clearValue('#confirmPasswordInput')
+        .setValue('#newPasswordInput', newNewPassword)
+        .setValue('#confirmPasswordInput', newNewPassword)
+
+      .click("#updatePasswordButton").pause(500)
+
+      .verify.elementPresent('#resetPasswordSuccessfulMessage')
+      .verify.containsText('#resetPasswordSuccessfulMessage', "Success!")
+
+
+      //========================================================================
+      // U. SIGN-OUT (SYSADMIN)
+
+      // click glossary
+      .click("#northeastDropDownLink")
+      .pause(500)
+      .verify.elementPresent("#northeastDropDownMenu")
+      .click("#signOutLink")
+
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+
+      .click("#signInLink").pause(200)
+      .pause(1000)
+      .waitForElementVisible("#entrySignInPage", 1000)
+
+
+      //========================================================================
+      // V. SIGN IN PAGE (FOZZY)
+
+      .waitForElementVisible("#entrySignInPage", 1000)
+        .verify.elementPresent('#entrySignInPage', "================================================")
+        .verify.elementPresent('#entrySignInPage', "== V. SIGN IN PAGE (FOZZY)")
+
+        .verify.elementPresent("#emailInput")
+        .verify.elementPresent("#passwordInput")
+        .verify.elementPresent("#entrySignInButton")
+      .setValue("#emailInput", username)
+      .setValue("#passwordInput", newPassword)
+      .click("#entrySignInButton")
+      .pause(1000)
+
+      .waitForElementVisible('#entryError', 500)
+      .verify.elementPresent('#entryError')
+      .verify.containsText('#entryError', "Incorrect password")
+
+      .clearValue('#emailInput')
+      .clearValue('#passwordInput')
+
+      .setValue("#emailInput", username)
+      .setValue("#passwordInput", newNewPassword)
+      .click("#entrySignInButton")
+      .pause(1000)
+
+
+      //========================================================================
+      // W. SIGN-OUT (FOZZY)
+
+      // click glossary
+      .click("#northeastDropDownLink")
+      .pause(500)
+      .verify.elementPresent("#northeastDropDownMenu")
+      .click("#signOutLink")
+      .pause(1000)
+
+      .verify.elementPresent('#landingPage')
+      .verify.elementPresent('#signInLink')
+      .click("#signInLink").pause(1000)
+
+      .waitForElementVisible("#entrySignInPage", 1000)
+      .verify.elementPresent('#entrySignInPage', "================================================")
+      .verify.elementPresent('#entrySignInPage', "== SIGNED-OUT (FOZZY)")
+        .verify.elementPresent("#emailInput")
+        .verify.elementPresent("#passwordInput")
+        .verify.elementPresent("#entrySignInButton")
+      .setValue("#emailInput", "sysadmin")
+      .setValue("#passwordInput", "sysadmin321$")
+      .click("#entrySignInButton")
+      .pause(1000)
+
+
+      //========================================================================
+      // Z. DELETE FOZZY
+
+      // .verify.elementPresent('#homePage', "================================================")
+      // .verify.elementPresent('#homePage', "== Z. INTRO/HOME PAGE (SYSADMIN)")
+      // .verify.elementPresent("#usersTile")
+      // .click('#usersTile')
+      //
+      //
+      // .waitForElementVisible("#entrySignInPage", 1000)
+      //
+      //   .verify.elementPresent('#entrySignInPage', "================================================")
+      //   .verify.elementPresent('#entrySignInPage', "== Z. DELETE FOZZY")
+      //   .verify.elementPresent("#emailInput")
+      //   .verify.elementPresent("#passwordInput")
+      //   .verify.elementPresent("#entrySignInButton")
+      // .setValue("#emailInput", "sysadmin")
+      // .setValue("#passwordInput", "sysadmin")
+      //
+      // .click("#entrySignInButton")
+      // .pause(1000)
+
+
+      .verify.elementPresent('#homePage', "================================================")
+      .verify.elementPresent('#homePage', "== Z. INTRO/HOME PAGE (SYSADMIN)")
+      .verify.elementPresent("#usersTile")
+      .click('#usersTile')
 
       .waitForElementVisible("#usersListPage", 1000)
-      .setValue("#usersSearchInput", "kermitfrog")
+      .clearValue('#usersSearchInput')
+      .setValue("#usersSearchInput", userFullName).pause(100)
+      .verify.elementPresent('#usersTable .userListItem:first-child')
+
+      .click('#usersTable .userListItem:first-child')
+      .verify.containsText('#deleteProfileButton', "Delete")
+
+      .click('#deleteProfileButton')
+      .waitForElementVisible('#removeUserModal', 1000)
+      .verify.visible('#removeUserModal')
+
+      .click('#cancelRemoveUserButton').pause(300)
+      .waitForElementNotVisible('#removeUserModal', 1000).pause(500)
+
+      .click('#deleteProfileButton')
+      .waitForElementVisible('#removeUserModal', 1000)
+      .verify.visible('#removeUserModalInput')
+      .clearValue('#removeUserModalInput')
+      .setValue('#removeUserModalInput', username)
+
+      .click('#confirmRemoveUserButton').pause(300)
+      .waitForElementNotVisible('#removeUserModal', 1000).pause(500)
+
+      .waitForElementVisible("#usersListPage", 1000)
+      .setValue("#usersSearchInput", username)
       .verify.elementNotPresent('#usersTable .userListItem:first-child')
+
+
 
       .end();
   }

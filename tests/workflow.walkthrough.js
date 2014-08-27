@@ -28,11 +28,24 @@ module.exports = {
 
       .waitForElementVisible("#homePage", 1000)
 
+      .verify.elementPresent("#activeStudiesTile")
+      .verify.elementPresent("#formBuilderTile")
+      .verify.elementPresent("#savedFormsTile")
+      .verify.elementPresent("#collectedDataTile")
+      .verify.elementPresent("#studiesTile")
+      .verify.elementPresent("#sponsorsTile")
+      .verify.elementPresent("#usersTile")
+      .verify.elementPresent("#subjectsTile")
+      .verify.elementPresent("#commentsTile")
+      .verify.elementPresent("#auditTile")
+
+      .click('#formBuilderTile').pause(500)
+
+
       //========================================================================
       // FORM BUILDER
 
         // navigate to the form builder
-        .click("#newFormLink").pause(500)
         .verify.elementPresent("#builderPage")
         .verify.elementPresent('#sortableListPanel')
         .verify.elementPresent('#list')
@@ -122,16 +135,16 @@ module.exports = {
         .verify.elementPresent("#formsListPage")
         .verify.elementPresent('#formsTable')
 
-        .verify.elementPresent('#publishFormLink')
-        .verify.elementPresent('#editFormLink')
-        .verify.elementPresent('#deleteFormLink')
+        // .verify.elementPresent('#publishFormLink')
+        // .verify.elementPresent('#editFormLink')
+        // .verify.elementPresent('#deleteFormLink')
 
         // users table
         .waitForElementVisible('#formsTable', 1000)
           .verify.elementPresent('#formsTableStarredColumn')
           .verify.containsText("#formsTableStarredColumn", "Starred")
-          .verify.elementPresent('#formsTableFormIdColumn')
-          .verify.containsText("#formsTableFormIdColumn", "Form ID")
+          // .verify.elementPresent('#formsTableFormIdColumn')
+          // .verify.containsText("#formsTableFormIdColumn", "Form ID")
           .verify.elementPresent('#formsTableFormNameColumn')
           .verify.containsText("#formsTableFormNameColumn", "Form Name")
           .verify.elementPresent('#formsTableOwnerColumn')
@@ -159,11 +172,11 @@ module.exports = {
 
           .verify.elementPresent('#formsTable .individualFormRow:first-child td:first-child')
           //.verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(1)', 'sysadmin')
-          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(3)', formName)
-          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(4)', 'sysadmin')
-          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(5)', '2')
-          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(6)', '2014')
-          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(7)', 'true')
+          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(2)', formName)
+          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(3)', 'sysadmin')
+          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(4)', '2')
+          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(5)', '2014')
+          .verify.containsText('#formsTable .individualFormRow:first-child td:nth-child(6)', 'true')
 
 
         .click('#formsTable .individualFormRow:first-child').pause(200)
@@ -176,7 +189,7 @@ module.exports = {
 
           .verify.elementPresent('#formBody .item:nth-child(2)')
           .verify.elementPresent('#formBody .item:nth-child(2) .yesNoText')
-          .verify.containsText('#formBody .item:nth-child(2) .yesNoText', 'Q: Are you alergic to asprin?')
+          .verify.containsText('#formBody .item:nth-child(2) .yesNoText', 'Are you alergic to asprin?')
 
         .click('#publishFormLink')
 

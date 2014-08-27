@@ -1,6 +1,5 @@
 {
   "packages": {
-    "iron-router": {},
     "event-hooks": {},
     "auto-nprogress": {},
     "mousetrap": {},

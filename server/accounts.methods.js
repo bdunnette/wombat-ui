@@ -72,9 +72,9 @@ Meteor.methods({
     console.log('setUserPassword');
     console.log(options);
     console.log('Meteor.userId() ' + Meteor.userId());
-    if((options.id == Meteor.userId()) || Meteor.user().profile.role == "Admin"){
+    if((options._id == Meteor.userId()) || (Meteor.user().profile.roles[0] == "Admin") || (Meteor.user().profile.roles[0] == "SysAdmin")){
       console.log('Access to change password verified.');
-      Accounts.setPassword(options.id, options.password);
+      Accounts.setPassword(options._id, options.password);
       return "Success.  Changed password to " + options.password;
     }else{
       console.log('Error changing password. Access denied.');

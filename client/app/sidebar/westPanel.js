@@ -90,24 +90,24 @@ Template.westPanel.events({
   'click #plainTextBlock':function(){
     // Session.set('selectedBlockType', 'plainTextBlock');
     // Session.set('movedElementId', 'plainTextBlock');
-    // Session.set('selectedBuilderTab','editFieldTab');
     // Session.set('selectedBlockItem', addBlockToForm());
+    // Session.set('selectedBuilderTab','editFieldTab');
 
     initiateAddingBlock('plainTextBlock');
   },
   'click #textInputBlock':function(){
     // Session.set('selectedBlockType', 'textInputBlock');
     // Session.set('movedElementId', 'textInputBlock');
-    // Session.set('selectedBuilderTab','editFieldTab');
     // Session.set('selectedBlockItem', addBlockToForm());
+    // Session.set('selectedBuilderTab','editFieldTab');
 
     initiateAddingBlock('textInputBlock');
   },
   'click #textareaInputBlock':function(){
     // Session.set('selectedBlockType', 'textareaInputBlock');
     // Session.set('movedElementId', 'textareaInputBlock');
-    // Session.set('selectedBuilderTab','editFieldTab');
     // Session.set('selectedBlockItem', addBlockToForm());
+    // Session.set('selectedBuilderTab','editFieldTab');
 
     initiateAddingBlock('textareaInputBlock');
   },
@@ -172,6 +172,7 @@ Template.westPanel.events({
     // Session.set('movedElementId', 'multiSelectInputBlock');
     // Session.set('selectedBlockItem', addBlockToForm());
     // Session.set('selectedBuilderTab','editFieldTab');
+
     initiateAddingBlock('multiSelectInputBlock');
 
     var pseudoObject = new Meteor.Collection.ObjectID();
@@ -296,6 +297,6 @@ Template.westPanel.helpers({
 initiateAddingBlock = function(blockType){
   Session.set('selectedBlockType', blockType);
   Session.set('movedElementId', blockType);
-  Session.set('selectedBuilderTab','editFieldTab');
   Session.set('selectedBlockItem', addBlockToForm());
+  Session.set('selectedBuilderTab','editFieldTab');
 }

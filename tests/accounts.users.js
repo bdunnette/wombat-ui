@@ -55,24 +55,6 @@ module.exports = {
       .verify.elementPresent("#auditTile")
 
       .click('#usersTile')
-      // click the ThinAire logo, and open the sidebar
-      // .click("#navbarBrandLink")
-      // .pause(1000)
-      //
-      // .waitForElementVisible("#sidebarTemplate", 1000)
-      //   .verify.elementPresent('#sidebarNav')
-      //   .verify.elementPresent('#sidebarMenu')
-      //   .verify.elementPresent('#sidebarMenuHomeItem')
-      //   .verify.elementPresent('#sidebarMenuHomeLink')
-      //   .verify.elementPresent('#sidebarMenuCampaignsItem')
-      //   .verify.elementPresent('#sidebarMenuCampaignsLink')
-      //   .verify.elementPresent('#sidebarMenuUsersItem')
-      //   .verify.elementPresent('#sidebarMenuUsersLink')
-      //   .verify.elementPresent('#sidebarMenuClientsItem')
-      //   .verify.elementPresent('#sidebarMenuClientsLink')
-      //
-      // .click("#sidebarMenuUsersLink")
-      // .pause(1000)
 
       //========================================================================
       // USERS LIST PAGE
@@ -92,9 +74,6 @@ module.exports = {
         .verify.containsText("#usersTableUsernameColumn", "Username")
         .verify.elementPresent('#usersTableCreatedAtColumn')
         .verify.containsText("#usersTableCreatedAtColumn", "CreatedAt")
-        //.verify.elementPresent('#usersTableLastLoginColumn')
-        // .verify.containsText("#usersTableLastLoginColumn", "Last Login")
-        // .verify.elementPresent('#usersTableLastLoginColumn')
         .verify.containsText("#usersTableFullNameColumn", "Full Name")
         .verify.elementPresent('#usersTableRoleColumn')
         .verify.containsText("#usersTableRoleColumn", "Role")
@@ -108,13 +87,6 @@ module.exports = {
       .setValue("#usersSearchInput", "sysadmin")
 
       .verify.elementPresent('#usersTable .userListItem:first-child')
-        // .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
-        // .verify.elementPresent('#usersTable .userListItem:first-child td:first-child img')
-        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'img-circle')
-        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'avatar')
-        // .verify.cssClassPresent('#usersTable .userListItem:first-child td:first-child img', 'hidden-phone')
-        // .verify.attributeEquals('#usersTable .userListItem:first-child td:first-child img', 'src', 'http://localhost:3000/images/icons/AdminClouds.jpg')
-
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(1)')
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(2)')
         .verify.elementPresent('#usersTable .userListItem:first-child td:nth-child(3)')
@@ -126,8 +98,6 @@ module.exports = {
         .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'sysadmin')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentHour)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentMinutes)
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'System Administrator')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'SysAdmin')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'clinical-trials.meteor.com')
@@ -146,8 +116,6 @@ module.exports = {
         .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'johndoe')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentHour)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentMinutes)
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'John Doe')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'Reviewer')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'ACME Pharmaceuticals')
@@ -162,8 +130,6 @@ module.exports = {
         .verify.elementPresent('#usersTable .userListItem:first-child td:first-child')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(1)', 'janedoe')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(2)', currentYear)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentHour)
-        //.verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', currentMinutes)
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(3)', 'Jane Doe')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(4)', 'Data Entry')
         .verify.containsText('#usersTable .userListItem:first-child td:nth-child(5)', 'ACME Pharmaceuticals')
@@ -246,7 +212,7 @@ module.exports = {
       .setValue('#profileZipInput', "71432")
 
         //-----------------------------------------------------------
-        // CLIENT SEARCH MODAL
+        // SPONSOR SEARCH MODAL
 
         .click("#findSponsorButton").pause(500)
         .waitForElementVisible('#sponsorSearchModal', 1000)
@@ -354,7 +320,6 @@ module.exports = {
       // USERS PROFILE PAGE
 
       .waitForElementVisible("#userProfilePage", 1000)
-
 
         .verify.visible('#profileUsername')
         .verify.visible('#profileUserIdLabel')

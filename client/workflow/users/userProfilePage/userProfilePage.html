@@ -15,7 +15,7 @@
             <div class="row">
               <div class="col-md-8">
                 <h3 id="profileUserName" class="name">{{ username }}</h3>
-                <span class="area">User Id: {{_id}}</span><br>
+                <span id="profileUserIdLabel" class="area">User ID:</span><span id="profileUserId">{{_id}}</span><br>
               </div>
               <div class="col-md-4">
                 <!-- <a id="editProfileButton" class="btn btn-info pull-right edit">
@@ -41,13 +41,16 @@
                     <p id="profileUsername">{{username}}</p>
                     <br>
 
-
-                    <label id="profileUserIdLabel">User ID</label>
+                    <!-- <label id="profileUserIdLabel">User ID</label>
                     <p id="profileUserId">{{_id}}</p>
-                    <br>
+                    <br> -->
 
                     <label id="profileFullNameLabel">Full Name</label>
                     <p id="profileFullName">{{ profile.name }}</p>
+                    <br>
+
+                    <label id="profileUserRoleLabel">Roles</label>
+                    <p id="profileUserRole">{{ profile.roles }}</p>
                     <br>
 
                     <label id="profileUsernameLabel">Username</label>

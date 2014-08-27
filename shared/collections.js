@@ -92,6 +92,9 @@ Items.allow({
   }
 })
 
+
+
+
 if (Meteor.isServer) {
   if (Items.find().count() === 0) {
     _.each(

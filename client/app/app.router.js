@@ -113,6 +113,7 @@ Router.map(function() {
 
   this.route('homePage', {
     path: '/',
+    template:'homePage',
     yieldTemplates: getYieldTemplates(),
     onBeforeAction: function() {
       console.log('routing to: /');
@@ -120,6 +121,10 @@ Router.map(function() {
     onAfterAction: function(){
       renderHomePage(this);
       setPageTitle("Landing Page");
+
+      // the home page route is a hacky way to simulate an onLogin Hook
+      Session.set('defaultUserProfileCard', 'basicInfoCard');
+      Session.set('updatePasswordIsSuccessful', false);
     }
   });
 

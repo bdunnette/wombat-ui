@@ -2,6 +2,7 @@ Meteor.startup(function(){
   Hooks.init();
 
   Hooks.onLoggedIn = function(){
+    Session.set('defaultUserProfileCard', 'basicInfoCard');
     // removeWallpaper();
   };
   Hooks.onLoggedOut = function(userId){

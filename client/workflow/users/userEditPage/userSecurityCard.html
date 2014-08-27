@@ -1,5 +1,5 @@
 <template name="userSecurityCard">
-  <div id="userSecurityCard" class="panel">
+  <div id="userSecurityCard" class="{{securityCardVisible}} panel">
     <div class="row">
       <div class="col col-md-12">
         <h5 id="resetPasswordTitle" class="personal-title">Change Your Password</h5>
@@ -21,14 +21,14 @@
           <input id="confirmPasswordInput" class="form-control" type="password" placeholder="********" value="{{password}}" />
         </div>
       </div>
-  <!--     {{#if passwordIsValid }} -->
-<!--       <div class="form-group">
-        <label id="updatePasswordLabel" class="col-xs-2 control-label"></label>
-        <div class="col-xs-8">
-          <button id="updatePasswordButton" class="btn btn-info">Update Password</button>
+      <!-- {{#if passwordIsValid }}
+        <div class="form-group">
+          <label id="updatePasswordLabel" class="col-xs-2 control-label"></label>
+          <div class="col-xs-8">
+            <button id="updatePasswordButton" class="btn btn-info">Update Password</button>
+          </div>
         </div>
-      </div> -->
-  <!--     {{/if}} -->
+      {{/if}} -->
     </form>
     <br>
     <div class="extra-padding">
